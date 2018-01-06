@@ -36,9 +36,9 @@
             });
 
         %>
-        <% postData.forEach(function(post){ %>
+        <% postData.forEach(function(post,i){ %>
 
-            <a href="<%= '/reports/' + post.path %>"><%= post.title %></a> <%= post.ct.total%><br>
+            <p><%= i %> : <a href="<%= '/reports/' + post.path %>"><%= post.title %></a> <%= post.ct.total%></p>
 
         <% }); %>
     </div>
