@@ -5,8 +5,8 @@ tags: [hexo,js,node.js,ejs]
 layout: post
 categories: hexo
 id: 125
-updated: 2018-01-06 10:43:13
-version: 1.6
+updated: 2018-01-06 12:11:35
+version: 1.7
 ---
 
 These days I am interested in ether making my own static site generator from the ground up, or just making plug-ins for one that all ready exists such as [hexo](https://hexo.io/). I might work on making one just for the sake of having a long term pet project to work on, but for now I am leaning more in the direction of making plug-ins for one that all ready exists before hand, and I might as well make it the one that I am using to begin with.
@@ -98,7 +98,9 @@ The object returned can also be an array of objects like this, which is how one 
 
 ### Helpers
 
-Helpers are methods that can be called when working with a template.
+read my [full post on hexo helpers](/2018/01/05/hexo-helpers/)
+
+Helpers are methods that can be called when working with a template. It can be used to format some data from an ejs object, or inject some html.
 
 ### Tags
 
