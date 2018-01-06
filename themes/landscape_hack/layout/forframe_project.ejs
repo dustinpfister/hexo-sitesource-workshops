@@ -1,0 +1,22 @@
+<%
+
+   let data = page.data || {};
+   
+   data.message = data.message || 'no message';
+   data.projectName = data.projectName || '';
+
+%>
+
+<div style="padding:20px;">
+
+    <h1>For Frame:</h1>
+    <p>Animations that are made on a for frame basis</p>
+    <%= data.message %><br>
+    <%= data.projectName %><br>
+    <div id="ff">
+    </div>
+
+    <%- ff_get_client() %>
+    <%- ff_get_project(data.projectName) %>
+
+</div>
