@@ -27,4 +27,9 @@ Hopefully I will remember to update this readme as I hack away at this theme as 
 <link rel="alternate" href="<%= config.url + "/" + page.path %>" hreflang="<%= config.language %>" />
 ```
 
+### layout/_partial/article.ejs
+
+* added itemtype="http://schema.org/Blog" to article element so google likes me better
+* using update.ejs for itemprop="dateModified" to let google (and people) know when a post was last updated
+
 
