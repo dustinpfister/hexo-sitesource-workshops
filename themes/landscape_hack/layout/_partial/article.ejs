@@ -1,10 +1,12 @@
 <%
 
-   // added itemtype to article
+   // placed itemscope in it's own div
+   // added itemtype for blog post
    // added update.ejs
 
 %>
-<article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %>" itemscope itemprop="blogPost" itemtype="http://schema.org/Blog">
+<div itemscope itemtype="http://schema.org/Blog">
+<article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %>"  itemprop="blogPost">
   <div class="article-meta">
     <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
     <%- partial('post/update', {class_name: 'article-date', date_format: null}) %>
@@ -50,3 +52,4 @@
   </div>
 </section>
 <% } %>
+</div>
