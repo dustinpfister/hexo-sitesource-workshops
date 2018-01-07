@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= config.language %>">
 <head>
   <meta charset="utf-8">
   <%- partial('google-analytics') %>
@@ -32,5 +32,7 @@
   <% if (config.highlight.enable){ %>
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   <% } %>
+  <% console.log(config.url + "/" + page.path); %>
+  <link rel="alternate" href="<%= config.url + "/" + page.path %>" hreflang="<%= config.language %>" />
   <%- css('css/style') %>
 </head>
