@@ -5,13 +5,15 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 110
-updated: 2017-12-07 16:00:07
-version: 1.5
+updated: 2018-01-07 21:55:14
+version: 1.6
 ---
 
-I just recently wrote a post on the node.js powered html template engine called pug, and mentioned that I have some experience working with ejs, which So far I seem to like the best when it come to doing this sort of thing in a node.js environment. However so far I have not wrote a post on ejs.
+I just recently wrote a post on the node.js powered html template engine called pug, and mentioned that I have some experience working with ejs, which so far I seem to like the best when it come to doing this sort of thing in a node.js environment. However so far I have not wrote a post on ejs, so why not get one together right?
 
 <!-- more -->
+
+ejs is a popular template format used in many node.js projects, and is one of several options that works out of the box in [hexo](/categories/hexo/).
 
 ## Why EJS
 
@@ -49,6 +51,14 @@ Here we have the whole idea of this to begin with at a very simple, and easy to 
 
 One of the most important aspects of ejs is of course the angle bracket and percentage sign patterns, these are what are used to tell the ejs parser that there is some javaScript to execute rather than just plain old static html.
 
+```
+<%
+ 
+   var n = 42;
+ 
+%>
+<p>The anwser is <%= n %></p>
+```
 
 ## Escaped, and unescaped html
 
@@ -68,6 +78,97 @@ console.log(ejs.render('<%-  \'' + htmlString + '\' %>'));
 // <p>Yes this is some html</p>
 ```
 
+## Looping over an array in ejs
+
+Any JavaScript loop such as a while loop, or for loop can be used. I just need to use the pointy brackets for the beginning, and closing parts of the loop.
+
+```
+<%
+ 
+    var arr=['foo','man','chew'],
+    i = 0,
+    len = arr.length;
+ 
+%>
+ 
+<% while(i < len){ %>
+
+    <p><%- arr[i] %></p>
+
+    <% 
+        // some js in the loop
+        console.log('arr[' + i + '] = ' + arr[i]);
+        i += 1; 
+    %>
+
+<% } %>
+```
+
+Will give me
+
+```html
+<p>foo</p><p>man</p><p>chew</p>
+```
+
+I can also use if statements, and methods like array.forEach in a similar manor.
+
+## comments in ejs
+
+There is an actual syntax for comments like this:
+
+```
+<%# this is a comment %>
+```
+
+However it seems like I can often use the JavaScript syntax as well.
+
+```
+<%
+    // this is a comment.
+%>
+```
+
+I can also use html comments but those will render of course, as long as that is not a problem that is yet another option for commenting.
+
+## Passing a data object in
+
+It is possible to pass a data object to a template that can contain useful data. The key value pares will become variables, and values in the global scope when working within the ejs template. This is the second argument that is given after the template, and before an optional options object.
+
+```
+var ejs = require('ejs'),
+template = '<p><%= message %><\/p>',
+obj = {
+    message : 'foo'
+};
+console.log(ejs.render(template,obj));
+// <p>foo</p>;
+```
+
+The object can also contain methods, but the methods can not do anything that requires an asynchronous task, such as reading a file. So anything like that will have to be done before hand, and then appends to the object.
+
+## using custom delimiters with one template, or globally.
+
+It is possible to change the delimiters from percentage sines to something else if need be. This can be done by setting the delimiter properties of the options object that is given after the data object. It can also be set globally by setting the delimiter property of the ejs object.
+
+```
+var ejs = require('ejs'),
+template = '<p>this is not percent <?- message ?></p>',
+data = {
+   message : 'oh snap! '
+},
+options = {
+    delimiter : '?'
+};
+ 
+ejs.render(template,data,options);
+// <p> this is not percent on snap! </p>
+ 
+template = 'what did you say? <!- message !>';
+ejs.delimiter = '!';
+ejs.render(template,data);
+// <p> what did you say? on snap! </p>
+```
+
 ## Writing a simple EJS file, and reading it.
 
 So I could use nodes filesystem module to read an external file, and pass that to the render method. However there is also a renderFile method in ejs itself that can be used which is what I will cover here.
@@ -83,7 +184,7 @@ ejs.renderFile(
     // first I give it a path to an *.ejs file
     'ejs/first.ejs', 
  
-    // the some data to use when rendering
+    // Some data to use when rendering
     {
  
         title: 'reading a file in ejs!',
