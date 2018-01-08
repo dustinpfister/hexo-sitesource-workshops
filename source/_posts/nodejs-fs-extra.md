@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 128
-updated: 2018-01-08 09:10:46
-version: 1.0
+updated: 2018-01-08 10:34:01
+version: 1.1
 ---
 
 For the most part the [built in node.js file system module](https://nodejs.org/api/fs.html) works just fine by itself. However it can be a bit lacking. As such I find myself adding in projects like [mkdirp](/2017/11/14/nodejs-mkdirp/), and [rimraf](/2017/05/14/nodejs-rimraf/) to pring about functionality that I often think should be a part of the module. Also as of node 8.x it would seem that many of the methods do not return promises as an alterative to using callbacks, becuase of that I often find myself wrting methods, or using some kind of project like [bluebird](/2017/12/02/nodejs-bluebird/) to [promisify the methods](http://bluebirdjs.com/docs/api/promise.promisify.html) in the fs module.
@@ -94,7 +94,7 @@ This is a neater way of doing the same thing that call backs to when it comes to
 
 However there should be some kind of module that does all of this for me, so I do not have to keep rewriting, or copying and past methods like the readFile method in the above example. This is one of the things that fs-extra can take care of for me.
 
-## fs-extra promisifiys nodes file system methods.
+## fs-extra gives me file system methods that return promises
 
 For me this is one of the best reasons why to consider adding in fs-extra to a node.js project. Each node.js file system module now returns a promise when it is used as a replacement for fs, out of the box.
 
@@ -115,3 +115,25 @@ fs.readFile('README.md','utf-8').then(function (data) {
 ```
 
 However I can still use my callbacks also if for some reason I want it to, so it still works with older code that I have not updated to make use of promises in place of overuse of call backs.
+
+## Using fs-extras fs.copy method to copy files recursively
+
+On method that seems to not be there in the node.js module, is a decent method for copying files. There is fs.copyFile(https://nodejs.org/api/fs.html#fs_fs_copyfile_src_dest_flags_callback), but what if I want to copy a complex file system structure that contains many nested files, and paths, recursively? Also what if the target folder is not there? Am i going to get a nasty error, or is the method going to make it for me?
+
+I could write a solution that makes use of projects like mkdirp(/2017/11/14/nodejs-mkdirp/), and node-dir, and spend a good hour of my life or longer putting just one little method togetaher to do it, or I could just use the copy method that fs-extra gives me.
+
+```js
+let fs = require('fs-extra');
+ 
+fs.copy('source', 'target').then(function () {
+ 
+    console.log('copyed source folder!');
+ 
+}).catch (function (e) {
+ 
+    console.log(e);
+ 
+});
+```
+
+This copies a source folder over to a target, and if the target is not there it makes it for me. Wow that was fast, I like it when I get things like this out of the way in a flash so I can more on to more important things.
