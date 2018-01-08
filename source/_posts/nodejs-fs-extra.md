@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 128
-updated: 2018-01-08 16:02:29
-version: 1.8
+updated: 2018-01-08 16:09:00
+version: 1.9
 ---
 
 For the most part the [built in node.js file system module](https://nodejs.org/api/fs.html) works just fine by itself. However it can be a bit lacking. As such I find myself adding in projects like [mkdirp](/2017/11/14/nodejs-mkdirp/), and [rimraf](/2017/05/14/nodejs-rimraf/) to pring about functionality that I often think should be a part of the module. Also as of node 8.x it would seem that many of the methods do not return promises as an alterative to using callbacks, becuase of that I often find myself wrting methods, or using some kind of project like [bluebird](/2017/12/02/nodejs-bluebird/) to [promisify the methods](http://bluebirdjs.com/docs/api/promise.promisify.html) in the fs module.
@@ -93,6 +93,18 @@ readFile('README.md','utf-8').then(function (data) {
 This is a neater way of doing the same thing that call backs to when it comes to asyn tasks, and the promises can also be chained together as well. I can return another promise within the function that I pass to then, that does another async task, making my code neat, compartmentalized, and easy to follow.
 
 However there should be some kind of module that does all of this for me, so I do not have to keep rewriting, or copying and past methods like the readFile method in the above example. This is one of the things that fs-extra can take care of for me.
+
+## install fs-extra
+
+Install fs extra like any other node.js project by calling npm install, and making sure to use --save to add it to the package.json file of the project. 
+
+```
+$ npm install fs-extra --save
+```
+
+In this case I am making yet another one of my test project folders for the sake of a blog post like this that I will be [making public on my github account](https://github.com/dustinpfister/test_fs_extra).
+
+There are also some additional projects that are closely associated with fs-extra, but I will be getting to those later.
 
 ## fs-extra gives me file system methods that return promises
 
