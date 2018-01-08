@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 128
-updated: 2018-01-08 10:56:10
-version: 1.3
+updated: 2018-01-08 11:56:14
+version: 1.4
 ---
 
 For the most part the [built in node.js file system module](https://nodejs.org/api/fs.html) works just fine by itself. However it can be a bit lacking. As such I find myself adding in projects like [mkdirp](/2017/11/14/nodejs-mkdirp/), and [rimraf](/2017/05/14/nodejs-rimraf/) to pring about functionality that I often think should be a part of the module. Also as of node 8.x it would seem that many of the methods do not return promises as an alterative to using callbacks, becuase of that I often find myself wrting methods, or using some kind of project like [bluebird](/2017/12/02/nodejs-bluebird/) to [promisify the methods](http://bluebirdjs.com/docs/api/promise.promisify.html) in the fs module.
@@ -173,3 +173,52 @@ fs.emptyDir('target').then(function () {
 ```
 
 This demo will check for the folder target, if it is not there it will make it. It then reads the dir and spits back an array of files in the dir, which should be an empty array, and of course it is. This is also a great example of why promises rock, I can do many async tasks one after another like this.
+
+## fs.ensureDir
+
+This is a very helpful method that will make a dir if it is not there to begin with. I have [written a post on the npm package mkdirp](/2017/11/14/nodejs-mkdirp/) that does the same thing as a stand alone project. however now it seems like it might be better to just use fs-extra to get this functionality, along with so much more.
+
+## fs.move
+
+This method can be used to move files, and even full paths from one place to another. It appears that there is no native move method in the node.js file system module, so this is a nice addition.
+
+```js
+let fs = require('fs-extra'),
+ 
+source = process.argv[2],
+target = process.argv[3];
+ 
+let check = function () {
+ 
+    return new Promise(function (resolve, reject) {
+ 
+        if (source && target) {
+ 
+            resolve();
+ 
+        }
+ 
+        reject(new Error('must give a source and target in that order:'));
+ 
+    });
+ 
+};
+ 
+check().then(function () {
+ 
+    return fs.move(source, target);
+ 
+}).then(function () {
+ 
+    console.log('moved source to target:');
+ 
+}).catch (function (e) {
+ 
+    console.log(e.message);
+ 
+});
+```
+
+## conclusion
+
+There are a lot of projects like this on npmjs, for example there is a similar project that is used by hexo called [hexo-fs](https://www.npmjs.com/package/hexo-fs) that also augments the file system api in node.js. However this is by far the best one I have worked with so far. I have really been getting into promises lately also, and I am loving them, as such this is a package I will most likely be using more so in the future with my various projects.
