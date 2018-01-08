@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 128
-updated: 2018-01-08 11:56:14
-version: 1.4
+updated: 2018-01-08 12:05:09
+version: 1.5
 ---
 
 For the most part the [built in node.js file system module](https://nodejs.org/api/fs.html) works just fine by itself. However it can be a bit lacking. As such I find myself adding in projects like [mkdirp](/2017/11/14/nodejs-mkdirp/), and [rimraf](/2017/05/14/nodejs-rimraf/) to pring about functionality that I often think should be a part of the module. Also as of node 8.x it would seem that many of the methods do not return promises as an alterative to using callbacks, becuase of that I often find myself wrting methods, or using some kind of project like [bluebird](/2017/12/02/nodejs-bluebird/) to [promisify the methods](http://bluebirdjs.com/docs/api/promise.promisify.html) in the fs module.
@@ -222,3 +222,5 @@ check().then(function () {
 ## conclusion
 
 There are a lot of projects like this on npmjs, for example there is a similar project that is used by hexo called [hexo-fs](https://www.npmjs.com/package/hexo-fs) that also augments the file system api in node.js. However this is by far the best one I have worked with so far. I have really been getting into promises lately also, and I am loving them, as such this is a package I will most likely be using more so in the future with my various projects.
+
+The best thing about this project is that it keeps me from having to install a whole bunch of little projects that all do one, little thing. As far as I can tell, it looks like this might cover everything when it comes to working with the file system. Except for maybe a method that will loop over all files that match a given pattern, for that i have found [node-dir](/2017/11/05/nodejs-node-dir/).
