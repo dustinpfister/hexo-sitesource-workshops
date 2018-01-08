@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 128
-updated: 2018-01-08 10:40:04
-version: 1.2
+updated: 2018-01-08 10:56:10
+version: 1.3
 ---
 
 For the most part the [built in node.js file system module](https://nodejs.org/api/fs.html) works just fine by itself. However it can be a bit lacking. As such I find myself adding in projects like [mkdirp](/2017/11/14/nodejs-mkdirp/), and [rimraf](/2017/05/14/nodejs-rimraf/) to pring about functionality that I often think should be a part of the module. Also as of node 8.x it would seem that many of the methods do not return promises as an alterative to using callbacks, becuase of that I often find myself wrting methods, or using some kind of project like [bluebird](/2017/12/02/nodejs-bluebird/) to [promisify the methods](http://bluebirdjs.com/docs/api/promise.promisify.html) in the fs module.
@@ -141,3 +141,35 @@ fs.copy('source', 'target').then(function () {
 ```
 
 This copies a source folder over to a target, and if the target is not there it makes it for me. Wow that was fast, I like it when I get things like this out of the way in a flash so I can more on to more important things.
+
+## fs.emptyDir
+
+This is another method that comes to mide that I mighbt use now and then with some projects. It will empty a path of it's contents, and if it is not there it will create it. A common task if I am making some kind of project that makes a whole bunch of files in a certian target folder, and I want to make sure that it is empty before the project starts building files.
+
+Check this out for example:
+
+```js
+let fs = require('fs-extra');
+ 
+fs.emptyDir('target').then(function () {
+ 
+    console.log('target should be there, and empty');
+ 
+    // lets check
+    return fs.readdir('target');
+ 
+}).then(function (files) {
+ 
+    console.log('the files in target:');
+ 
+    // should be an empty array
+    console.log(files); // []
+ 
+}).catch (function (e) {
+ 
+    console.log(e);
+ 
+});
+```
+
+This demo will check for the folder target, if it is not there it will make it. It then reads the dir and spits back an array of files in the dir, which should be an empty array, and of course it is. This is also a great example of why promises rock, I can do many async tasks one after another like this.
