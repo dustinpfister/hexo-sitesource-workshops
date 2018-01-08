@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 128
-updated: 2018-01-08 10:34:01
-version: 1.1
+updated: 2018-01-08 10:40:04
+version: 1.2
 ---
 
 For the most part the [built in node.js file system module](https://nodejs.org/api/fs.html) works just fine by itself. However it can be a bit lacking. As such I find myself adding in projects like [mkdirp](/2017/11/14/nodejs-mkdirp/), and [rimraf](/2017/05/14/nodejs-rimraf/) to pring about functionality that I often think should be a part of the module. Also as of node 8.x it would seem that many of the methods do not return promises as an alterative to using callbacks, becuase of that I often find myself wrting methods, or using some kind of project like [bluebird](/2017/12/02/nodejs-bluebird/) to [promisify the methods](http://bluebirdjs.com/docs/api/promise.promisify.html) in the fs module.
@@ -116,7 +116,11 @@ fs.readFile('README.md','utf-8').then(function (data) {
 
 However I can still use my callbacks also if for some reason I want it to, so it still works with older code that I have not updated to make use of promises in place of overuse of call backs.
 
-## Using fs-extras fs.copy method to copy files recursively
+## lets take a look at some of the methods.
+
+fs-extra does more than just make it so the methods I all ready use return promises, it also adds a whole bunch more methods to the file system api that are pretty useful. For a full list there is the [readme of the project](https://github.com/jprichardson/node-fs-extra/blob/master/README.md#methods), however I will also be covering some of the most important ones here as well.
+
+### fs.copy method to copy files recursively
 
 On method that seems to not be there in the node.js module, is a decent method for copying files. There is fs.copyFile(https://nodejs.org/api/fs.html#fs_fs_copyfile_src_dest_flags_callback), but what if I want to copy a complex file system structure that contains many nested files, and paths, recursively? Also what if the target folder is not there? Am i going to get a nasty error, or is the method going to make it for me?
 
