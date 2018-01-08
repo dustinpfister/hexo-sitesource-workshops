@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 128
-updated: 2018-01-08 12:12:18
-version: 1.6
+updated: 2018-01-08 15:08:32
+version: 1.7
 ---
 
 For the most part the [built in node.js file system module](https://nodejs.org/api/fs.html) works just fine by itself. However it can be a bit lacking. As such I find myself adding in projects like [mkdirp](/2017/11/14/nodejs-mkdirp/), and [rimraf](/2017/05/14/nodejs-rimraf/) to pring about functionality that I often think should be a part of the module. Also as of node 8.x it would seem that many of the methods do not return promises as an alterative to using callbacks, becuase of that I often find myself wrting methods, or using some kind of project like [bluebird](/2017/12/02/nodejs-bluebird/) to [promisify the methods](http://bluebirdjs.com/docs/api/promise.promisify.html) in the fs module.
@@ -219,13 +219,39 @@ check().then(function () {
 });
 ```
 
-## Walking or looping over a file system
+## Walking or looping over a dir with klaw
 
-This was removed from fs-extra in 2.x and placed in it's own project called [klaw](https://www.npmjs.com/package/klaw).
+This was removed from fs-extra in 2.x and placed in it's own project called [klaw](https://www.npmjs.com/package/klaw). So for that feature I now need to install another package.
 
-## Walking with node-dir
+```
+$ npm install klaw --save
+```
 
-there is another project I have found called [node-dir](/2017/11/05/nodejs-node-dir/), that can also be used to loop over the contents of a folder as well..
+Walking over a path is simple enough then. I just need to give it the path and then add some events for data, which will be called for each file, or folder. 
+
+```js
+let klaw = require('klaw'),
+path = require('path');
+ 
+klaw('source').on('data', function (item) {
+ 
+    console.log('**********');
+    console.log(item.path);
+    console.log('dir: ' + item.stats.isDirectory());
+    console.log('**********');
+ 
+}).on('end', function () {
+ 
+    console.log('done');
+ 
+});
+```
+
+Whats real cool compared to node-dir is that it grabs the stats for me and gives it to me in the item. That saves me another step, as I often do want to grap file stats.
+
+## Walking or looping over a dir with node-dir
+
+There is another project I have found called [node-dir](/2017/11/05/nodejs-node-dir/), that can also be used to loop over the contents of a folder as well..
 
 ## conclusion
 
