@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 128
-updated: 2018-01-08 15:08:32
-version: 1.7
+updated: 2018-01-08 16:02:29
+version: 1.8
 ---
 
 For the most part the [built in node.js file system module](https://nodejs.org/api/fs.html) works just fine by itself. However it can be a bit lacking. As such I find myself adding in projects like [mkdirp](/2017/11/14/nodejs-mkdirp/), and [rimraf](/2017/05/14/nodejs-rimraf/) to pring about functionality that I often think should be a part of the module. Also as of node 8.x it would seem that many of the methods do not return promises as an alterative to using callbacks, becuase of that I often find myself wrting methods, or using some kind of project like [bluebird](/2017/12/02/nodejs-bluebird/) to [promisify the methods](http://bluebirdjs.com/docs/api/promise.promisify.html) in the fs module.
@@ -227,6 +227,12 @@ This was removed from fs-extra in 2.x and placed in it's own project called [kla
 $ npm install klaw --save
 ```
 
+Also if I want to do something with piping, I will want to install [through2](https://www.npmjs.com/package/through2).  This is just a tiny little project that has to do with streams.
+
+```
+$ npm install through2 --save
+```
+
 Walking over a path is simple enough then. I just need to give it the path and then add some events for data, which will be called for each file, or folder. 
 
 ```js
@@ -248,6 +254,35 @@ klaw('source').on('data', function (item) {
 ```
 
 Whats real cool compared to node-dir is that it grabs the stats for me and gives it to me in the item. That saves me another step, as I often do want to grap file stats.
+
+## piping with klaw, and through2
+
+There will come may times that i will want to filter files bases on file extension, if the filename fits a given pattern, or meets some other kind of criteria such as file size. To do this I will want to use a pipe, and to work with that I will want to install through2 on top of klaw, and fs-extra.
+
+```js
+let klaw = require('klaw'),
+through2 = require('through2'),
+path = require('path');
+ 
+klaw('source')
+.pipe(through2.obj(function (item, enc, next) {
+ 
+        // match only items that have a *.txt extenstion
+        if (item.path.match(/.txt$/)) {
+            this.push(item);
+        }
+ 
+        next();
+    }))
+.on('data', function (item) {
+ 
+    // just txt files
+    console.log(path.basename(item.path));
+ 
+});
+```
+
+pipe just needs what is returned by through2.obj, and the method that I give throgh2.obj is where I define my logic that can be used to filter out files I do not want. Anything I do what I just push to an array that can be referenced by the this keyword. Then I can use data events like normal, on the filtered results.
 
 ## Walking or looping over a dir with node-dir
 
