@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 129
-updated: 2018-01-09 15:05:20
-version: 1.2
+updated: 2018-01-09 15:22:25
+version: 1.3
 ---
 
 Still hand coding css? So am I, so I thought I would try one of the many options out there when it comes to some kind of superset of css. In [hexo](https://hexo.io/) one of the dependences that is used is the npm package [stylus](https://www.npmjs.com/package/stylus), which is both a language, and a software package used to parse stylus into plain old css. 
@@ -14,6 +14,35 @@ Still hand coding css? So am I, so I thought I would try one of the many options
 <!-- more -->
 
 The documentation [on the readme for stylus](https://github.com/stylus/stylus/blob/dev/Readme.md) instructs me to install the package globally which is fine if I aim to use it as a stand alone CLI tool. However in this post I will be covering how to go about using it in a project grabbing at it with require, rather than making calls with [child-process](https://nodejs.org/api/child_process.html).
+
+## The Stylus language
+
+If you are looking for a decent resource on the stylus language, rather than how to get up and running with the npm package there is the [stylus-lang](http://stylus-lang.com/) site that seems to do a decent job of that. I will only be covering the basics of the language here, so be sure to check out the site to get a more in depth understanding of the language.
+
+### Start with plain old css
+
+When it comes to plain old \*.css files I might have many instances of css properties, and values enclosed inside curly brackets that are set to one or more selectors such as a tag selector like this:
+
+```
+body {
+    margin : 0px;
+    padding : 0px;
+    color: #ffffff;
+    background: #000000;
+}
+```
+
+To convert my \*.css file to a \*.styl file I just need to save my style.css to something like style.styl. Then just loose the curly brackets, and the semicolons.
+
+```
+body
+    margin : 0px
+    padding : 0px
+    color: #ffffff
+    background: #000000
+```
+
+If you know css fairly well before hand, thats are there is to know in order to get started with stylus. There is the question of more advanced features, but there are other resources that get into the language deeply, and the idea I had in mind with this post is working with the npm package to get parsing to work.
 
 ## Making the test folder
 
@@ -33,11 +62,6 @@ $ npm install fs-extra --save
 ```
 
 I will also [publish this project to my github account](https://github.com/dustinpfister/test_stylus) if interested.
-
-## The Stylus language
-
-If you are looking for a decent resource on the stylus language, rather than how to get up and running with the npm package there is the [stylus-lang](http://stylus-lang.com/) site that seems to do a decent job of that. I will only be covering the basics of the language here, so be sure to check out the site to get a more in depth understanding of the language.
-
 
 ## Basic example of using stylus in node.js
 
