@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 129
-updated: 2018-01-09 15:22:25
-version: 1.3
+updated: 2018-01-09 15:28:54
+version: 1.4
 ---
 
 Still hand coding css? So am I, so I thought I would try one of the many options out there when it comes to some kind of superset of css. In [hexo](https://hexo.io/) one of the dependences that is used is the npm package [stylus](https://www.npmjs.com/package/stylus), which is both a language, and a software package used to parse stylus into plain old css. 
@@ -183,3 +183,13 @@ fs.ensureDir(source).then(function () {
  
 });
 ```
+
+If you do not what to use fs-extra thats fine, you just need to find a way to get the text, and feed it to stylus.render as that is the actual parser method in the project.
+
+## conclusion
+
+I have just started with stylus, and I think I like it over plain old hand coding of css. Not that there is anything wrong with that, in fact I might keep doing that for some projects. However I am getting more interested in making themes for hexo, and stylus seems to be used as the language for styles when making themes.
+
+I have not gotten into more advanced features available in stylus, it I get aground to it I might update this post some day if it gets some attention.
+
+Happy coding.
