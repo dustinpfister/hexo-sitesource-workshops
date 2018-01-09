@@ -1,12 +1,12 @@
 ---
-title: Generate css with stylus using the npm package stylus.js
+title: Generate stylus to css using the npm package stylus
 date: 2018-01-09 13:51:00
 tags: [js,node.js]
 layout: post
 categories: node.js
 id: 129
-updated: 2018-01-09 14:21:54
-version: 1.1
+updated: 2018-01-09 15:05:20
+version: 1.2
 ---
 
 Still hand coding css? So am I, so I thought I would try one of the many options out there when it comes to some kind of superset of css. In [hexo](https://hexo.io/) one of the dependences that is used is the npm package [stylus](https://www.npmjs.com/package/stylus), which is both a language, and a software package used to parse stylus into plain old css. 
@@ -34,6 +34,128 @@ $ npm install fs-extra --save
 
 I will also [publish this project to my github account](https://github.com/dustinpfister/test_stylus) if interested.
 
-## Stylus file extension
+## The Stylus language
+
+If you are looking for a decent resource on the stylus language, rather than how to get up and running with the npm package there is the [stylus-lang](http://stylus-lang.com/) site that seems to do a decent job of that. I will only be covering the basics of the language here, so be sure to check out the site to get a more in depth understanding of the language.
+
+
+## Basic example of using stylus in node.js
+
+Once stylus is in the node_modules folder I can pull it in with require as usual. This will give me an object with many methods, the one that I am most interested in here is the render method, which can be used to parse stylus into css.
+
+So in my project I made a basic.js file at the root space that looks like this:
+
+```js
+let stylus = require('stylus');
+ 
+console.log(stylus.render('body \n    padding: 5px'));
+```
+
+When I call it with node in the console, it gives me plain old css.
+
+```
+$ node basic
+body {
+  padding: 5px;
+}
+```
+
+## Processing a *.styl file
+
+Although I can render hard coded stylus into css this way, it most real world use case examples this project will be used with one or more external files that contain stylus that need to be parsed into css. The easiest way to do this might be to just install the script globally, and use stylus as a CLI tool. However if you are using stylus as a dependency of some kind of complex project, you might not want to make use of it by making child-process calls. If so no problem, I had no trouble starting to work with it by pulling it in with require as well.
+
+### The stylus file extension
 
 The stylus file extension is often in the form of \*.styl, so just remember the word style less the e and you should be good.
+
+In my test project I have just one test.styl file in a folder called styl, that I aim to process into a css folder.
+
+### Install stylus globally
+
+If you want to give it a go, the go for it.
+
+```
+$ npm install stylus -g
+```
+
+You can then watch an process a style file [as describe in the readme](https://github.com/stylus/stylus/blob/dev/Readme.md).
+
+```
+$ stylus -w style.styl -o style.css
+```
+
+The quick and simple way to get it done if need be. Taking a look at the bin folder in the project, it looks like they are just using the built in node.js module to read styl files, and write out css. So when it comes to using stylus as a dependency, the same can be done in a complex project as well, in place of using exec, or spawn.
+
+### Using fs-extra to read an extremal \*.styl file, and process to css with the stylus.render method.
+
+If you have not heard of fs-extra it might be a good idea to [check it out](https://www.npmjs.com/package/fs-extra). It is a great extension to the built in node.js file system module that adds a few more methods that should be there, alone with making it so all the built in methods return promises. I would get into detail about it here, as I have [wrote a post on it](/2018/01/08/nodejs-fs-extra/).
+
+In my test project I created a file called process.js that makes use of fs-extra, and the stylus render method to process \*.styl files into \*.css files.
+
+```js
+let stylus = require('stylus'),
+fs = require('fs-extra'),
+path = require('path'),
+ 
+source = 'styl',
+target = 'css';
+ 
+// write the given css in the target folder
+let writeCSS = function (css, fn) {
+ 
+    let uri = path.join(target, fn);
+ 
+    return fs.writeFile(uri, css, 'utf-8');
+ 
+};
+ 
+// process the given styl file
+let processFile = function (file) {
+ 
+    let uri = path.join(source, file);
+ 
+    return fs.readFile(uri, 'utf-8').then(function (data) {
+ 
+        // here I am using stylus in the same manor as in the
+        // basic example, just feeding it data from a external
+        // file with the stylus file extension \*.styl rather
+        // than a hard coded string
+        let css = stylus.render(data);
+        let fn = file.replace(/.styl$/, '.css');
+ 
+        return writeCSS(css, fn);
+ 
+    }).then(function () {
+ 
+        console.log('sucess');
+ 
+    }).catch (function (e) {
+ 
+        console.log(e);
+ 
+    });
+ 
+};
+ 
+// ensure the styl folder is there
+fs.ensureDir(source).then(function () {
+ 
+    // ensure the css folder is there
+    return fs.ensureDir(target);
+ 
+}).then(function () {
+ 
+    // read the source path
+    return fs.readdir(source);
+ 
+}).then(function (files) {
+ 
+    // call for each
+    files.forEach(processFile);
+ 
+}).catch (function (e) {
+ 
+    console.log(e);
+ 
+});
+```
