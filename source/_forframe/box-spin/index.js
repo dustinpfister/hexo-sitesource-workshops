@@ -3,10 +3,16 @@ forFrame({
     name: 'box-spin',
     init: function (api) {
 
-        this.add('graphics', 'item', function () {
+        this.add('graphics', 'item', function (ff) {
 
+            this.clear();
             this.beginFill(0xff0000);
-            this.drawRect(-50, -50, 100, 100);
+
+            var pos = 32 - 32 * ff.bias;
+            var size = 64 * ff.bias;
+
+            this.drawRect(pos, pos, size, size);
+            this.angle = 360 * ff.per;
             this.endFill();
 
         });
@@ -15,39 +21,19 @@ forFrame({
 
     forFrame: function () {
 
-        var item = this.get('item');
+        var bx = this.get('item').disp;
+
+        bx.w = 16;
+        bx.h = 16;
+
+        var cx = this.width / 2 - bx.w / 2;
+        var cy = this.height / 2 - bx.h / 2;
+
+        var r = Math.PI * 2 * this.per;
+
+        bx.x = cx + Math.cos(r) * 50;
+        bx.y = cy + Math.sin(r) * 50;
 
     }
 
 });
-/*
-forFrame.add({
-
-name: 'box spin',
-
-init: function (api) {
-
-// and a single box with the id 'theBox';
-api.addBox.call(this, 'theBox');
-
-},
-
-forFrame: function (api) {
-
-var bx = api.get.call(this, 'theBox');
-
-bx.w = 32;
-bx.h = 32;
-
-let cx = this.canvas.width / 2 - bx.w / 2;
-let cy = this.canvas.height / 2 - bx.h / 2;
-
-let r = Math.PI * 2 * this.per;
-
-bx.x = cx + Math.cos(r) * 100;
-bx.y = cy + Math.sin(r) * 100;
-
-}
-
-});
-*/
