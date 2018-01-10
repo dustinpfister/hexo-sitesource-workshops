@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 130
-updated: 2018-01-10 10:48:06
-version: 1.1
+updated: 2018-01-10 10:55:32
+version: 1.2
 ---
 
 Axios is a javaScript promise based http client for node.js, and the browser. making requests with axios is pretty simple, however if need be I can still set all relevant options like headers, and url parameters. In short it is yet another way to make get, and post requests to a server on the web somewhere via scripting http.
@@ -34,3 +34,35 @@ $ git clone https://github.com/dustinpfister/test_axios
 $ cd test_axios
 $ node basic
 ```
+
+## Basic use case of axios
+
+For by basic example I am using axios to get the html of the webpage [https://www.google.com](https://www.google.com), then loading the html into cheerio to help get the href attributes and inner text of each link.
+
+```js
+let axios = require('axios'),
+cheerio = require('cheerio');
+ 
+axios.get('http://www.google.com/').then(function (html) {
+ 
+    let $ = cheerio.load(html.data);
+ 
+    // loop all links
+    $('a').each(function (i, span) {
+ 
+        let href = $(this).attr('href'),
+        text = $(this).text();
+ 
+        // log the inner text, and the href of the link
+        console.log(text + ' : ' + href);
+ 
+    })
+ 
+}).catch (function (e) {
+ 
+    console.log(e);
+ 
+});
+```
+
+So right off the bat axios strikes me as one of the best options for making get requests. That is pretty simple, and easy to remember. This is of course just a get request I am making for a public web page, but don't worry when it comes to doing something more complicated everything I need is there.
