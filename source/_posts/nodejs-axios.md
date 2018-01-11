@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 130
-updated: 2018-01-10 19:52:53
-version: 1.3
+updated: 2018-01-11 15:22:09
+version: 1.4
 ---
 
 Axios is a javaScript promise based http client for node.js, and the browser. making requests with axios is pretty simple, however if need be I can still set all relevant options like headers, and url parameters. In short it is yet another way to make get, and post requests to a server on the web somewhere via scripting http.
@@ -35,7 +35,11 @@ $ cd test_axios
 $ node basic
 ```
 
-## Basic use case of axios (GET example with no options)
+## Using axios as a client side library
+
+Axios is a javascript library that works the same way in both a server side, as well as client side environment. In the npm package the axios.js file that will work in both environments is in the dist folder. In my test project I just copyed and pasted what is there to a name space in the public html folder to be used in my client side demos of this project.
+
+## Basic use case of axios (node.js GET example with no options)
 
 For by basic example I am using axios to get the html of the webpage [https://www.google.com](https://www.google.com), then loading the html into cheerio to help get the href attributes and inner text of each link.
 
@@ -71,10 +75,13 @@ So right off the bat axios strikes me as one of the best options for making get 
 
 For this project I experimented with making a server from the ground up, which I something I do now and then rather than installing [hapi](https://www.npmjs.com/package/hapi), or [express](https://www.npmjs.com/package/express).
 
+So this is not something that I would use in production, just a custom hack job that I made while experimenting with axios.
+
 ```js
 let http = require('http'),
 fs = require('fs'),
 path = require('path'),
+url = require('url'),
 port = process.argv[2] || 8080,
 dir_public = 'public';
  
@@ -118,7 +125,14 @@ let forMethod = {
  
     post: function (req, res) {
  
-        var body = '';
+        let body = '',
+        query = url.parse(req.url, true).query;
+ 
+        if (query) {
+ 
+            console.log(query);
+ 
+        }
  
         req.on('data', function (chunk) {
  
@@ -185,7 +199,7 @@ For the purpose of this test project I quickly threw together a simple static we
 
 The public folder just contains a main index.html, and two demos do far for making get requests, and post requests from the browser.
 
-## The post example (client)
+## Simple post example (client)
 
 For a post request example I just made a project where I make a post request to the server, and get a response if the text matches a certain something.
 
@@ -215,6 +229,45 @@ For a post request example I just made a project where I make a post request to 
     </body>
 </html>
 ```
+
+## Url parameters
+
+Working with Url parameter is as simple as just giving an object with key value pairs rather than a sting that looks like this:
+
+```
+/?foo=bar&anwser=42
+```
+
+Although if you want to to it that way then it can just be appended to the url property given.
+
+```js
+axios({
+ 
+    method: 'post',
+    url: '/',
+    params: {
+ 
+        sort: 'date'
+ 
+    },
+    data: {
+ 
+        iwant: 'theanwser'
+ 
+    }
+ 
+}).then(function (res) {
+ 
+    console.log(res);
+ 
+}).catch (function (e) {
+ 
+    console.log(e);
+ 
+});
+```
+
+If you want a quick solution for parsing the url parameters back into an object on the server side check out url.parse in the [built in node.js url module](https://nodejs.org/api/url.html).
 
 ## Conclusion
 
