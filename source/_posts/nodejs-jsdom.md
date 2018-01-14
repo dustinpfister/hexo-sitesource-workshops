@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 131
-updated: 2018-01-14 14:16:52
-version: 1.4
+updated: 2018-01-14 15:04:22
+version: 1.5
 ---
 
 There comes a time now and then that I need to work with html in a server side, node.js environment. I have wrriten about a very helpful project called [cheerio](https://www.npmjs.com/package/cheerio) that works well if I just want to grab at something liek a link, or maybe make some kind of edit to html. However cheerio is not an actual emulation of a browser environment. There are other projects that aim to actually emulate an actual usable browser environment for the purpose of getting client side apparitions to work in a node.js project server side. The npm package [jsdom](https://www.npmjs.com/package/jsdom) is one such project, and as such this post will be about how to use jsdom to bring a browser environment to node.
@@ -132,4 +132,40 @@ jsdom.fromFile(uri, options).then(function (dom) {
 });
 ```
 
-This worked as expected just fine, but of course it is not at all a real application.
+This worked as expected just fine, but of course it is not at all a real application. The resources that can be loaded also include iframes, stylesheets, and images on top of external scripts.
+
+## Add something to window before html is parsed.
+
+Jsdom allows for me to define some things before html is parsed to populate the document.
+
+```js
+let jsdom = require('jsdom').JSDOM,
+ 
+// the options that I will be giving to jsdom
+options = {
+    runScripts: 'dangerously',
+    resources: "usable",
+    beforeParse: function (window) {
+ 
+        window.foo = function () {
+ 
+            console.log('bar');
+ 
+        };
+ 
+    }
+};
+ 
+// bar
+let dom = new jsdom('<script>foo()<\/script>',options);
+```
+
+This can be used to implement something that might not be there if I take the time to do it.
+
+## Canvas support
+
+If I want to do something with canvas in jsdom is looks like I have to install some additional software. Not only do I need to install an additional npm package called juts simply canvas, I also need to install some additional software at the lower level as well, something called Cairo. As of this writing I have not done so, however if interested in doing this I would start by checking out [canvas on npmjs](https://www.npmjs.com/package/canvas).
+
+## Conclusion
+
+js-dom is the most powerful project that I have come across so far that can be used to do this sort of thing in a node.js environment. If I use this project in more of my projects I will likely update this content, and write a few more posts on the subject.
