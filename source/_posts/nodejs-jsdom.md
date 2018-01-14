@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 131
-updated: 2018-01-14 12:32:00
-version: 1.3
+updated: 2018-01-14 14:16:52
+version: 1.4
 ---
 
 There comes a time now and then that I need to work with html in a server side, node.js environment. I have wrriten about a very helpful project called [cheerio](https://www.npmjs.com/package/cheerio) that works well if I just want to grab at something liek a link, or maybe make some kind of edit to html. However cheerio is not an actual emulation of a browser environment. There are other projects that aim to actually emulate an actual usable browser environment for the purpose of getting client side apparitions to work in a node.js project server side. The npm package [jsdom](https://www.npmjs.com/package/jsdom) is one such project, and as such this post will be about how to use jsdom to bring a browser environment to node.
@@ -76,3 +76,60 @@ In addition to scripts not just working by default without giving the proper run
 
 ## Running an external html file, and it's sub resources.
 
+If I want to run a client side app that exists as something in a \*.html file I can attept to load it using jsdoms fromFile method. When doing so I might often have external resources that are referenced from the \*.html file such as external scripts, and other assets. To make use that jsdom is making use of everything that is referenced from the *\.html file I will want to pass some options to the method, on top of the path to the file.
+
+So I set up a public html folder, and placed the following index.html file at the root name space.
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>External file</title>
+    </head>
+    <body>
+        <h1>I am an external file</h1>
+        <script>
+            console.log('I am a script tag on the index.html file');
+        </script>
+        <!-- here is a line to a sub resource -->
+        <script src="sub.js"></script>
+    </body>
+</html>
+```
+
+I also placed a sub.js file at root as well, and linked to it in the html.
+
+```js
+var n = 40 + 2;
+console.log('I am a sub resource, the answer is : ' + n);
+```
+
+And to make use of all this i made a from_file.js demo that I will call from the command line.
+
+```js
+let jsdom = require('jsdom').JSDOM,
+ 
+// the file I will be loading
+uri = 'public/index.html',
+ 
+// the options that I will be giving to jsdom
+options = {
+    runScripts: 'dangerously',
+    resources: "usable"
+};
+ 
+// load from an external file
+jsdom.fromFile(uri, options).then(function (dom) {
+ 
+    let window = dom.window,
+    document = window.document;
+ 
+    console.log(document.querySelectorAll('h1')[0].innerHTML);
+ 
+}).catch (function (e) {
+ 
+    console.log(e);
+ 
+});
+```
+
+This worked as expected just fine, but of course it is not at all a real application.
