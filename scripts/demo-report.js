@@ -4,6 +4,7 @@ generate a report on posts
 
  */
 
+/*
 let cheerio = require('cheerio'),
 _ = require('lodash'),
 path = require('path');
@@ -105,3 +106,4 @@ hexo.extend.generator.register('report', function (locals) {
     });
 
 });
+*/

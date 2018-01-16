@@ -3,6 +3,7 @@
    // placed itemscope in it's own div
    // added itemtype for blog post
    // added update.ejs
+   // added use of lexter_basic_info helper
 
 %>
 <div itemscope itemtype="http://schema.org/Blog">
@@ -30,6 +31,9 @@
         <% } %>
       <% } else { %>
         <%- post.content %>
+  
+        <%- lexter_basic_info(site,post) %>
+  
       <% } %>
     </div>
     <footer class="article-footer">
@@ -40,6 +44,7 @@
       <%- partial('post/tag') %>
     </footer>
   </div>
+  
   <% if (!index){ %>
     <%- partial('post/nav') %>
   <% } %>
