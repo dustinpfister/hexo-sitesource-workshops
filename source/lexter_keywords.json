@@ -1,0 +1,10 @@
+{
+    "site": ["node.js", "lodash", "js","javaScript"],
+
+    "posts": {
+
+        "lodash-find": ["_.find", "lodash", "lodash find example"]
+
+    }
+
+}

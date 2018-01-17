@@ -1,8 +1,20 @@
+<% 
+
+   let dataFile = site.data['lexter-'+ page.data.slug ] || {keywords:{site:[], page:[]}};
+
+%>
 
 <div style="padding:20px;">
 
     <p>This is an report for the post at <a href="/<%= page.data.post_path %>">/<%= page.data.post_path %></a></p>
 
     <p>World Count Total: <%= page.data.ct.total%></p>
+
+	<% dataFile.keywords.site.forEach(function(keyObj){ %>
+	
+	    <p><%= keyObj.keyword %> : <%= keyObj.ct %> </p>
+	
+	<% }); %>
+	
 
 </div>
