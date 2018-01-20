@@ -32,7 +32,18 @@
       <% } else { %>
         <%- post.content %>
   
-        <%- lexter_basic_info(site,post) %>
+        <%
+            // inject basic info for post, if using lexter
+            let html_lexter = '';
+            try{
+                html_lexter = lexter_basic_info(site,post);
+            }catch(e){
+
+                html_lexter = '';
+
+            }
+        %>
+        <%- html_lexter %>
   
       <% } %>
     </div>

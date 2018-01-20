@@ -2,8 +2,9 @@
 menu:
   Home: /
   Archives: /archives
-  Reports: /reports
-  forFrame: /forframe
+  Games: /games
+#  Reports: /reports
+#  forFrame: /forframe
 rss: /atom.xml
 
 # Content
