@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 108
-updated: 2017-12-04 17:58:06
-version: 1.0
+updated: 2018-01-23 13:09:25
+version: 1.1
 ---
 
 When working with many node projects I often run into a situation in which I need to just set up a simple static web sever, often purely for the sake of serving a path over http:// rather than file://. There are many npm packages to pull this off, but I often fine myself, just working out a simple solution using the built in http module in node itself. 
@@ -31,19 +31,22 @@ As such I thought I would write a quick post on one of the latest solutions I ha
  *   This just provides a simple static server for the project.
  *
  */
-
-var http = require('http'),
+ 
+let http = require('http'),
 fs = require('fs'),
 path = require('path'),
  
-port = 8888, // port 8888 for now
-root = process.cwd(); // assume current working path is root
+// set root with first argument, or current working dir
+root = process.argv[2] || './public', //process.cwd(),
+ 
+// set port with second argument, or 8888
+port = process.argv[3] || 8888; // port 8888 for now
  
 // create and start the server
 http.createServer(function (req, res) {
  
     // get the path
-    var p = path.join(root, req.url);
+    let p = path.join(root, req.url);
  
     // get stats of that path
     fs.lstat(p, function (e, stat) {
@@ -51,6 +54,8 @@ http.createServer(function (req, res) {
         // if error end
         if (e) {
  
+            res.writeHead(500);
+            res.write(JSON.stringify(e));
             res.end();
  
         }
@@ -60,15 +65,24 @@ http.createServer(function (req, res) {
  
             // if it is not a file append index.html to path, and try that
             if (!stat.isFile()) {
-                p = path.join(p, 'index.html')
+                p = path.join(p, 'index.html');
             }
  
+            // default encoding to utf-8, and get file extension
+            let encoding = 'utf-8';
+            let ext = path.extname(p).toLowerCase();
+ 
+            // binary encoding if...
+            encoding = ext === '.png' ? 'binary' : encoding;
+ 
             // try to read the path
-            fs.readFile(p, 'binary', function (e, file) {
+            fs.readFile(p, encoding, function (e, file) {
  
                 // if error end
                 if (e) {
  
+                    res.writeHead(500);
+                    res.write(JSON.stringify(e));
                     res.end();
  
                 }
@@ -76,8 +90,21 @@ http.createServer(function (req, res) {
                 // if file, send it out
                 if (file) {
  
-                    res.writeHead(200);
-                    res.write(file, 'binary');
+                    // default mime to text/plain
+                    let mime = 'text/plain';
+ 
+                    // text
+                    mime = ext === '.html' ? 'text/html' : mime;
+                    mime = ext === '.css' ? 'text/css' : mime;
+                    mime = ext === '.js' ? 'text/javascript' : mime;
+ 
+                    // images
+                    mime = ext === '.png' ? 'image/png' : mime;
+ 
+                    res.writeHead(200, {
+                        'Content-Type': mime
+                    });
+                    res.write(file, encoding);
                     res.end();
                 }
  
@@ -87,7 +114,11 @@ http.createServer(function (req, res) {
  
     });
  
-}).listen(port);
+}).listen(port, function () {
+ 
+    console.log('server up on port: ' + port);
+ 
+});
 ```
 
 So of course this solution just handles GET requests which works fine in most situations. In the event that a path is given such as '/' then '/index.html' is assumed. In addition in the event of any kind of error the request is just ended, and I do not serve any kind of 404 page.
