@@ -7,8 +7,6 @@
     },
     "dependencies": {
         "hexo": "^3.2.0",
-        "hexo-game-studio": "^0.0.0",
-        "hexo-lexter": "^0.0.0",
         "hexo-forframe": "^0.0.0",
         "hexo-generator-archive": "^0.1.4",
         "hexo-generator-category": "^0.1.3",
