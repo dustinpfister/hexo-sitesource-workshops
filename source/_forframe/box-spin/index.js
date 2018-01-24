@@ -1,20 +1,26 @@
 forFrame({
 
     name: 'box-spin',
-    init: function (api) {
+    init: function () {
 
-        this.add('graphics', 'item', function (ff) {
+        this.addDisp({
+            id: 'item',
+            type: 'graphics',
+            forFrame: function () {
 
-            this.clear();
-            this.beginFill(0xff0000);
+                var gfx = this.disp;
 
-            var pos = 32 - 32 * ff.bias;
-            var size = 64 * ff.bias;
+                gfx.clear();
+                gfx.beginFill(0xff0000);
 
-            this.drawRect(pos, pos, size, size);
-            this.angle = 360 * ff.per;
-            this.endFill();
+                var pos = 32 - 32 * this.bias;
+                var size = 64 * this.bias;
 
+                gfx.drawRect(pos, pos, size, size);
+                gfx.angle = 360 * this.per;
+                gfx.endFill();
+
+            }
         });
 
     },

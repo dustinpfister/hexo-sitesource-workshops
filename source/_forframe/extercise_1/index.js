@@ -3,7 +3,7 @@ forFrame({
     name: 'hello-world',
     maxFrame: 200,
 
-    init: function (api) {
+    init: function () {
 
         var game = this.game;
 
@@ -15,17 +15,23 @@ forFrame({
 
                 var val = Math.random() * 255;
 
-                self.add('graphics', 'bx' + (i + 1), function (ff) {
+                self.addDisp({
+                    type: 'graphics',
+                    id: 'bx' + (i + 1),
+                    forFrame: function () {
 
-                    this.data.w = 20 + 110 * ff.bias;
-                    this.data.h = 20 + 20 * ff.bias;
-                    //this.data.h = 20;
+                        var gfx = this.disp;
 
-                    this.clear();
-                    this.beginFill(parseInt(Math.floor(val).toString(16) + '00', 16));
-                    this.drawRect(0, 0, this.data.w, this.data.h);
-                    this.endFill();
+                        gfx.data.w = 20 + 110 * this.bias;
+                        gfx.data.h = 20 + 20 * this.bias;
+                        //this.data.h = 20;
 
+                        gfx.clear();
+                        gfx.beginFill(parseInt(Math.floor(val).toString(16) + '00', 16));
+                        gfx.drawRect(0, 0, gfx.data.w, gfx.data.h);
+                        gfx.endFill();
+
+                    }
                 });
 
                 i += 1;

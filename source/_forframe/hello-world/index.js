@@ -1,55 +1,49 @@
 forFrame({
 
-    name: 'hello-world',
-    maxFrame: 500,
+    name: 'text-demo',
 
-    init: function (api) {
+    maxFrame: 100,
 
-        var game = this.game;
+    // the init method is called once to set things up
+    init: function () {
 
-        this.add('graphics', 'bx1', function (ff) {
-
-            this.data.h = game.height / 6;
-            this.data.w = game.width / 2;
-
-            this.clear();
-            this.beginFill(0x00ff00);
-            this.drawRect(0, 0, this.data.w, this.data.h);
-            this.endFill();
-
+        this.addDisp({
+            id: 'text-hello',
+            type: 'text',
+            text: 'hello',
+            forFrame: function (ff) {
+                var gfx = this.disp;
+            }
         });
 
-        this.add('graphics', 'bx2', function (ff) {
+        this.addDisp({
+            id: 'text-world',
+            type: 'text',
+            text: 'world',
+            style: {
 
-            this.data.h = game.height / 6;
-            this.data.w = game.width / 2;
+                fill: 'blue'
 
-            this.clear();
-            this.beginFill(0x0000ff);
-            this.drawRect(0, 0, this.data.w, this.data.h);
-            this.endFill();
-
+            },
+            forFrame: function (ff) {
+                var gfx = this.disp;
+            }
         });
 
     },
 
     forFrame: function () {
 
-        var bx = this.get('bx1').disp,
-        game = this.game;
+        var game = this.game,
 
-        //game.transparent = false;
-        //game.stage.backgroundColor = '#ff0000';
+        tx = this.get('text-hello').disp;
 
-        bx.x = 0 + bx.data.w * this.bias - bx.data.w;
-        bx.y = game.height / 2 - bx.data.h / 2;
-        bx.alpha = this.bias;
+        tx.x = (game.width - tx.width) * this.bias;
+        tx.y = game.height / 2 - tx.height;
 
-        bx = this.get('bx2').disp;
-
-        bx.x = game.width-bx.data.w * this.bias;
-        bx.y = game.height / 2 - bx.data.h / 2;
-        bx.alpha = this.bias;
+        tx = this.get('text-world').disp;
+        tx.x = (game.width - tx.width) - (game.width - tx.width) * this.bias;
+        tx.y = game.height / 2 - tx.height;
 
     }
 
