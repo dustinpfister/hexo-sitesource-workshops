@@ -1,15 +1,15 @@
 ---
-title: Game Money
+title: Orbs game Class for something similar to Gemcraft
 date: 2018-01-25 19:00:00
 tags: [js,games]
 layout: post
 categories: games
 id: 135
-updated: 2018-01-25 20:46:58
-version: 1.0
+updated: 2018-01-29 12:00:22
+version: 1.1
 ---
 
-I have only made one other post where I write about game development ideas, all the way back in February of last year. Maybe part of the reason why is because part of me sees no future in it for me, as such I should focus elsewhere. However the main reason why I got into programing in the first place is to be creative in that regard, also it is important to have fun now and then, so maybe it's time for another one of these kinds of posts.
+I have only made two other posts where I write about game development ideas, all the way back in March of last year was the last time I wrote a post in my [games category](/categories/games/). Maybe part of the reason why is because part of me sees no future in it for me, as such I should focus elsewhere. However the main reason why I got into programing in the first place is to be creative in that regard, also it is important to have fun now and then, so maybe it's time for another one of these kinds of posts.
 
 <!-- more -->
 
@@ -17,7 +17,7 @@ Also I have become tired of writing posts on libraries, and frameworks that are 
 
 ## The Game idea I have been working on lately is inspired from Gemcraft
 
-So one of my favorite series of web based games is the gem craft series of games, by an indie label called game in a bottle. If you have never played one of them before, don't, unless you are okay with the idea of loosing a great deal of your time playing something that is pretty addicting. The idea I am working on is inspired by this series of games, for now I have am just calling it orbs.js.
+So one of my favorite series of web based games is the [gem craft series of games](https://en.wikipedia.org/wiki/GemCraft), by an indie label called [game in a bottle](http://gameinabottle.com/). If you have never played one of them before, don't, unless you are okay with the idea of loosing a great deal of your time playing something that is pretty addicting. The idea I am working on is inspired by this series of games, for now I have am just calling it orbs.js.
 
 In Gemcraft a _Gem_ has a _Grade_ and two Gems of the same Grade can be combined together to form a new Gem of a Grade that is one higher. So A Gems Grade is increased by way of powers of two. 
 
