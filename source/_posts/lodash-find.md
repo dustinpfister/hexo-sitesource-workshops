@@ -5,8 +5,8 @@ tags: [js,lodash,node.js]
 layout: post
 categories: lodash
 id: 37
-updated: 2018-01-29 12:47:17
-version: 1.8
+updated: 2018-01-29 13:01:23
+version: 1.9
 ---
 
 So there is the old do I use objects or arrays problem that I run into when working on a project. Of course [arrays are objects](/2017/05/12/js-arrays-are-objects/), but I gather that you may know what I mean if you are like me, and have been coding with javaScript for a few years. I try not to get caught up on these things, it does not matter a whole lot, plus there are ways of always dealing with whatever it may be anyway. As such methods like [\_.find](https://lodash.com/docs/4.17.4#find) in [lodash](https://lodash.com/) come in handy for this kind of thing.
@@ -15,7 +15,7 @@ So there is the old do I use objects or arrays problem that I run into when work
 
 ## What a collection is, and basic example
 
-The lodash \_.find method works not just with Arrays but also any object. So find can help solve that problem when it comes to choosing between using Arrays and plain old Objects, they are at the core both Objects, and in any case I can use \_.find to get at what I want in an Object of any kind, not just an Array.
+The lodash \_.find method works not just with Arrays but also any object. So find can help solve that problem when it comes to choosing between using Arrays and plain old Objects, so in any case I can use \_.find to get at what I want in an Object of any kind, not just an Array.
 
 So the first argument that is given to \_.find is a collection, which can be an Array, an Array like object, or just a plain old Object.
 
@@ -203,9 +203,9 @@ q = _.find(db_array, function (obj) {
 });
 ```
 
-## Using \_.find on an array of primitives
+## Using \_.find on an array of primitives, and a single primitive.
 
-Find can also be used with an array of primitives as well of course to find a string that fits a regExp pattern.
+Find is fairly robust, of course it can be used with an array of primitives.
 
 ```js
 var words = ['foo**', '*foo*', '**foo'];
@@ -223,6 +223,20 @@ var result = _.find(words, function (str, i) {
 console.log(result); // '**foo'
 ```
 
-## conclusion
+However \_.find can be used on a single stand alone String as well
+
+```js
+var str = 'This is a single string! Yes it can be used with find.';
+ 
+console.log( _.find(str,function(el,i,col){
+ 
+    return el === '!';
+ 
+}) ); // !
+```
+
+This is because strings are also another example of something in javaScript that is kindof Array like, even though it is not an array. Sure it's constructor is String, and not Array asu such it does not have array methods in it's prototype. However it can still be thought of as an array of characters.
+
+## Conclusion
 
 This post needed a major update, as it was pretty thin before hand. I am still pretty sure I have not covered all bases with the lodash find method, so I will likely update this post again in the future at some point. If you are in the mood check out [my other posts on lodash](/categories/lodash/).
