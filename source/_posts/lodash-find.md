@@ -5,11 +5,11 @@ tags: [js,lodash,node.js]
 layout: post
 categories: lodash
 id: 37
-updated: 2018-01-29 12:29:19
-version: 1.6
+updated: 2018-01-29 12:35:12
+version: 1.7
 ---
 
-So there is the old do I use objects or arrays problem that I run into when working on a project. Of course [arrays are objects](/2017/05/12/js-arrays-are-objects/), but I gather that you may know what I mean if you are like me, and have been coding with javaScript for a few years. I try not to get caught up on these things, as of late I seem to be going with arrays. As such methods like [\_.find](https://lodash.com/docs/4.17.4#find) in [lodash](https://lodash.com/) come in handy.
+So there is the old do I use objects or arrays problem that I run into when working on a project. Of course [arrays are objects](/2017/05/12/js-arrays-are-objects/), but I gather that you may know what I mean if you are like me, and have been coding with javaScript for a few years. I try not to get caught up on these things, it does not matter a whole lot, plus there are ways of always dealing with whatever it may be anyway. Methods like [\_.find](https://lodash.com/docs/4.17.4#find) in [lodash](https://lodash.com/) come in handy for this kind of thing.
 
 <!-- more -->
 
