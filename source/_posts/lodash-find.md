@@ -5,11 +5,11 @@ tags: [js,lodash,node.js]
 layout: post
 categories: lodash
 id: 37
-updated: 2018-01-29 12:35:12
-version: 1.7
+updated: 2018-01-29 12:47:17
+version: 1.8
 ---
 
-So there is the old do I use objects or arrays problem that I run into when working on a project. Of course [arrays are objects](/2017/05/12/js-arrays-are-objects/), but I gather that you may know what I mean if you are like me, and have been coding with javaScript for a few years. I try not to get caught up on these things, it does not matter a whole lot, plus there are ways of always dealing with whatever it may be anyway. Methods like [\_.find](https://lodash.com/docs/4.17.4#find) in [lodash](https://lodash.com/) come in handy for this kind of thing.
+So there is the old do I use objects or arrays problem that I run into when working on a project. Of course [arrays are objects](/2017/05/12/js-arrays-are-objects/), but I gather that you may know what I mean if you are like me, and have been coding with javaScript for a few years. I try not to get caught up on these things, it does not matter a whole lot, plus there are ways of always dealing with whatever it may be anyway. As such methods like [\_.find](https://lodash.com/docs/4.17.4#find) in [lodash](https://lodash.com/) come in handy for this kind of thing.
 
 <!-- more -->
 
@@ -17,7 +17,7 @@ So there is the old do I use objects or arrays problem that I run into when work
 
 The lodash \_.find method works not just with Arrays but also any object. So find can help solve that problem when it comes to choosing between using Arrays and plain old Objects, they are at the core both Objects, and in any case I can use \_.find to get at what I want in an Object of any kind, not just an Array.
 
-So the first argument that is given to \_.fins is a collection, which can be an Array, an Array like object, or just a plain old Object.
+So the first argument that is given to \_.find is a collection, which can be an Array, an Array like object, or just a plain old Object.
 
 ```js
 // The is an Object that is an Array that
@@ -92,12 +92,15 @@ var result = _.find(['a', 'b', 'c'], function (el, i, col) {
 console.log(result); // b
 ```
 
-## Custom iteration methods and lodash method shorthands
-
 In the body of the iteration method, if what is returned by the method evaluates to true then, then that will count as the element being found.
 
+## Custom iteration methods and lodash method shorthands
+
+As shown above I can make my own methods that are used to define the terms of weather or not an element in a collection is what it is that I am looking for. I can of course make a method that returns a iteration method that \_.find can use. However I might not even have to do that if such a method is in lodash to begin with, and there are even some shorthands that can be used in \_.find that allow for me to not even have to call the lodash method directly.
+
 ```js
-var data = ['talk', 'run', {action: 'walk'}],
+// say I have an array with some data like this
+var data = ['talk', 'run', {action: 'walk'}, {action: 'sing'}, {action: 'dance'}],
  
 // sure I can make my own methods that
 // make use of closure...
@@ -127,6 +130,16 @@ console.log( _.find(data, _.property('action') ) );  // {action:'walk'}
 // and why even bother with that when there is
 // a short hand for it.
 console.log( _.find(data, 'action') );  // {action:'walk'}
+```
+
+In addition to shorthands for \_.property there are also shorthands for \_.matches \_.matchesProperty.
+
+```js
+// _.matchesProperty
+console.log( _.find(data, ['action','sing']) );  // {action:'sing'}
+
+// _.matches
+console.log( _.find(data, {action:'dance'}) );  // {action:'dance'}
 ```
 
 ## FromIndex example
