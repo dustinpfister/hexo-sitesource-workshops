@@ -5,8 +5,8 @@ tags: [js,lodash,node.js]
 layout: post
 categories: lodash
 id: 37
-updated: 2018-01-29 13:05:19
-version: 1.10
+updated: 2018-02-09 11:26:07
+version: 1.11
 ---
 
 So there is the old do I use objects or arrays problem that I run into when working on a project. Of course [arrays are objects](/2017/05/12/js-arrays-are-objects/), but I gather that you may know what I mean if you are like me, and have been coding with javaScript for a few years. I try not to get caught up on these things, it does not matter a whole lot, plus there are ways of always dealing with whatever it may be anyway. As such methods like [\_.find](https://lodash.com/docs/4.17.4#find) in [lodash](https://lodash.com/) come in handy for this kind of thing.
@@ -162,9 +162,9 @@ console.log( _.find(collection, method) ); // 'a'
 console.log( _.find(collection, method , 6) ); // 'b'
 ```
 
-## The basic usage example of \_.find
+## Finding an Object in an Array, a basic usage example of \_.find
 
-So \_.find will help with returning an element in an array, rather than it's index. So if you have an array of objects and you want to find a single object in the array by a certain key value pare \_.find is the right tools for the job.
+So \_.find will help with returning an element in an array, rather than it's index, If you want the index, rather than the Object itself there is \_.findIndex that works just like \_.find only it returns an index, or key value. So if you have an array of objects and you want to find a single object in the array by a certain key value pare \_.find is the right tools for the job.
 
 ```js
 var db_array = [
