@@ -1,23 +1,23 @@
 ---
-title: Example of the _.find array method in lodash
+title: Example of the _.find collection method in lodash
 date: 2017-09-14 10:49:00
 tags: [js,lodash,node.js]
 layout: post
 categories: lodash
 id: 37
-updated: 2018-02-09 11:26:07
-version: 1.11
+updated: 2018-02-09 12:22:25
+version: 1.12
 ---
 
-So there is the old do I use objects or arrays problem that I run into when working on a project. Of course [arrays are objects](/2017/05/12/js-arrays-are-objects/), but I gather that you may know what I mean if you are like me, and have been coding with javaScript for a few years. I try not to get caught up on these things, it does not matter a whole lot, plus there are ways of always dealing with whatever it may be anyway. As such methods like [\_.find](https://lodash.com/docs/4.17.4#find) in [lodash](https://lodash.com/) come in handy for this kind of thing.
+So there is the old do I use objects or arrays problem that I run into when working on a project. Of course [arrays are objects](/2017/05/12/js-arrays-are-objects/), but I gather that you may know what I mean if you are like me, and have been coding with javaScript for a few years. I try not to get caught up on these things, it does not matter a whole lot, plus there are ways of always dealing with whatever it may be anyway. As such methods like [\_.find](https://lodash.com/docs/4.17.5#find) in [lodash](https://lodash.com/) come in handy for this kind of thing.
 
 <!-- more -->
 
 ## What a collection is, and basic example
 
-The lodash \_.find method works not just with Arrays but also any object. So find can help solve that problem when it comes to choosing between using Arrays and plain old Objects, so in any case I can use \_.find to get at what I want in an Object of any kind, not just an Array.
+The lodash \_.find method works not just with Arrays but also any object, so \_.find is considered one of the many collection methods in lodash. So find can help solve that problem when it comes to choosing between using Arrays and plain old Objects, as in any case I can use \_.find to get at what I want in an Object of any kind, not just an Array.
 
-So the first argument that is given to \_.find is a collection, which can be an Array, an Array like object, or just a plain old Object.
+So the first argument that is given to \_.find is a collection, which can be an Array, an Array like object, just a plain old Object, and even Strings.
 
 ```js
 // The is an Object that is an Array that
@@ -164,7 +164,7 @@ console.log( _.find(collection, method , 6) ); // 'b'
 
 ## Finding an Object in an Array, a basic usage example of \_.find
 
-So \_.find will help with returning an element in an array, rather than it's index, If you want the index, rather than the Object itself there is \_.findIndex that works just like \_.find only it returns an index, or key value. So if you have an array of objects and you want to find a single object in the array by a certain key value pare \_.find is the right tools for the job.
+So \_.find will help with returning an element in an array, rather than it's index. So if you have an array of objects and you want to find a single object in the array by a certain key value pare \_.find is the right tools for the job.
 
 ```js
 var db_array = [
@@ -201,6 +201,62 @@ You do not have to give an object, you can also use a function like this.
 q = _.find(db_array, function (obj) {
     return obj.name === 'Dave';
 });
+```
+
+## Using \_.find to find the index of an element in an Array, or the key of a property in an Object.
+
+In lodash there is the [\_.findIndex](https://lodash.com/docs/4.17.5#findIndex) method, that works just fine with Arrays, as it is an Array method. However it will not work with Objects in general, as it is not a collection method. It is possible to use \_.find to get the index of an element in an Array, or the key of a property in any Object. As you might have read earlier in this post the second argument that is given in the iteration method is the index, or key value if it is a plain Object.
+
+```js
+var arr = ['foo', 'man', 'chew'],
+index = -1;
+ 
+// using _.find to find an index, or key value
+var findIndex = function (col, what) {
+ 
+    var index = -1;
+ 
+    // _.find will return the value
+    // but the index or key is one of the values
+    // in the iteration method
+    _.find(col, function (el, iKey) {
+ 
+        index = iKey;
+        return el === what;
+ 
+    });
+ 
+    // return the result
+    return index;
+ 
+};
+ 
+// this will return the index, or key
+console.log(findIndex(arr, 'man')); // 1
+console.log(findIndex({
+        what: 'foo',
+        how: 'bar'
+    }, 'bar')); // 'how'
+ 
+// there is also the _.findIndex method
+var findIndex = function (col, what) {
+ 
+    // _.findIndex will return an index, rather than a value
+    return _.findIndex(col, function (el, i) {
+ 
+        console.log('i=' + i);
+ 
+        return el === what;
+ 
+    });
+ 
+};
+ 
+// _.findIndex works fine with arrays
+console.log(findIndex(arr, 'man')); // 1
+ 
+// but it is an array method, so it will only work with arrays
+console.log(findIndex({what: 'foo',how: 'bar'}, 'bar')); // -1
 ```
 
 ## Using \_.find on an array of primitives, and a single primitive.
