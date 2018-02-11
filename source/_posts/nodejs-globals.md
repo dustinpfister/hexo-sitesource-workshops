@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 150
-updated: 2018-02-10 20:49:24
-version: 1.2
+updated: 2018-02-10 21:02:27
+version: 1.3
 ---
 
 When working in a node.js environment there are many global variables to work with. Of course because it is server side javaScript there is what there is to work with in core js, or javaScript itself, however this post is on the additional global variables on top of core js that make core js server side js in a node.js environment.
@@ -164,3 +164,25 @@ let port = process.env.PORT || process.argv[2] || 8080;
 This will set the value of port to a port given by way of an environment variable called PORT if present, else it will expect a port value to be given as the first argument, and if that is not given it will default to the hard coded value 8080;
 
 ## require
+
+Require is what is used to use additional modules in a module. It can be a built in node.js module, such as [path](/2017/12/27/nodejs-paths/), or [fs](/2018/02/08/nodejs-filesystem/), it can be a package that has been installed into a node_modules folder by way of using npm such as [cheerio](/2017/11/28/nodejs-cheerio/), or a module of your own design that may be within a lib folder in your project.
+
+basic use of require to work with the node.js path, and file-system modules.
+```js
+let fs = require('fs'),
+path = require('path');
+ 
+fs.readFile(path.join(process.cwd(),'README.md'),'utf-8', function(e,data){
+ 
+    if(e){
+ 
+        console.log(e);
+ 
+    }else{
+ 
+        console.log(data);
+ 
+    }
+ 
+});
+```
