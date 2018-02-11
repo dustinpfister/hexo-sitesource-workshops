@@ -5,11 +5,11 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 146
-updated: 2018-02-11 10:57:05
-version: 1.2
+updated: 2018-02-11 11:14:12
+version: 1.3
 ---
 
-The node.js http module.
+There are many frameworks that help to make the process of making a node.js powered full stack application a quick process compared to working with just the core node.js modules. I might prefer to use hapi, or express, but still it is important to at least write a few simple demos using just the node.js [http module](https://nodejs.org/dist/latest-v8.x/docs/api/http.html).
 
 <!-- more -->
 
