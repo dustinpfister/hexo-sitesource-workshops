@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 146
-updated: 2018-02-11 10:27:09
-version: 1.1
+updated: 2018-02-11 10:57:05
+version: 1.2
 ---
 
 The node.js http module.
@@ -90,4 +90,31 @@ server.on('request', function (req, res) {
 });
  
 server.listen(port);
+```
+
+## Making http requests from node.js
+
+There are many npm packages for this that may help to make requests easier, or add helpful features, but it is not to hard to just make requests from node.js with the built in http module.
+
+
+This basic example will make a get request for www.google.com
+```js
+let http = require('http'),
+ 
+req = http.request({
+ 
+        hostname: 'www.google.com'
+ 
+    }, function (res) {
+ 
+        res.on('data', function (chunk) {
+ 
+            // log each chunk as 'ascii' encoded string
+            console.log(chunk.toString('ascii'));
+ 
+        });
+ 
+    });
+ 
+req.end();
 ```
