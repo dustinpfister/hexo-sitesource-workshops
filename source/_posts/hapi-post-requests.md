@@ -5,8 +5,8 @@ tags: [js,node.js,hapi]
 layout: post
 categories: hapi
 id: 49
-updated: 2018-02-11 09:32:55
-version: 1.4
+updated: 2018-02-11 10:27:08
+version: 1.5
 ---
 
 Post requests are an important aspect of any kind of full stack application. You have some data on the client, and you need to shoot it over to the back end system. Doing so in hapi is pretty easy, in this post I will be covering a very basic approach that does not even require any kind of client system, apart from just a simple postIt function that will be copied into the console.
@@ -24,18 +24,19 @@ As such that method might look something like this.
 ```js
 var postIt = function (argu) {
  
+    // the xhr Instance
     var xhr = new XMLHttpRequest();
  
-    if(typeof argu === 'string'){
- 
+    // if argu is not an object
+    if(typeof argu != 'object'){
+
+        // make what is given the data
+        // to be sent to the server
         argu = {data: argu};
- 
+
     }
  
-    argu = argu || {};
- 
     argu.url = argu.url || window.location.href;
-    argu.data = argu.data || {};
     argu.beforeSend = argu.beforeSend || function(xhr,next){
        next();
     };
@@ -68,6 +69,7 @@ var postIt = function (argu) {
  
     argu.beforeSend(xhr, function(){
  
+        console.log(typeof argu.data);
         xhr.send(argu.data);
  
     });
