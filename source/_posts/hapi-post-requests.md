@@ -5,8 +5,8 @@ tags: [js,node.js,hapi]
 layout: post
 categories: hapi
 id: 49
-updated: 2017-12-13 13:38:19
-version: 1.3
+updated: 2018-02-11 09:32:55
+version: 1.4
 ---
 
 Post requests are an important aspect of any kind of full stack application. You have some data on the client, and you need to shoot it over to the back end system. Doing so in hapi is pretty easy, in this post I will be covering a very basic approach that does not even require any kind of client system, apart from just a simple postIt function that will be copied into the console.
@@ -22,23 +22,31 @@ It will likely be a simple method written in vanilla js, because at the earliest
 As such that method might look something like this.
 
 ```js
-var postIt = function (data, url, beforeSend, done, fail) {
+var postIt = function (argu) {
  
     var xhr = new XMLHttpRequest();
  
-    url = url || 'http://localhost:3000';
-    data = data || {};
-    beforeSend = beforeSend || function(xhr,next){
+    if(typeof argu === 'string'){
+ 
+        argu = {data: argu};
+ 
+    }
+ 
+    argu = argu || {};
+ 
+    argu.url = argu.url || window.location.href;
+    argu.data = argu.data || {};
+    argu.beforeSend = argu.beforeSend || function(xhr,next){
        next();
-    },
-    done = done || function (xhr) {
+    };
+    argu.done = argu.done || function (xhr) {
         console.log(xhr);
     };
-    fail = fail || function (xhr) {
+    argu.fail = argu.fail || function (xhr) {
         console.log(xhr);
     };
  
-    xhr.open('post', url);
+    xhr.open('post', argu.url);
  
     xhr.onreadystatechange = function () {
  
@@ -46,11 +54,11 @@ var postIt = function (data, url, beforeSend, done, fail) {
  
             if (this.status === 200) {
  
-                done(this);
+                argu.done(this);
  
             } else {
  
-                fail(this);
+                argu.fail(this);
  
             }
  
@@ -58,9 +66,9 @@ var postIt = function (data, url, beforeSend, done, fail) {
  
     };
  
-    beforeSend(xhr, function(){
+    argu.beforeSend(xhr, function(){
  
-        xhr.send(data);
+        xhr.send(argu.data);
  
     });
  
