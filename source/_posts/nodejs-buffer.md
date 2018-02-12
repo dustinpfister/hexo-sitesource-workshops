@@ -5,13 +5,17 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 147
-updated: 2018-02-07 22:34:11
-version: 1.1
+updated: 2018-02-11 21:11:53
+version: 1.2
 ---
 
 Buffers in node.js
 
 <!-- more -->
+
+## Simple example of Buffer in node.js
+
+As of late (node 8.x+) it is advised to not use the Buffer constructor directly, in fact doing so is depreciated, instead when dealing with buffers the various methods of Buffer are what should be used in order to work with buffers.
 
 ```js
 let buff = Buffer.from('hello buffer!');
@@ -21,4 +25,27 @@ console.log(buff);
  
 console.log(buff.toString());
 // 'hello buffer!'
+```
+
+Buffer.from is one such method and in most cases will work just find, allowing for the creating of a buffer from a string value, as well as other types such as arrays of .
+
+## Encoding
+
+```js
+//let dp = [0xe2, 0x82, 0xaf];
+ 
+// text containing Drachma sign
+let text = '\u20af';
+ 
+// ascii encoding
+let ascii = Buffer.from(text,'ascii');
+ 
+// utf-8 encoding
+let utf8 = Buffer.from(text,'utf-8');
+ 
+console.log(ascii);
+// <Buffer af>
+ 
+console.log(utf8);
+// <Buffer e2 82 af>
 ```
