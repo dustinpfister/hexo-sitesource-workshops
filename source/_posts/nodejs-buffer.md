@@ -5,11 +5,11 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 147
-updated: 2018-02-11 21:11:53
-version: 1.2
+updated: 2018-02-12 20:02:37
+version: 1.3
 ---
 
-Buffers in node.js
+When [node.js](https://nodejs.org/en/) was first developed there where no typed arrays such as [Uint8Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array) to help work with binary data. As such [Buffer](https://nodejs.org/dist/latest-v8.x/docs/api/buffer.html) was introduced to help work with binary data in a server environment.
 
 <!-- more -->
 
