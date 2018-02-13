@@ -5,11 +5,11 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 150
-updated: 2018-02-10 21:02:27
-version: 1.3
+updated: 2018-02-12 20:02:38
+version: 1.4
 ---
 
-When working in a node.js environment there are many global variables to work with. Of course because it is server side javaScript there is what there is to work with in core js, or javaScript itself, however this post is on the additional global variables on top of core js that make core js server side js in a node.js environment.
+When working in a [node.js](https://nodejs.org/en/) environment there are many [global variables](https://nodejs.org/dist/latest-v8.x/docs/api/globals.html) to work with. Of course because it is server side javaScript there is what there is to work with in core js, or javaScript itself, however this post is on the additional global variables on top of core js that make core js server side js in a node.js environment.
 
 <!-- more -->
 
