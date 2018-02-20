@@ -1,12 +1,12 @@
 ---
 title: More than one mean however for the most part there is just one
 date: 2018-02-19 18:40:00
-tags: [js,node.js,statistics]
+tags: [js,statistics]
 layout: post
 categories: statistics
 id: 154
-updated: 2018-02-19 19:29:57
-version: 1.3
+updated: 2018-02-20 13:06:04
+version: 1.4
 ---
 
 I am always looking for new things to learn, and write about, in the process of doing so I have decided to write a few posts on statistics. From what I have gathered data science is getting pretty hot these days, and companies can not seem to find enough people, so I started looking into what I need to know to start going in that direction. Turns out there is a lot to know in order to hack it as a data scientist, a whole lot of heavy math is involved, but I am down for giving it a try at least.
