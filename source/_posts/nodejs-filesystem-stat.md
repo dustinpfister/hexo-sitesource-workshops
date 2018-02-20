@@ -5,11 +5,11 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 153
-updated: 2018-02-19 18:28:54
-version: 1.2
+updated: 2018-02-20 18:33:50
+version: 1.3
 ---
 
-Getting the stats of a file is quick and easy in [node.js](https://nodejs.org/en) with just the core file system modules fs.stat method.
+Getting the stats of a file is quick and easy in [node.js](https://nodejs.org/en) with just the core file system modules fs.stat method. A stat object contains useful information about a file such as when it was last modified, and the data size of it. A stat object also contains methods that can be used to find if the current file is in fact a file, or a directory.
 
 <!-- more -->
 
