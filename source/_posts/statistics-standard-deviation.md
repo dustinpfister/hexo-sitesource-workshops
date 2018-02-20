@@ -1,12 +1,12 @@
 ---
-title: More than one mean however for the most part there is just one
+title: Finding Standard Deviation in javaScript
 date: 2018-02-20 13:05:00
 tags: [js,statistics]
 layout: post
 categories: statistics
 id: 155
-updated: 2018-02-20 13:06:04
-version: 1.0
+updated: 2018-02-20 13:08:10
+version: 1.1
 ---
 
 In [Statistics](https://en.wikipedia.org/wiki/Statistics) it seems like standard deviation is something that comes up often. So why not just go ahead and cover this one when it comes to launching my new [series of posts]() on working with statistics in javaScript.
