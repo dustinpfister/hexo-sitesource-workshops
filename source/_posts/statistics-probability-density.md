@@ -5,8 +5,8 @@ tags: [js,statistics]
 layout: post
 categories: statistics
 id: 156
-updated: 2018-02-21 22:51:02
-version: 1.0
+updated: 2018-02-26 11:52:38
+version: 1.1
 ---
 
 Today I am continuing to look into statistics to see if this is something that I want to learn more about by writing a post on [Probability density](https://en.wikipedia.org/wiki/Probability_density_function). 
@@ -96,3 +96,7 @@ var bugs = (function() {
  
 }());
 ```
+
+## Conclusion
+
+I will be holding off on expanding my collection of posts on statistics until I work out more demos, and refine my understating of things.
