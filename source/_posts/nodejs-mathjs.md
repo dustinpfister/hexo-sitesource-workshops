@@ -1,15 +1,15 @@
 ---
 title: Using mathjs as a more advanced alternative the the corejs Math Object
 date: 2018-03-03 20:10:00
-tags: [js,node.js]
+tags: [js,node.js,math]
 layout: post
 categories: node.js
 id: 161
-updated: 2018-03-03 20:40:29
-version: 1.0
+updated: 2018-03-08 12:25:43
+version: 1.1
 ---
 
-When it comes to doing anything with math in javaScript there is of course the corejs Math object that is very helpful, but it does have it's limitations, and does not always work the way I would like it to. A popular alternative to the corejs Math object is [math.js](http://mathjs.org/). It can do everything the Math object can, as well add a whole bunch of new features such as big number support. In addition certain mathjs equivalents to the Math object methods have additional features, and also a plug in system exists that can be used to further extend mathjs.
+When it comes to doing anything with math in javaScript there is of course the corejs Math object that is very helpful, but it does have it's limitations, and does not always work the way I would like it to. A popular alternative to the corejs Math object is [math.js](http://mathjs.org/), which can be found on [npm](https://www.npmjs.com/package/mathjs), and [github](https://github.com/josdejong/mathjs) like most projects. It can do everything the Math object can, as well add a whole bunch of new features such as big number support. In addition certain mathjs equivalents to the Math object methods have additional features, and also a plug in system exists that can be used to further extend mathjs.
 
 <!-- more -->
 
@@ -27,7 +27,7 @@ In this post I am using mathjs 4.x, and I assume a node.js environment.
 
 I tend to favor using mathjs separately as an alternative to the Math Object in core javaScript, rather than monkey patching the Math Object. This means I will have two globals, one lower case, and one upper.
 
-## Plugin system
+## Plug in system
 
 mathjs has a plug in system, and there are additional projects that wok well with mathjs when it comes to getting into a certain discipline involving math. Of course it is not that hard to add my own functionality as well if I cant fine something.
 
