@@ -5,8 +5,8 @@ tags: [js,canvas,animation]
 layout: post
 categories: js
 id: 163
-updated: 2018-03-13 13:12:19
-version: 1.0
+updated: 2018-03-13 19:37:40
+version: 1.1
 ---
 
 When making any kind of application there is often a need to have some kind of main update loop where the state of a model is updated, and then rendered using some kind of view. Unless the project is completely even driven there will typically be a need to have a way to run the same method over and over again, this is where things the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) come into play.
@@ -23,6 +23,7 @@ Browser support is pretty good with requestAnimatinFrame, but the other options 
 
 ## basic demo of requestAnimationFrame
 
+For a basic demo of requestAnimationFrame I put together something that involves the updating of a model, and rendering of that model.
 
 ```js
 (function() {
@@ -103,3 +104,5 @@ Browser support is pretty good with requestAnimatinFrame, but the other options 
  
 }());
 ```
+
+RequestAnimation frame takes only one argument that is the method to call when it is time to update the animation. Often it is used in a recursive fashion like this, and because it only takes one argument something else must be done in order to set a frame rate.
