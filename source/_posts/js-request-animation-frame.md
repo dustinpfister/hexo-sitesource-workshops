@@ -1,12 +1,12 @@
 ---
-title: using setInterval in javaScript
+title: using requestAnimationFrame in javaScript
 date: 2018-03-13 12:37:00
 tags: [js,canvas,animation]
 layout: post
 categories: js
 id: 163
-updated: 2018-03-13 19:37:40
-version: 1.1
+updated: 2018-03-13 19:38:51
+version: 1.2
 ---
 
 When making any kind of application there is often a need to have some kind of main update loop where the state of a model is updated, and then rendered using some kind of view. Unless the project is completely even driven there will typically be a need to have a way to run the same method over and over again, this is where things the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) come into play.
