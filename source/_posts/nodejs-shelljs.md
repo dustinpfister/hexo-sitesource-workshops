@@ -5,8 +5,8 @@ tags: [js,node.js,linux]
 layout: post
 categories: node.js
 id: 164
-updated: 2018-03-28 15:32:13
-version: 1.2
+updated: 2018-03-28 18:40:35
+version: 1.3
 ---
 
 As someone who has been a kind of windows, and Linux dual boot type person for over ten years now, it would be great to have some way of always having some of the commands I have grown to like when working in a Linux environment always with me regardless of the operating system environment that i am working with when making a node.js project. Lucky for me there is a project called [shell.js](https://www.npmjs.com/package/shelljs) that can help with this.
@@ -44,9 +44,72 @@ if (shell.which('mongod')) {
 }
 ```
 
+## exec
+
+If you are familiar with the [child-process](/2018/02/04/nodejs-child-process/) module, then you should also be familiar with exec and spawn.
+
+As such an exec method is given for convenience for launching external commands.
+
+```js
+let shell = require('shelljs');
+ 
+if (shell.which('git')) {
+ 
+    shell.exec('git --version');
+ 
+} else {
+ 
+    console.log('you do not have git installed.');
+ 
+}
+```
+
+An optional options object, and callback can be given to exec as well.
+
+```js
+let shell = require('shelljs');
+ 
+shell.exec('git --version', {silent:true}, function (code, out, err) {
+ 
+    if (code === 0) {
+ 
+        let regex = out.match(/\d.\d.\d/);
+ 
+        if (regex) {
+ 
+            let v = regex[0].split('.');
+ 
+            if (v[0] >= 2 && v[1] >= 8) {
+ 
+                console.log('Using 2.8.x or later I see, good.');
+ 
+            } else {
+ 
+                console.log('kicking it old school? Okay, fine, see if I care.');
+ 
+            }
+ 
+        } else {
+ 
+            console.log('ahhh... hua?');
+ 
+        }
+ 
+    } else {
+ 
+        console.log('what!? really?');
+        console.log(err);
+ 
+    }
+ 
+});
+```
+
+Using the silent option prevents exec from logging the raw standard output to the console. In addition I can give a callback to exec that will give me the exit code, as well as the standard output, and standard error in the event of an error.
+
 ## Grep example
 
-Maybe on eof the best know unit like commands out there is grep, which is used for text pattren matching tasks.
+Maybe one of the best know unix like commands out there is [grep](https://en.wikipedia.org/wiki/Grep), which is used for text pattern matching tasks.
 
 ```js
 let shell = require('shelljs');
