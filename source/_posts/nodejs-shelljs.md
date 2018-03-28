@@ -5,8 +5,8 @@ tags: [js,node.js,linux]
 layout: post
 categories: node.js
 id: 164
-updated: 2018-03-28 11:26:20
-version: 1.1
+updated: 2018-03-28 15:32:13
+version: 1.2
 ---
 
 As someone who has been a kind of windows, and Linux dual boot type person for over ten years now, it would be great to have some way of always having some of the commands I have grown to like when working in a Linux environment always with me regardless of the operating system environment that i am working with when making a node.js project. Lucky for me there is a project called [shell.js](https://www.npmjs.com/package/shelljs) that can help with this.
@@ -81,3 +81,7 @@ Once shelljs is installed globally, A command can then be used by calling shjs, 
 ```
 $ shjs ls
 ```
+
+## Conclusion
+
+Shelljs looks like a great solution for making unix like commands more portable across different operating systems. Even when developing, and deploying with posix environments I would say it is a nice alternative to fiddling with the child-process module.
