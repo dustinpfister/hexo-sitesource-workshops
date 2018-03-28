@@ -5,15 +5,15 @@ tags: [js,node.js,linux]
 layout: post
 categories: node.js
 id: 164
-updated: 2018-03-22 18:30:48
-version: 1.0
+updated: 2018-03-28 11:26:20
+version: 1.1
 ---
 
 As someone who has been a kind of windows, and Linux dual boot type person for over ten years now, it would be great to have some way of always having some of the commands I have grown to like when working in a Linux environment always with me regardless of the operating system environment that i am working with when making a node.js project. Lucky for me there is a project called [shell.js](https://www.npmjs.com/package/shelljs) that can help with this.
 
 <!-- more -->
 
-## Using shell.js in a node script
+## installing shell.js
 
 To use shell.js as a module in a node.js project just install it in the usual manner when adding a dependency to a project like normal.
 
@@ -28,6 +28,8 @@ Many of the demos I will be writing about with this project will involve using s
 
 ## Which method example
 
+The which method searches for a native command in the systems path, which is useful to find out if something like git or mongodb is installed on the system or not.
+
 ```js
 let shell = require('shelljs');
  
@@ -41,6 +43,30 @@ if (shell.which('mongod')) {
  
 }
 ```
+
+## Grep example
+
+Maybe on eof the best know unit like commands out there is grep, which is used for text pattren matching tasks.
+
+```js
+let shell = require('shelljs');
+ 
+console.log( shell.ls('*.js').grep('_[0-9]{8}').toString() );
+```
+
+I am a little fuzzy on the regex used in grep and how it compares to what is used in javaScript. Getting into that may be a whole other post, but so far they seem very similar.
+
+## piping of commands
+
+One of the best features of a unix style Command Line Interface is the ability to pipe commands, or in other words supply the input of a command as the output of another. This can be done by chaining commands.
+
+```js
+let shell = require('shelljs');
+ 
+console.log( shell.ls('*.js').grep('app_').toString() );
+```
+
+This as you would expect results in a list of \*.js files begin with the text pattern 'app_'.
 
 ## Using shell.js globally
 
