@@ -5,11 +5,11 @@ tags: [js]
 layout: post
 categories: js
 id: 166
-updated: 2018-03-28 16:48:23
-version: 1.0
+updated: 2018-03-29 16:18:48
+version: 1.1
 ---
 
-these days there are a ton of options for scripting http, I have written posts on [axios](/2018/01/10/nodejs-axios/), and [fetch](/2018/03/27/js-fetch/), but I still find myself using [XMLHttprequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) for these tasks.
+These days there are a ton of options for scripting http, I have written posts on [axios](/2018/01/10/nodejs-axios/), and [fetch](/2018/03/27/js-fetch/), but I still find myself using [XMLHttprequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) for these tasks. It does have it's draw backs, compared to more modern solutions, but it is not that hard to quickly make a solution that makes use of more modern javaScript features like promises.
 
 <!-- more -->
 
