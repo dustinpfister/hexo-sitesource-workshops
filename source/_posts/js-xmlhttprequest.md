@@ -5,8 +5,8 @@ tags: [js]
 layout: post
 categories: js
 id: 166
-updated: 2018-03-29 16:18:48
-version: 1.1
+updated: 2018-03-29 16:22:27
+version: 1.2
 ---
 
 These days there are a ton of options for scripting http, I have written posts on [axios](/2018/01/10/nodejs-axios/), and [fetch](/2018/03/27/js-fetch/), but I still find myself using [XMLHttprequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) for these tasks. It does have it's draw backs, compared to more modern solutions, but it is not that hard to quickly make a solution that makes use of more modern javaScript features like promises.
@@ -15,7 +15,7 @@ These days there are a ton of options for scripting http, I have written posts o
 
 ## Using an XMLHTTPRequest pollyfill
 
-There was once a time where the use of a pollyfill for XMLHttpRequest was a must, today more often then not it might not be as big of a deal. Of course it really comes down to browser share of your site, for me it does not matter everyone is using late versions of IE when they are using IE which is not often.
+There was once a time where the use of a pollyfill for XMLHttpRequest was a must, today more often then not it might not be as big of a deal. Of course it really comes down to browser share of your site, for me it does not seem to matter everyone is using late versions of IE, when they are using IE, which is not often.
 
 Still If it is desired to push backward compatibility as far back as possible a pollyfill like this might be used.
 
@@ -37,9 +37,11 @@ Still If it is desired to push backward compatibility as far back as possible a 
   }
 ```
 
-This is only really needed if for some reason you want to march backward comparability of you project all the way back to IE 5. Maybe if for some reason you get a lot of traffic from china, or some country where there are still a lot of people using these browsers a Polly fill will be of interest.
+This is only really needed if for some reason you want to march backward comparability of your project all the way back to IE 5. Maybe if for some reason you get a lot of traffic from china, or some country where there are still a lot of people using these browsers a Polly fill will be of interest.
 
-However going by my website stats, noone is using a version if IE older than IE 8. So I will not loose a lot of traffic (or any at all actually) by just going with:
+However if you site analytics show nothing but IE 7, and older chances are there is not much of a reason to bother with the polly fill anymore, and you can just assume that it is there in window to work with.
+
+In which case you can just use the constructor.
 
 ```js
 var xhr = new XMLHttpRequest();
