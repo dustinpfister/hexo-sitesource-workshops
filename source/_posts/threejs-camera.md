@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 168
-updated: 2018-04-06 17:33:59
-version: 1.2
+updated: 2018-04-06 19:06:51
+version: 1.3
 ---
 
 One of the most important things to understand when making a [three.js](https://threejs.org/) project, is at least the basics of working with a [perspective camera](https://threejs.org/docs/index.html#api/cameras/PerspectiveCamera). There are other types of cameras to work with in three.js, but a perspective camera is the most common one that mimics the way the human eye sees the world.
@@ -35,22 +35,37 @@ far = 1000,
 camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, near, far),
 ```
 
-## Understanding Viewing frustum.
+### Understanding Viewing frustum.
 
 [Viewing frustum](https://en.wikipedia.org/wiki/Viewing_frustum) cam be thought of as a pyramid of vision that exists in front of a camera. Any object that lays inside of the pyramid will be rendered. This pyramid can be defined by an [field of view](https://en.wikipedia.org/wiki/Field_of_view) in terms of an angle in y direction. As well as additional values that define the aspect ratio of this view, as well as values that define where the top of the pyramid begins, and ends (view distance).
 
-### Field of view
+#### Field of view
 
 The first argument that is given to the three.js perspective camera constructor is the field of view. The value expected should be a Number representing an angle in degrees not radians.
 
-### Aspect ratio
+#### Aspect ratio
 
 The aspect ratio is the second argument that is given to the three.js perspective camera constructor. This value is the width divided by the height of the desired ratio. Typically you might want to set this to something like 16 / 9, or 4 / 3. Whatever value you set will be used to determine the width and height of the near, and far rectangles of the pyramid of vision.
 
-### Near distance
+#### Near distance
 
 This is the near bound of the frustum, any object that is from this distance, outward to the far distance will be rendered if it is inside the pyramid of vision.
 
-### Far distance
+#### Far distance
 
 This is for course the far distance of the view pyramid. It is also the distance at which the aspect ratio of the field of view will be at it's largest, the bottom of the pyramid. If you are ever asking yourself, how far is to far, this value is of interest, as anything the exists beyond this distance will not be rendered.
+
+## Changing the pyramid of vision during runtime with the updateProjectionMatrix method
+
+If you want to change any of the properties that are used to create the geometry of the view pyramid, you may thing that there is some kind of method that needs to be called to reconfigure that when you change a value, and you are right. The method you want to call is updateProjectionMatrix.
+
+```js
+    camera.fov = Math.floor(25 + 50 * bias);
+    camera.updateProjectionMatrix();
+```
+
+If you do not call this method, and change that is made to values like camera.fov, or camera.aspect will not take effect.
+
+## Camera Constructor
+
+Perspective Camera inherits from the Camera constructor, as such the perspective Camera shares certain properties, and methods with all other cameras in three.js.
