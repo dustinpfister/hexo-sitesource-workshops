@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 169
-updated: 2018-04-07 10:53:25
-version: 1.0
+updated: 2018-04-07 15:41:51
+version: 1.1
 ---
 
 One of the most important things to understand when making a [three.js](https://threejs.org/) project, is at least the basics of working with a [perspective camera](https://threejs.org/docs/index.html#api/cameras/PerspectiveCamera). There are other types of cameras to work with in three.js, but a perspective camera is the most common one that mimics the way the human eye sees the world.
@@ -32,7 +32,7 @@ near = 1,
 far = 1000,
  
 // I can now make an instance of Perspective Camera
-camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, near, far),
+camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, near, far);
 ```
 
 ### Understanding Viewing frustum.
