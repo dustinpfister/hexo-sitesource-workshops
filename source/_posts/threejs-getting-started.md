@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 167
-updated: 2018-04-07 13:27:46
-version: 1.2
+updated: 2018-04-07 13:34:33
+version: 1.3
 ---
 
 I have been wanting to write a series of posts in [three.js](https://threejs.org/) for a while now, and I do not care to put it off any longer. I have fiddled with three.js in the past, but never really got into it. I have enough experience with it to know that it helps making projects the involve 3d objects very easy, yet it is still something that takes a significant investment of time to get fairly solid with.
@@ -95,7 +95,7 @@ A very typical example for getting started with three.js indeed, but still it wo
  
     // I must append the dom element used by the renderer to the html
     // that I am using.
-    document.getElementById('cube').appendChild(renderer.domElement);
+    document.getElementById('demo').appendChild(renderer.domElement);
  
     // now that I have everything I need I can call some methods
     // of what I have to set up my scene, camera, and renderer.
@@ -114,3 +114,5 @@ A very typical example for getting started with three.js indeed, but still it wo
 }
     ());
 ```
+
+This example will just draw a cube on the screen.
