@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 167
-updated: 2018-04-07 15:41:52
-version: 1.4
+updated: 2018-04-07 15:56:02
+version: 1.5
 ---
 
 I have been wanting to write a series of posts in [three.js](https://threejs.org/) for a while now, and I do not care to put it off any longer. I have fiddled with three.js in the past, but never really got into it. I have enough experience with it to know that it helps making projects the involve 3d objects very easy, yet it is still something that takes a significant investment of time to get fairly solid with.
@@ -160,4 +160,20 @@ There are then four camera types to choose from, in this post I am only briefly 
 
 ## Geometry, Material, and Mesh.
 
-To make some kind of object to look at I need it's geometry, I will also want to skin that geometry with some kind Of Material, and I will want to tie those two things togeather into a Mesh.
+To make some kind of object to look at I need it's geometry, I will also want to skin that geometry with some kind Of Material, and I will want to tie those two things together into a Mesh. In the example in this Post I used BoxGeometry to quickly create a Cube, and Just a basic Material with a Mesh.
+
+## Renderer
+
+In order to see anything I will need to render it using something like Canvas, or webGL. In this post I just used the webGL renderer, but there are additional renderer's available in three.js, such as the canvas renderer that uses the 2d drawing context. That will be a lot slower, but it will give greater support on platforms that do not support webGL that well.
+
+## Object3D
+
+Yet another Class to mention is the [Object3D](https://threejs.org/docs/index.html#api/core/Object3D) class, This is not something that you typically work with directly, but is a class that is used in many of the objects in three.js that helps to make working with three.js easy. It gives Objects like Camera, and Mesh methods like lookAT, and position.set.
+
+## Vector3
+
+Another class of interest that you should at least be aware of is [vector3](https://threejs.org/docs/index.html#api/math/Vector3), This is what you want to use when defining a point in 3d Space.
+
+## Conclusion
+
+There is a lot more to write about, but because this is just a getting started post, I thought I would just stick to writing about some of the most important aspects of three.js that one needs to be aware of in order to get anything done at all. I will likely update this post many times, as my content on three.js grows, and treat this as a good starting point to other posts of interest on three.js as I tinker with it more.
