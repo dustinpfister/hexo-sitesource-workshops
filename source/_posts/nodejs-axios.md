@@ -5,8 +5,8 @@ tags: [js,node.js]
 layout: post
 categories: node.js
 id: 130
-updated: 2018-01-11 15:22:09
-version: 1.4
+updated: 2018-04-07 16:30:32
+version: 1.5
 ---
 
 Axios is a javaScript promise based http client for node.js, and the browser. making requests with axios is pretty simple, however if need be I can still set all relevant options like headers, and url parameters. In short it is yet another way to make get, and post requests to a server on the web somewhere via scripting http.
@@ -34,10 +34,6 @@ $ git clone https://github.com/dustinpfister/test_axios
 $ cd test_axios
 $ node basic
 ```
-
-## Using axios as a client side library
-
-Axios is a javascript library that works the same way in both a server side, as well as client side environment. In the npm package the axios.js file that will work in both environments is in the dist folder. In my test project I just copyed and pasted what is there to a name space in the public html folder to be used in my client side demos of this project.
 
 ## Basic use case of axios (node.js GET example with no options)
 
@@ -75,7 +71,7 @@ So right off the bat axios strikes me as one of the best options for making get 
 
 For this project I experimented with making a server from the ground up, which I something I do now and then rather than installing [hapi](https://www.npmjs.com/package/hapi), or [express](https://www.npmjs.com/package/express).
 
-So this is not something that I would use in production, just a custom hack job that I made while experimenting with axios.
+So this is not something that I would use in production, just a custom hack job that I made while experimenting with axios, as I wanted something that I can run that will just respond to requests.
 
 ```js
 let http = require('http'),
@@ -230,7 +226,7 @@ For a post request example I just made a project where I make a post request to 
 </html>
 ```
 
-## Url parameters
+## Url parameters, and post example
 
 Working with Url parameter is as simple as just giving an object with key value pairs rather than a sting that looks like this:
 
@@ -268,6 +264,14 @@ axios({
 ```
 
 If you want a quick solution for parsing the url parameters back into an object on the server side check out url.parse in the [built in node.js url module](https://nodejs.org/api/url.html).
+
+## Using axios as a client side library
+
+Axios is a javaScript library that works the same way in both a server side, as well as client side environment. In the npm package the axios.js file that will work in both environments is in the dist folder. In my test project I just copied and pasted what is there to a name space in the public html folder to be used in my client side demos of this project.
+
+## Beware of Browser Promise Support
+
+When using axios on the client side, axios depends on native Promise support. Promise are of course an es2015+ javaScript feature, so it goes without saying that can cause your code to break on some older browsers. If the browser share of older browsers that do not support promises is hight, you could just use [good old XMLHttpRequest](/2018/03/28/js-xmlhttprequest/), or try something that will bring Promises to these older platforms. The axios developers seem to recommend a project called [es6-promise](https://github.com/stefanpenner/es6-promise). Another popular solution for adding Promises to older browsers is [bluebird](/2017/12/02/nodejs-bluebird/).
 
 ## Conclusion
 
