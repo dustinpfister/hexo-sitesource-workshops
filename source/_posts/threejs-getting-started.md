@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 167
-updated: 2018-04-07 13:34:33
-version: 1.3
+updated: 2018-04-07 15:41:52
+version: 1.4
 ---
 
 I have been wanting to write a series of posts in [three.js](https://threejs.org/) for a while now, and I do not care to put it off any longer. I have fiddled with three.js in the past, but never really got into it. I have enough experience with it to know that it helps making projects the involve 3d objects very easy, yet it is still something that takes a significant investment of time to get fairly solid with.
@@ -107,7 +107,7 @@ A very typical example for getting started with three.js indeed, but still it wo
     camera.lookAt(0,0,0);
     renderer.setSize(320, 240);
  
-    // finnaly I call renderer.render to draw the current
+    // finally I call renderer.render to draw the current
     // state of the scene, from the perspective of the camera
     renderer.render(scene, camera);
  
@@ -115,4 +115,49 @@ A very typical example for getting started with three.js indeed, but still it wo
     ());
 ```
 
-This example will just draw a cube on the screen.
+This example will just draw a cube on the screen. So lets have a break down on everything that is going on here.
+
+## The Scene
+
+The [Scene](https://threejs.org/docs/index.html#api/scenes/Scene) is the space in which everything will go, your objects, cameras, and anything else that would be placed in a scene like a light source. Once you have a scene we will want to add things into it, like an object of some kind to look at with a camera. 
+
+To do this I will want to call the Object3D add method, and give it a [Mesh](https://threejs.org/docs/index.html#api/objects/Mesh), that is composed of a [Geometry](https://threejs.org/docs/index.html#api/core/Geometry), and a [Material](https://threejs.org/docs/index.html#api/materials/Material). I will touch base on all of that, because you should have at least a basic knowledge of all of those things, but not get into depth here, as each of these things could use there own posts.
+
+```js
+var scene = new THREE.Scene(); // Scene
+scene.add(new THREE.Mesh( // Mesh
+    new THREE.BoxGeometry(200, 200, 200), // Geometry
+    new THREE.MeshBasicMaterial({ // Material
+        color: 0xff0000,
+        wireframe: true
+    })
+));
+```
+
+## The Camera
+
+Full post on [Camera](/2018/04/06/threejs-camera/)
+
+There is a core class Called [Camera](https://threejs.org/docs/index.html#api/cameras/Camera) that has some methods and properties that are shared across all camera types that are used in three.js. 
+
+Like most objects in three.js, a Camera inherits from Object3D which gives it methods to help make changing the position, and orientation of the Camera pretty easy.
+
+```js
+var fieldOfView = 45,
+aspectRatio = 16 / 9,
+near = 1,
+far = 1000,
+ 
+// I can now make an instance of Perspective Camera
+camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, near, far);
+ 
+// move the camera to 250,250,250, and look at the origin.
+camera.position.set(250,250,250);
+camera.lookAT(0,0,0);
+```
+
+There are then four camera types to choose from, in this post I am only briefly covering the [perspective camera](https://threejs.org/docs/index.html#api/cameras/PerspectiveCamera).
+
+## Geometry, Material, and Mesh.
+
+To make some kind of object to look at I need it's geometry, I will also want to skin that geometry with some kind Of Material, and I will want to tie those two things togeather into a Mesh.
