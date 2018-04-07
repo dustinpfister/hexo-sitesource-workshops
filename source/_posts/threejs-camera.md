@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 168
-updated: 2018-04-06 19:06:51
-version: 1.3
+updated: 2018-04-07 09:23:44
+version: 1.4
 ---
 
 One of the most important things to understand when making a [three.js](https://threejs.org/) project, is at least the basics of working with a [perspective camera](https://threejs.org/docs/index.html#api/cameras/PerspectiveCamera). There are other types of cameras to work with in three.js, but a perspective camera is the most common one that mimics the way the human eye sees the world.
@@ -57,15 +57,30 @@ This is for course the far distance of the view pyramid. It is also the distance
 
 ## Changing the pyramid of vision during runtime with the updateProjectionMatrix method
 
-If you want to change any of the properties that are used to create the geometry of the view pyramid, you may thing that there is some kind of method that needs to be called to reconfigure that when you change a value, and you are right. The method you want to call is updateProjectionMatrix.
+With most projects typically I will be setting some values for the camera just once, and then change values that are part of the Object3D class for instance if I want to move the position, and orientation of the camera.
+
+Still If you want to change any of the properties that are used to create the geometry of the view pyramid, you may thing that there is some kind of method that needs to be called to reconfigure that when you change a value, and you are right. The method you want to call is updateProjectionMatrix.
+
+If you do not call this method, any change that is made to values like camera.fov, or camera.aspect will not take effect.
+
+A full list of the properties that correspond with the arguments that you give to the constructor are:
+
+* camera.fov
+* camera.aspect
+* camera.near
+* camera.far
+
+If you change a property you will need to call updateProjectionMatrix in order to re generate the pyramid geometry. like so:
 
 ```js
     camera.fov = Math.floor(25 + 50 * bias);
     camera.updateProjectionMatrix();
 ```
 
-If you do not call this method, and change that is made to values like camera.fov, or camera.aspect will not take effect.
-
 ## Camera Constructor
 
-Perspective Camera inherits from the Camera constructor, as such the perspective Camera shares certain properties, and methods with all other cameras in three.js.
+Perspective Camera inherits from the Camera constructor, as such the perspective Camera shares certain properties, and methods with all other cameras in three.js. I will not be getting into this class in depth with this post, but for now it is important to know that this class adds some properties and methods that are uniform across all cameras used in three.js, including a method that can be used to clone a camera.
+
+## Object3D constructor
+
+The Camera class in turn also inherits from Object3D, this class is what helps to make Objects including a camera easy to work with in three.js. Like the Camera Class I will not get into detail as it is a little off topic, and it deserves a post of it's own. However if you are interested in learning how to move the camera, or change it's orientation this is the Class of interest for that.
