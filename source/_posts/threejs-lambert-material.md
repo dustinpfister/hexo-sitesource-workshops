@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 170
-updated: 2018-04-10 11:50:41
-version: 1.3
+updated: 2018-04-10 11:58:34
+version: 1.4
 ---
 
 I have been toying around with [three.js](https://threejs.org/) these days, and may continue doing so until I have a solid collection of posts on it. You can count on at least a few posts on Materials which I have been working with today. If you are just getting started with three.js you might be familiar with at least the Basic Material, and that you use a Material with a Geometry to make a Mesh. However you might now be interested in working with lights, and having a material that will respond to a light source, if so the Lambert Material may be of interest.
@@ -127,11 +127,12 @@ var plane = new THREE.Mesh(
     new THREE.MeshLambertMaterial({
         color: 0x00afaf,
         emissive: 0x2a2a2a,
+        emissiveIntensity: .5,
         side: THREE.DoubleSide
 }));
 ```
 
-This will make all the area of the plane that is not effected by the spot light a shade of gray, rather than the default which is black.
+This will make all the area of the plane that is not effected by the spot light a shade of gray, rather than the default which is black. In addition to being able to set the emissive color, the intensity can also be set from a 0 to one value, it is also possible to define a texture that will modulate with the emmsive color using the emmsiveMap property. To set a texture that will function as the regular color map, you will want to use the plain old map property.
 
 ## Conclusion
 
