@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 170
-updated: 2018-04-10 11:31:50
-version: 1.2
+updated: 2018-04-10 11:50:41
+version: 1.3
 ---
 
 I have been toying around with [three.js](https://threejs.org/) these days, and may continue doing so until I have a solid collection of posts on it. You can count on at least a few posts on Materials which I have been working with today. If you are just getting started with three.js you might be familiar with at least the Basic Material, and that you use a Material with a Geometry to make a Mesh. However you might now be interested in working with lights, and having a material that will respond to a light source, if so the Lambert Material may be of interest.
@@ -112,6 +112,26 @@ For a simple example I put together a scene containing a cube, and plane both of
 ```
 
 This results in reflection in a manner that is expected with light reflecting from areas where the spotlight is striking the surfaces of the cube, and plane.
+
+## The emissive, and color properties
+
+Unlike materials like the [basic material](https://threejs.org/docs/index.html#api/materials/MeshBasicMaterial), the Lambert Material does not just have a single color for filling the faces of an polygon. There is a color that is shown when it is effected by a light source, and then there is a color that it is by default regardless if there is any light or not.
+
+To set the color value that is not effected by light you will want to set the emissve property of the Lambert material, and use the color property to set the color that is to be reflected when effected by a light source.
+
+for example say we add the emissive property to the material that I gave in the plain to this:
+```js
+// add plane to the scene
+var plane = new THREE.Mesh(
+    new THREE.PlaneBufferGeometry(1500, 1500, 8, 8),
+    new THREE.MeshLambertMaterial({
+        color: 0x00afaf,
+        emissive: 0x2a2a2a,
+        side: THREE.DoubleSide
+}));
+```
+
+This will make all the area of the plane that is not effected by the spot light a shade of gray, rather than the default which is black.
 
 ## Conclusion
 
