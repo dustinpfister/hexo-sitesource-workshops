@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 171
-updated: 2018-04-11 16:04:02
-version: 1.1
+updated: 2018-04-11 16:13:33
+version: 1.2
 ---
 
 Lights, camera, action! In this post will will be covering all three of those things in [three.js](https://threejs.org/), but with an emphases on spotlights. Spotlights as the name suggests is a directional light that will concentrate light in a cone like shape at a given target. This kind of light source differs from other options that will just brighten things up in general, or give a cylinder like beam of light in a given direction. In addition to adding directional light to a project, spotlights can be used to generate shadows, if the render used can do so, and is set up to render shadows.
@@ -71,3 +71,6 @@ like this:
 }
     ());
 ```
+
+By default a spotlight will point at the origin (0,0,0), because the mesh I am using in this demo is located at the origin, and I am not moving anything around, this works just okay with the default settings when it comes to things like the angle of the cone, and the light intensity. However if I want to change the target point that the spotlight is pointing at, and tweak some additional values, there is a great deal more to know about spotlights. Also there is more to know about materials as well, after all a material is what will respond to a light source. In addition there is what to do in order to get shadows working if interested, so lets get to it.
+
