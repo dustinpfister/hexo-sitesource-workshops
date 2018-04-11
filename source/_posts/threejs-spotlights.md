@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 171
-updated: 2018-04-11 18:28:08
-version: 1.4
+updated: 2018-04-11 18:50:33
+version: 1.5
 ---
 
 Lights, camera, action! In this post will will be covering all three of those things in [three.js](https://threejs.org/), but with an emphases on spotlights. Spotlights as the name suggests is a directional light that will concentrate light in a cone like shape at a given target. This kind of light source differs from other options that will just brighten things up in general, or give a cylinder like beam of light in a given direction. In addition to adding directional light to a project, spotlights can be used to generate shadows, if the render used can do so, and is set up to render shadows.
@@ -116,7 +116,7 @@ var renderer = new THREE.WebGLRenderer();
 renderer.shadowMap.enabled = true;
 ```
 
-## Setting up Objects for shadows
+### Setting up Objects for shadows
 
 The Object3D class has castShadow, and receiveShadow properties that both default to false. You will want to set one, the other, or both of these booleans to true for any and all objects in your scene that you want to have cast or receive shadows.
 
@@ -125,10 +125,81 @@ var cube = new THREE.Mesh(
     new THREE.BoxGeometry(200, 200, 200),
     new THREE.MeshLambertMaterial({
         color: 0xff0000
-});
+}));
 cube.position.set(0, 150, 0);
 cube.castShadow = true; // my cube will cast a shadow
 scene.add(cube);
 ```
 
 Notice that I am also using the Lambert material with my cube that will respond to light, be sure you are using a material like that unless for some reason you want an object that will cast a shadow, but not reflect a light source.
+
+### Setting up the spotLight, and full shadow demo
+
+Just like the objects that will case or receive shadows, you will want to set the castShadow boolean of the spotLight instance to true. In addition there are some more properties of the spotLight that you may want to play with that have to do with setting the resolution of the shadow map, and the geometry of the cone of the spotlight.
+
+```js
+(function () {
+ 
+    // Scene
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0f0f0f);
+ 
+    // Camera
+    camera = new THREE.PerspectiveCamera(50, 320 / 240, 1, 5000);
+    camera.position.set(500, 500, 500);
+    camera.lookAt(0, 0, 0);
+ 
+    // A CUBE
+    var cube = new THREE.Mesh(
+            new THREE.BoxGeometry(200, 200, 200),
+            new THREE.MeshLambertMaterial({
+                color: 0xff0000
+            }));
+    cube.position.set(0, 150, 0);
+    cube.castShadow = true;
+    scene.add(cube);
+ 
+    // RENDER
+    var renderer = new THREE.WebGLRenderer();
+    renderer.shadowMap.enabled = true;
+    document.getElementById('demo').appendChild(renderer.domElement);
+    renderer.setSize(320, 240);
+ 
+    // SpotLight
+    var spotLight = new THREE.SpotLight(0xffffff);
+    // I must at least set the caseShadow boolean
+    // of the spotLight to true
+    spotLight.castShadow = true;
+ 
+    // additional shadow properties of interest
+    spotLight.shadow.mapSize.width = 128;
+    spotLight.shadow.mapSize.height = 128;
+    spotLight.shadow.camera.near = 1;
+    spotLight.shadow.camera.far = 1000;
+ 
+    // additional spotlight properties of interest
+    spotLight.intensity = 2;
+    spotLight.penumbra = .5;
+    spotLight.angle = Math.PI / 2.5;
+    spotLight.distance = 1000;
+ 
+    spotLight.position.set(-250, 350, 250);
+    scene.add(spotLight);
+ 
+    // add plane to the scene
+    var plane = new THREE.Mesh(
+            new THREE.PlaneBufferGeometry(3000, 3000, 8, 8),
+            new THREE.MeshStandardMaterial({
+                color: 0x00afaf,
+                side: THREE.DoubleSide
+            }));
+    plane.rotation.x = Math.PI / 2;
+    plane.receiveShadow = true; // the plane will receive a shadow
+    scene.add(plane);
+ 
+    // render what we have
+    renderer.render(scene, camera);
+ 
+}
+    ());
+```
