@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 171
-updated: 2018-04-11 16:47:13
-version: 1.3
+updated: 2018-04-11 18:28:08
+version: 1.4
 ---
 
 Lights, camera, action! In this post will will be covering all three of those things in [three.js](https://threejs.org/), but with an emphases on spotlights. Spotlights as the name suggests is a directional light that will concentrate light in a cone like shape at a given target. This kind of light source differs from other options that will just brighten things up in general, or give a cylinder like beam of light in a given direction. In addition to adding directional light to a project, spotlights can be used to generate shadows, if the render used can do so, and is set up to render shadows.
@@ -94,3 +94,41 @@ The target property of the spotlight is what is of interest if you want to chang
     spotLight.position.set(-200, 200, 200);
     spotLight.target.set(100,0,200);
 ```
+
+It is also possible to set the target of the spotlight to a mesh that you have in the scene before hand.
+
+```js
+spotLight.target = mesh;
+```
+
+## Getting shadows to work with a spotlight
+
+Spotlights are a type of light in three.js that can be used to cast shadows. This is something that will not just work right out of the gate, as properties need to be set for the spotLight, renderer, and the objects in your scene that will cast, and receive shadows. Also shadows will not work with some renderer's, but It should in most cases work just fine with the webGL renderer. 
+
+One thing to keep in mind though is that shadows will of course eat up more processing power compared to not using them, which is why you might consider putting in an option to turn them off when designing your project.
+
+### Setting up the renderer for shadows
+
+First off make sure you are using a renderer that supports shadows in the first place, the plane old 2d canvas renderer for instance does not. If you are using a renderer that does support shadows, and think you might do okay with the default settings for the shadow map of the renderer then all you have to do, for the renderer at least, is to set the shadowMap.enabled boolean to true.
+
+```js
+var renderer = new THREE.WebGLRenderer();
+renderer.shadowMap.enabled = true;
+```
+
+## Setting up Objects for shadows
+
+The Object3D class has castShadow, and receiveShadow properties that both default to false. You will want to set one, the other, or both of these booleans to true for any and all objects in your scene that you want to have cast or receive shadows.
+
+```js
+var cube = new THREE.Mesh(
+    new THREE.BoxGeometry(200, 200, 200),
+    new THREE.MeshLambertMaterial({
+        color: 0xff0000
+});
+cube.position.set(0, 150, 0);
+cube.castShadow = true; // my cube will cast a shadow
+scene.add(cube);
+```
+
+Notice that I am also using the Lambert material with my cube that will respond to light, be sure you are using a material like that unless for some reason you want an object that will cast a shadow, but not reflect a light source.
