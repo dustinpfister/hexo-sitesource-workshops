@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 172
-updated: 2018-04-12 11:44:02
-version: 1.5
+updated: 2018-04-12 11:54:12
+version: 1.6
 ---
 
 In this post I will be writing about the [BufferGeometryLoader](https://threejs.org/docs/index.html#api/loaders/BufferGeometryLoader) in[three.js](https://threejs.org/). The Buffer Geometry Loader is one of several loaders in three.js that can be used to load an external JSON asset. In three.js if you want to import a 3d model that has been created in a 3d modeling program like [blender](https://www.blender.org/), it will have to be converted to a standard JSON format used by three.js. luckly there is an ofishal plugin to do just that for blender at least in the three.js repositories [exporters folder](https://github.com/mrdoob/three.js/tree/r91/utils/exporters/blender). The Buffered Geometry loader can be used to load a JSON file that has a type of BufferGeometry.
@@ -143,3 +143,41 @@ A basic example of the loader will involve creating an instance of the loader, a
 ```
 
 The callback gives just one argument that is the geometry that can be used to make a mesh that can then be added to the scene, at which point the external geometry can be rendered. Aside from that I do not have to do anything out of the usual with respect to the scene, camera, and renderer as it is just another way to acquire a geometry to create a mesh.
+
+## Additional callbacks
+
+If desired additional callbacks can be given to the load method for reporting load progress, and handing errors if they happen.
+
+```js
+// load a resource
+loader.load(
+ 
+    // URL
+    'loader-buffer-geometry/js/three_2.json',
+ 
+    // Load Done
+    function ( geometry ) {
+        // create a mesh with the geometry
+        // and a material, and add it to the scene
+        var mesh = new THREE.Mesh(geometry, new THREE.MeshNormalMaterial({}));
+        scene.add(mesh);
+ 
+        // render the scene
+        renderer.render(scene, camera);
+    },
+ 
+    // Progress
+    function ( xhr ) {
+        console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+    },
+ 
+    // Error
+    function ( err ) {
+        console.log( 'An error happened' );
+    }
+);
+```
+
+## Conclusion
+
+There are many more loaders, some of which do more than just load geometry. It is possible to other assets besides just geometry as well. In this post I also did not get into depth about Buffered Geometry, and why it is that you might want to use Buffered geometry over plain old Geometry.
