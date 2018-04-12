@@ -5,17 +5,17 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 171
-updated: 2018-04-11 20:46:47
-version: 1.6
+updated: 2018-04-12 09:44:57
+version: 1.7
 ---
 
-Lights, camera, action! In this post will will be covering all three of those things in [three.js](https://threejs.org/), but with an emphases on spotlights. Spotlights as the name suggests is a directional light that will concentrate light in a cone like shape at a given target. This kind of light source differs from other options that will just brighten things up in general, or give a cylinder like beam of light in a given direction. In addition to adding directional light to a project, spotlights can be used to generate shadows, if the render used can do so, and is set up to render shadows.
+Lights, camera, action! In this post will will be covering all three of those things in [three.js](https://threejs.org/), but with an emphases on [spotlights](https://threejs.org/docs/index.html#api/lights/SpotLight). Spotlights as the name suggests is a directional light that will concentrate light in a cone like shape at a given target. This kind of light source differs from other options that will just brighten things up in general, or give a cylinder like beam of light in a given direction. In addition to adding directional light to a project, spotlights can be used to generate shadows, if the render used can do so, and is set up to render shadows.
 
 <!-- more -->
 
 # What to know before hand
 
-This is not a getting started post on three.js, or javaScript in general. I assume that you have at least a basic working knowledge on javaScript, and that you have your feet wet with three.js. If not I have other posts that may help.
+This is not a [getting started](/2018/04/04/threejs-getting-started/) post on three.js, or javaScript in general. I assume that you have at least a basic working knowledge on javaScript, and that you have your feet wet with three.js. If not I have other posts that may help.
 
 In this post I will not be covering materials in three.js in detail, but I also assume that you know that in three.js some materials respond to a light source, and others do not.
 
@@ -36,7 +36,7 @@ spotLight.position.set(350, 340, 170);
 scene.add(spotLight);
 ```
 
-Assuming that I have a mesh of some kind at the origin of my scene that is equipped with a material that responds to light such as the Lambert material, I should have a basic working example of reflectance going on. I will also need the usual scene, renderer, and camera all set up to make this an actual function demo.
+Assuming that I have a mesh of some kind at the origin of my scene that is equipped with a material that responds to light such as the [Lambert material](/2018/04/08/threejs-lambert-material/), I should have a basic working example of reflectance going on. I will also need the usual scene, renderer, and camera all set up to make this an actual function demo.
 
 like this:
 ```js
