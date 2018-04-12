@@ -5,8 +5,8 @@ tags: [js,lodash]
 layout: post
 categories: lodash
 id: 88
-updated: 2017-11-13 12:07:18
-version: 1.1
+updated: 2018-04-12 09:44:56
+version: 1.2
 ---
 
 The issue with deep cloning objects in javaScript comes up now and then. Maybe one day I will write a full post on the matter, and all the ways to go about doing it, but this is a post on [lodash](https://lodash.com/), as such I will just be writing about the [\_.cloneDeep](https://lodash.com/docs/4.17.4#cloneDeep) method.
@@ -62,7 +62,7 @@ var obj = {
     foo : 'bar'
  
 };
-var copy = _.cone(obj);
+var copy = _.clone(obj);
 copy.foo = 42;
 console.log(copy.foo); // 42
 console.log(obj.foo); // 42
