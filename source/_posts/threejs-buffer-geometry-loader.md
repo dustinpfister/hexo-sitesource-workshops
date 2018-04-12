@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 172
-updated: 2018-04-12 11:36:36
-version: 1.4
+updated: 2018-04-12 11:44:02
+version: 1.5
 ---
 
 In this post I will be writing about the [BufferGeometryLoader](https://threejs.org/docs/index.html#api/loaders/BufferGeometryLoader) in[three.js](https://threejs.org/). The Buffer Geometry Loader is one of several loaders in three.js that can be used to load an external JSON asset. In three.js if you want to import a 3d model that has been created in a 3d modeling program like [blender](https://www.blender.org/), it will have to be converted to a standard JSON format used by three.js. luckly there is an ofishal plugin to do just that for blender at least in the three.js repositories [exporters folder](https://github.com/mrdoob/three.js/tree/r91/utils/exporters/blender). The Buffered Geometry loader can be used to load a JSON file that has a type of BufferGeometry.
@@ -96,7 +96,9 @@ C:\Users\USERNAME\AppData\Roaming\Blender Foundation\Blender\2.6X\scripts\addons
 
 Wherever it is you are looking for, it is the addons folder that is used by blender. Out of the box there should be a bunch of plug-ins there before hand, you just want to add the io_three plug-in to the collection there.
 
-## The demo
+## Basic demo using the buffered geometry loader.
+
+A basic example of the loader will involve creating an instance of the loader, and then calling the load method of that instance. When calling the load method you will want to pass at least two arguments to the method which are the url of the json file that you want to load, and a callback method that will fire when the file is loaded, and ready to use.
 
 ```js
 (function () {
@@ -139,3 +141,5 @@ Wherever it is you are looking for, it is the addons folder that is used by blen
  
 }());
 ```
+
+The callback gives just one argument that is the geometry that can be used to make a mesh that can then be added to the scene, at which point the external geometry can be rendered. Aside from that I do not have to do anything out of the usual with respect to the scene, camera, and renderer as it is just another way to acquire a geometry to create a mesh.
