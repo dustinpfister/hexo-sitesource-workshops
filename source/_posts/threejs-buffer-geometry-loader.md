@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 172
-updated: 2018-04-12 11:19:22
-version: 1.3
+updated: 2018-04-12 11:36:36
+version: 1.4
 ---
 
 In this post I will be writing about the [BufferGeometryLoader](https://threejs.org/docs/index.html#api/loaders/BufferGeometryLoader) in[three.js](https://threejs.org/). The Buffer Geometry Loader is one of several loaders in three.js that can be used to load an external JSON asset. In three.js if you want to import a 3d model that has been created in a 3d modeling program like [blender](https://www.blender.org/), it will have to be converted to a standard JSON format used by three.js. luckly there is an ofishal plugin to do just that for blender at least in the three.js repositories [exporters folder](https://github.com/mrdoob/three.js/tree/r91/utils/exporters/blender). The Buffered Geometry loader can be used to load a JSON file that has a type of BufferGeometry.
@@ -23,6 +23,12 @@ Also when it comes to making a 3d model with a 3d modeling program I have come t
 ## Version Numbers matter.
 
 I know there are a lot of projects where newer versions just patch programing mistakes, and the actual use of the project renames the same. This is not so true with three.js, major changes happen often. In this post i am using [three.js r91](https://github.com/mrdoob/three.js/tree/r91) that was release in March of 2018. Also in this post I am using blender 2.79 also released in March of 2018. When it comes to using the io_three plug-in it is important to use a late version of blender.
+
+## Why use the buffered geometry loader?
+
+When first starting out with three.js one might use one of the built in constructors to create a simple geometry such as a cube geometry using the [BoxBufferGeometry](https://threejs.org/docs/index.html#api/geometries/BoxBufferGeometry) constructor. That works fine when you are just aiming to make a three.js hello world type project involving a spinning cube on the screen, but when making an actual project chances are you are going to want to make your own geometry one way or another.
+
+Of course there are ways of making a hard coded geometry, or generating a geometry with javaScipt in the source code of your project. However it is also possible to create a geometry in an external application, and then import that geometry into three.js. The buffered geometry loader is one of many ways in three.js to load a geometry.
 
 ## The JSON file format
 
@@ -89,3 +95,47 @@ C:\Users\USERNAME\AppData\Roaming\Blender Foundation\Blender\2.6X\scripts\addons
 ```
 
 Wherever it is you are looking for, it is the addons folder that is used by blender. Out of the box there should be a bunch of plug-ins there before hand, you just want to add the io_three plug-in to the collection there.
+
+## The demo
+
+```js
+(function () {
+ 
+    // Scene
+    var scene = new THREE.Scene();
+ 
+    // Camera
+    var camera = new THREE.PerspectiveCamera(65, 4 / 3, .5, 10);
+    camera.position.set(-1.5, 2.5, 1.5);
+    camera.lookAt(0, 0, 0);
+ 
+    // Render
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(320, 240);
+    document.getElementById('demo').appendChild(renderer.domElement);
+ 
+    // Loader
+    var loader = new THREE.BufferGeometryLoader();
+ 
+    // load a resource
+    loader.load(
+        // resource URL
+        'loader-buffer-geometry/js/three_2.json',
+ 
+        // onLoad callback
+        function (geometry) {
+ 
+            // create a mesh with the geometry
+            // and a material, and add it to the scene
+            var mesh = new THREE.Mesh(geometry, new THREE.MeshNormalMaterial({}));
+            scene.add(mesh);
+ 
+            // render the scene
+            renderer.render(scene, camera);
+ 
+        }
+ 
+    );
+ 
+}());
+```
