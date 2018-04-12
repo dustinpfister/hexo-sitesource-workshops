@@ -1,12 +1,12 @@
 ---
-title: spotlights in three.js
+title: The buffered geometry loader in three.js
 date: 2018-04-12 10:20:30
 tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 172
-updated: 2018-04-12 11:05:19
-version: 1.1
+updated: 2018-04-12 11:08:19
+version: 1.2
 ---
 
 In this post I will be writing about the [BufferGeometryLoader](https://threejs.org/docs/index.html#api/loaders/BufferGeometryLoader) in[three.js](https://threejs.org/). The Buffer Geometry Loader is one of several loaders in three.js that can be used to load an external JSON asset. In three.js if you want to import a 3d model that has been created in a 3d modeling program like [blender](https://www.blender.org/), it will have to be converted to a standard JSON format used by three.js. luckly there is an ofishal plugin to do just that for blender at least in the three.js repositories [exporters folder](https://github.com/mrdoob/three.js/tree/r91/utils/exporters/blender). The Buffered Geometry loader can be used to load a JSON file that has a type of BufferGeometry.
