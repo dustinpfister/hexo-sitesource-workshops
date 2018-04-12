@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 171
-updated: 2018-04-11 18:50:33
-version: 1.5
+updated: 2018-04-11 20:46:47
+version: 1.6
 ---
 
 Lights, camera, action! In this post will will be covering all three of those things in [three.js](https://threejs.org/), but with an emphases on spotlights. Spotlights as the name suggests is a directional light that will concentrate light in a cone like shape at a given target. This kind of light source differs from other options that will just brighten things up in general, or give a cylinder like beam of light in a given direction. In addition to adding directional light to a project, spotlights can be used to generate shadows, if the render used can do so, and is set up to render shadows.
@@ -203,3 +203,43 @@ Just like the objects that will case or receive shadows, you will want to set th
 }
     ());
 ```
+
+## Spotlight geometry and other metrics
+
+There are a number of properties that can be used to change the geometry of the cone that composes the area of the spotlight. two major values that may come to mind are the angle of the cone, as well as the distance.
+
+```js
+spotLight.angle = Math.PI / 2.5;
+spotLight.distance = 1000;
+```
+
+These can be used to set the geometry of the cone, in addition to that there are more values that have to do with the intensity of the light, and the [penumbra](https://en.wikipedia.org/wiki/Umbra,_penumbra_and_antumbra#Penumbra) of the spotlight.
+
+```js
+spotLight.intensity = 2;
+spotLight.penumbra = .5;
+```
+
+## Spotlight helper
+
+If you want to see what is going on with the spotlight, by having a way of showing the current area of the cone with some lines, there is no need to make your own object for dong so. There is a special helper class in three.js just for this purpose.
+
+```js
+    var spotLight = new THREE.SpotLight(0xffffff),
+    spotLightHelper = new THREE.SpotLightHelper(spotLight);
+ 
+    // add a spotlight helper to the spotlight
+    spotLight.add(spotLightHelper);
+    scene.add(spotLight);
+    scene.add(spotLight.target);
+ 
+    // when changing the spotlight position
+    // or target I will want to update the helper
+    spotLight.position.set(-100, 100, -100);
+    spotLight.target.position.set(20, 5, 5);
+    spotLightHelper.update();
+```
+
+## Conclusion
+
+There is much more to know about spotlights, and lights in general as well as the differences in the materials that respond to lights like the spotlight. As I author, and update more demos I might get around to updating, and expanding this post.
