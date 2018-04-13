@@ -5,14 +5,18 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 173
-updated: 2018-04-13 19:39:35
-version: 1.3
+updated: 2018-04-13 19:46:53
+version: 1.4
 ---
 
 It would not be to hard to implement some camera controls for a [three.js](https://threejs.org/) project from scratch. It would involve some event handlers, and the use of a few Object3D methods like lookAt, and position.set. However There is some additional resources in the three.js project repository itself that can be used to quickly set this up in a flash. In this post I will be covering how to quickly set up some orbit controls for the camera, so you do not have to keep changing hard coded values, or spend a great deal of time working on your own solution to just look around a scene.
 
 
 <!-- more -->
+
+## What to know before hand
+
+This is an advanced post on one of the many useful time saving features fount in the three.js examples folder in the [three.js github repository](https://github.com/mrdoob/three.js/tree/r91). If you are looking for my take on [getting started with three.js](/2018/04/04/threejs-getting-started/) type post I have written that before. In this post I assume you have a basic working knowledge of javaScript, and three.js and are wondering if there is some kind of official solution for quickly adding some orbit controls to a three.js project, in which case you are at the right place.
 
 ## Where to get the file for orbit controls
 
