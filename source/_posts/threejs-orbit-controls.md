@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 173
-updated: 2018-04-13 19:02:23
-version: 1.1
+updated: 2018-04-13 19:30:39
+version: 1.2
 ---
 
 It would not be to hard to implement some camera controls for a [three.js](https://threejs.org/) project from scratch. It would involve some event handlers, and the use of a few Object3D methods like lookAt, and position.set. However There is some additional resources in the three.js project repository itself that can be used to quickly set this up in a flash. In this post I will be covering how to quickly set up some orbit controls for the camera, so you do not have to keep changing hard coded values, or spend a great deal of time working on your own solution to just look around a scene.
@@ -114,4 +114,36 @@ If all goes well I should now be able to use the OrbitControls constructor just 
     animate();
  
 }());
+```
+
+## AutoRotate
+
+A common task with any three.js project is to have the camera rotate around a mesh or scene that you have made. With the orbit controls constructor there is an boolean that can be set true to start an automation rotation around a target position.
+
+```js
+var controls = new THREE.OrbitControls(camera);
+ 
+// auto rotate
+controls.autoRotate = true;
+controls.autoRotateSpeed = 1;
+controls.target = new THREE.Vector3(.5, .5, .5);
+```
+
+By default the target position is the origin, but you can use the vector3 to change it to another point. Speed can be set as well by giving a Number to the autoRotateSpeed property where 1 will meen it will take about a minute to make one rotation ad sixty frames per second.
+
+## Disables right clicking on the page
+
+One thing about the Orbit Controls is that it ends up disabling right clicking on the page in which I am using it, in most cases this does not present a problem. If for some reason it does the reason why is because event.preventDefault() is used in an on context menu event handler in the Orbit Controls source file, disabling it would be as simple as just commenting it out or removing the code all together.
+
+The code of interest looks like this
+```js
+function onContextMenu( event ) {
+ 
+    if ( scope.enabled === false ) return;
+ 
+    event.preventDefault();
+ 
+}
+
+scope.domElement.addEventListener( 'contextmenu', onContextMenu, false );
 ```
