@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 173
-updated: 2018-04-13 19:30:39
-version: 1.2
+updated: 2018-04-13 19:39:35
+version: 1.3
 ---
 
 It would not be to hard to implement some camera controls for a [three.js](https://threejs.org/) project from scratch. It would involve some event handlers, and the use of a few Object3D methods like lookAt, and position.set. However There is some additional resources in the three.js project repository itself that can be used to quickly set this up in a flash. In this post I will be covering how to quickly set up some orbit controls for the camera, so you do not have to keep changing hard coded values, or spend a great deal of time working on your own solution to just look around a scene.
@@ -147,3 +147,11 @@ function onContextMenu( event ) {
 
 scope.domElement.addEventListener( 'contextmenu', onContextMenu, false );
 ```
+
+## Other Controls of interest
+
+If you take a look at the [other controls](https://github.com/mrdoob/three.js/tree/r91/examples/js/controls) in the three.js examples folder it looks like there are some additional options for quickly adding some typical controls to a three.js project, including fly controls. I have not check theme out yet, but I feel they might also come in handy at some point as well.
+
+## Conclusion
+
+I have not covered everything that the Orbit controls has to offer. It looks like it has some methods for saving and loading camera save states among other things but you get the idea. If you are thinking about taking the time to make your own controls for something like this think again, chances are it has been done before, and there is so shame of just taking advantage of these things like this to save time. The focus on any three.js project, or any project for that matter should be whatever it is that sets your project apart from all others. Chances are that is not going to be the orbit controls is it? I didn't think so, just use this stuff and move on.
