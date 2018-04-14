@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 173
-updated: 2018-04-13 19:46:53
-version: 1.4
+updated: 2018-04-13 20:10:12
+version: 1.5
 ---
 
 It would not be to hard to implement some camera controls for a [three.js](https://threejs.org/) project from scratch. It would involve some event handlers, and the use of a few Object3D methods like lookAt, and position.set. However There is some additional resources in the three.js project repository itself that can be used to quickly set this up in a flash. In this post I will be covering how to quickly set up some orbit controls for the camera, so you do not have to keep changing hard coded values, or spend a great deal of time working on your own solution to just look around a scene.
@@ -134,6 +134,22 @@ controls.target = new THREE.Vector3(.5, .5, .5);
 ```
 
 By default the target position is the origin, but you can use the vector3 to change it to another point. Speed can be set as well by giving a Number to the autoRotateSpeed property where 1 will meen it will take about a minute to make one rotation ad sixty frames per second.
+
+## Min max values
+
+There are a bunch of properties that can be used to set man and max values for the two angles of rotation [Azimuth](https://en.wikipedia.org/wiki/Azimuth), and Polar angle of the [Spherical coordinate system](https://en.wikipedia.org/wiki/Spherical_coordinate_system).
+
+```js
+//  horizontally angle control
+controls.minAzimuthAngle = -Math.PI / 4;
+controls.maxAzimuthAngle = Math.PI / 4;
+ 
+// vertical angle control
+controls.minPolarAngle = -Math.PI / 2;
+controls.maxPolarAngle = Math.PI / 2;
+```
+
+There are also a bunch of other values that can be used to set limits on distance, and paining. The range of the values for the min, and max values for the angles range from -Math.PI to Math.PI
 
 ## Disables right clicking on the page
 
