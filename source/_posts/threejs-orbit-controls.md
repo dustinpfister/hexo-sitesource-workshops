@@ -5,13 +5,13 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 173
-updated: 2018-04-13 20:29:22
-version: 1.6
+updated: 2018-04-13 20:38:38
+version: 1.7
 ---
 
-It would not be to hard to implement some camera controls for a [three.js](https://threejs.org/) project from scratch. It would involve some event handlers, and the use of a few Object3D methods like lookAt, and position.set. However There is some additional resources in the three.js project repository itself that can be used to quickly set this up in a flash. In this post I will be covering how to quickly set up some orbit controls for the camera, so you do not have to keep changing hard coded values, or spend a great deal of time working on your own solution to just look around a scene.
+It would not be to hard to implement some camera controls for a [three.js](https://threejs.org/) project from scratch. It would involve some event handlers, and the use of a few [Object3D](https://threejs.org/docs/#api/core/Object3D) methods like lookAt, and position.set. However there is some additional resources in the three.js project repository itself that can be used to quickly set this up in a flash. In this post I will be covering how to quickly set up some orbit controls for the camera, so you do not have to keep changing hard coded values, or spend a great deal of time working on your own solution to just look around a scene.
 
-The Orbit Controls solution that can b found in the three.js examples folder in the github repo of the project can be used to quickly set up a solution for panning, zooming, and changing the orientation of a camera with the mouse, keyboard, and touch events.
+The Orbit Controls solution that can be found in the three.js examples folder in the github repo of the project can be used to quickly set up a solution for panning, zooming, and changing the orientation of a camera with the mouse, keyboard, and touch events.
 
 <!-- more -->
 
@@ -53,7 +53,7 @@ function animate() {
 animate();
 ```
 
-## Full working Example of three.sj Orbit Controls
+## Full working Example of three.js Orbit Controls
 
 For a full working example of this I will of course want something to look at such as a cube, and of course I will want the usual scene, camera, and renderer. In my html not only will I want to load three.js like normal, I will want to see to it that the Orbit controls are added to three.js, as or r91 they are not part of three.js itself, so it must be added by some means.
 
@@ -120,6 +120,8 @@ If all goes well I should now be able to use the OrbitControls constructor just 
  
 }());
 ```
+
+From here I have my basic example of how to go about using the orbit controls to quickly allow for the basic control of the camera that is typical of many games, and 3d modeling programs. From here it is just a question if you want to further tweak the behavior of the controls, there are plenty of additional properties to do that.
 
 ## AutoRotate
 
