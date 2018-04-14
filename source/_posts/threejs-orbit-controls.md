@@ -5,12 +5,13 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 173
-updated: 2018-04-13 20:10:12
-version: 1.5
+updated: 2018-04-13 20:29:22
+version: 1.6
 ---
 
 It would not be to hard to implement some camera controls for a [three.js](https://threejs.org/) project from scratch. It would involve some event handlers, and the use of a few Object3D methods like lookAt, and position.set. However There is some additional resources in the three.js project repository itself that can be used to quickly set this up in a flash. In this post I will be covering how to quickly set up some orbit controls for the camera, so you do not have to keep changing hard coded values, or spend a great deal of time working on your own solution to just look around a scene.
 
+The Orbit Controls solution that can b found in the three.js examples folder in the github repo of the project can be used to quickly set up a solution for panning, zooming, and changing the orientation of a camera with the mouse, keyboard, and touch events.
 
 <!-- more -->
 
@@ -150,6 +151,24 @@ controls.maxPolarAngle = Math.PI / 2;
 ```
 
 There are also a bunch of other values that can be used to set limits on distance, and paining. The range of the values for the min, and max values for the angles range from -Math.PI to Math.PI
+
+## Set the panning mode
+
+There is an option to set the panning mode for panning. By default the orbit controls use Screen Space Panning, but it can be set to Horizontal Panning if desired.
+
+```js
+// HorizontalPanning ( 0 ScreenSpacePanning is the default)
+controls.panningMode = 1;
+```
+
+## Enable Damping
+
+There is the Enable Damping Boolean value that can be set true to give the controls some inertia. If you enable this you may also want to play around with the damping factor value as well.
+
+```js
+controls.enableDamping = true;
+controls.dampingFactor = .2;
+```
 
 ## Disables right clicking on the page
 
