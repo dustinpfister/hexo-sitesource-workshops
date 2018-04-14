@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 173
-updated: 2018-04-13 20:38:38
-version: 1.7
+updated: 2018-04-14 09:41:12
+version: 1.8
 ---
 
 It would not be to hard to implement some camera controls for a [three.js](https://threejs.org/) project from scratch. It would involve some event handlers, and the use of a few [Object3D](https://threejs.org/docs/#api/core/Object3D) methods like lookAt, and position.set. However there is some additional resources in the three.js project repository itself that can be used to quickly set this up in a flash. In this post I will be covering how to quickly set up some orbit controls for the camera, so you do not have to keep changing hard coded values, or spend a great deal of time working on your own solution to just look around a scene.
@@ -136,7 +136,7 @@ controls.autoRotateSpeed = 1;
 controls.target = new THREE.Vector3(.5, .5, .5);
 ```
 
-By default the target position is the origin, but you can use the vector3 to change it to another point. Speed can be set as well by giving a Number to the autoRotateSpeed property where 1 will meen it will take about a minute to make one rotation ad sixty frames per second.
+By default the target position is the origin, but you can use the vector3 to change it to another point. Speed can be set as well by giving a Number to the autoRotateSpeed property where 1 will mean it will take about a minute to make one rotation ad sixty frames per second.
 
 ## Min max values
 
