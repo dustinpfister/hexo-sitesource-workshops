@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 174
-updated: 2018-04-14 20:20:10
-version: 1.5
+updated: 2018-04-14 20:28:44
+version: 1.6
 ---
 
 When working with [three.js](https://threejs.org/) there are many built in geometry constructors that can be used to quickly make many simple, common, solid shapes like cubes, and spheres. However when getting into making an actual three.js project rather than just yet another simple rotating cube demo, there is going to be a need for a way to make custom geometry.
@@ -27,6 +27,16 @@ This post is also on the regular Geometry constructor, rather than BufferGeometr
 In three.js there is [BufferGeometry](https://threejs.org/docs/index.html#api/core/BufferGeometry), and then regular [Geometry]((https://threejs.org/docs/index.html#api/core/Geometry)) constructors. The reason for this is that the regular Geometry constructor is easier to work with as the vertices, faces, and so forth are stored directly. However this comes at a performance loss.
 
 Still if you are new to making custom geometry it would make sense to start with the regular Geometry first, then progress into the more advanced BufferGeometry to know how to make your projects run faster.
+
+## BuferGeomeetry from Geometry
+
+I will not be getting into buffered geometry and why it is faster, at least not in this post. I think that it is at least worth mentioning that there is a method of Buffered Geometry instance that can be used to create a Buffered Geometry from an instance of regular geometry. So it is possible to create something with the regular geometry constructor, and then just convert it later.
+
+```js
+var bufferGeometry = new THREE.BufferGeometry().fromGeometry(geometry);
+```
+
+So don't worry about it to much, at least for now, as you might find the regular geometry constructor easier to work with.
 
 ## Basic three.js Geometry example.
 
