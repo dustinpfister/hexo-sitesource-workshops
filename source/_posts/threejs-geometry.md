@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 174
-updated: 2018-04-14 20:13:48
-version: 1.4
+updated: 2018-04-14 20:20:10
+version: 1.5
 ---
 
 When working with [three.js](https://threejs.org/) there are many built in geometry constructors that can be used to quickly make many simple, common, solid shapes like cubes, and spheres. However when getting into making an actual three.js project rather than just yet another simple rotating cube demo, there is going to be a need for a way to make custom geometry.
@@ -110,6 +110,96 @@ Here is an example of what it is I am talking about here.
 ```
 
 In this example I am repeating the use of Vector3, and Face3 constructors over and over again for each instance. However in more advanced examples you can of course get into making helper functions that will involve loops that will involve the use of these constructors in just one line of your code.
+
+## Creating a helper method that returns a Geometry
+
+As a project grows more complex it might be a good idea to make methods that create, and return a geometry, just like the build in constructors that do just that. To pull that off I just need to have a method that returns an instance of Geometry that is created by way of some javaScript rather than just hard coded data.
+
+```js
+(function () {
+ 
+    var genPanes = function (count) {
+ 
+        var geometry = new THREE.Geometry(),
+ 
+        offset,
+        pane,
+        x = 0,
+        y = 0,
+        z = 0;
+ 
+        count = count || 6;
+ 
+        // generate vertices
+        pane = 0;
+        while (pane < count) {
+ 
+            var i = 0,
+            per = pane / count,
+            len = 4;
+            while (i < len) {
+ 
+                x = Math.floor(i % 2) + pane * 1.5;
+                y = Math.floor(i / 2);
+                z = pane * per;
+ 
+                geometry.vertices.push(new THREE.Vector3(x, y, z));
+ 
+                i += 1;
+            }
+ 
+            pane += 1;
+        }
+ 
+        // generate faces
+        pane = 0;
+        while (pane < count) {
+ 
+            offset = pane * 4;
+ 
+            geometry.faces.push(
+                new THREE.Face3(0 + offset, 1 + offset, 2 + offset),
+                new THREE.Face3(3 + offset, 2 + offset, 1 + offset));
+            pane += 1;
+        }
+ 
+        // compute Normals
+        geometry.computeVertexNormals();
+ 
+        // normalize the geometry
+        geometry.normalize();
+ 
+        return geometry;
+ 
+    };
+ 
+    // SCENE
+    var scene = new THREE.Scene();
+ 
+    // CAMERA
+    var camera = new THREE.PerspectiveCamera(50, 4 / 3, .5, 1000);
+    camera.position.set(1, 1, 1);
+    camera.lookAt(0, 0, 0);
+ 
+    // MESH with Geometry, and Basic Material
+    scene.add(new THREE.Mesh(
+ 
+            genPanes(20),
+ 
+            // Material
+            new THREE.MeshNormalMaterial({
+                side: THREE.DoubleSide
+            })));
+ 
+    // RENDER
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(320, 240);
+    document.getElementById('demo').appendChild(renderer.domElement);
+    renderer.render(scene, camera);
+ 
+}
+    ());
+```
 
 ## Normalizing Geometry
 
