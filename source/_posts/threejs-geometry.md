@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 174
-updated: 2018-04-14 15:45:18
-version: 1.2
+updated: 2018-04-14 20:05:51
+version: 1.3
 ---
 
 When working with [three.js](https://threejs.org/) there are many built in geometry constructors that can be used to quickly make many simple, common, solid shapes like cubes, and spheres. However when getting into making an actual three.js project rather than just yet another simple rotating cube demo, there is going to be a need for a way to make custom geometry.
@@ -110,3 +110,40 @@ Here is an example of what it is I am talking about here.
 ```
 
 In this example I am repeating the use of Vector3, and Face3 constructors over and over again for each instance. However in more advanced examples you can of course get into making helper functions that will involve loops that will involve the use of these constructors in just one line of your code.
+
+## Normalizing Geometry
+
+A common task to do when you have an off centered geometry, is to center it. In addition it may Also be desirable to have it set within a bounding sphere of area that has a radius of one, so that it is easily scaled up or down from there. To achieve this you will want to use the normalize method.
+
+```js
+    // creating a custom geometry
+    var geometry = new THREE.Geometry();
+    geometry.vertices.push(
+ 
+        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(5, 0, 0),
+        new THREE.Vector3(5, 5, 0),
+        new THREE.Vector3(0, 5, 0));
+    geometry.faces.push(
+ 
+        new THREE.Face3(0, 1, 2),
+        new THREE.Face3(3, 0, 2));
+ 
+    // geometry is not centered, and it ranges
+    // out of the range of 1
+    console.log(geometry.vertices[0].x); // 0
+    console.log(geometry.vertices[1].x); // 5
+ 
+    // normalize
+    geometry.normalize();
+    geometry.computeVertexNormals();
+ 
+    // geometry is now centered to the origin
+    // and is inside the range of one
+    console.log(geometry.vertices[0].x); // -0.707...
+    console.log(geometry.vertices[1].x); // 0.707...
+```
+
+This is typically what I will always want to do with a geometry, after all it is going to be placed in a Mesh, at which point I will use methods that come with the mesh to move, and rotate the geometry further from there. Having the geometry centered to the origin will only be relative to the instance of Geometry that will be in a Mesh, not the over all Scene.
+
+In Other words think of this Geometry as being relative to the center of a Cube, or Sphere if you prefer, and then you are going to move and rotate this object in a Scene that might contain many such objects. So chances are you are going to want it centered to this relative origin, and scaled to a certain standard.
