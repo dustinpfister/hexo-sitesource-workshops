@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 176
-updated: 2018-04-16 15:31:33
-version: 1.2
+updated: 2018-04-16 15:47:43
+version: 1.3
 ---
 
 Adding Fog to a Scene in [three.js](https://threejs.org/) is a fairly easy, and straight forward process, so this should be a quick post for today. A Fog is a nice effect to have for most projects as it allows for a more graceful transition from rendering within range to no longer rendering when an object is to far from the camera, as apposed to the object just all of a sudden disappearing. Even if you have the far value of the camera set to a high value so that the object is just a single pixel before it is no longer rendered, it can still be a nice additional effect on top of the object just simply getting smaller.
@@ -27,14 +27,16 @@ A fog is something that you add or do not add to a three.js [Scene](https://thre
     fogColor = new THREE.Color(0xffffff);
  
     scene.background = fogColor;
-    scene.fog = new THREE.Fog(fogColor, 0.0025, 10);
+    scene.fog = new THREE.Fog(fogColor, 0.0025, 20);
 ```
 
 You pass the Fog constructor three arguments the first is the color, the second is the near distance, and the final is the far distance of the fog effect. This is similar to the camera as well where there are also values that are the near and far distances for the cameras view of a scene in which it is used.
 
-Typically you will also want to set the Fog color, as the same color as the background.
+Typically you will also want to set the Fog color, as the same color as the background. You also might want to have the near, and far distances correspond to your camera as well.
 
 ## Full Fog Demo
+
+A full working demo will require all the usual components that make up a fully functioning three.js project. There is nothing out of the norm when it comes to setting up the renderer as compared to working with things like shadows.
 
 ```js
 (function () {
@@ -44,7 +46,7 @@ Typically you will also want to set the Fog color, as the same color as the back
     fogColor = new THREE.Color(0xffffff);
  
     scene.background = fogColor;
-    scene.fog = new THREE.Fog(fogColor, 0.0025, 10);
+    scene.fog = new THREE.Fog(fogColor, 0.0025, 20);
  
     // Camera
     var camera = new THREE.PerspectiveCamera(75, 320 / 240, .025, 20);
@@ -92,4 +94,23 @@ Typically you will also want to set the Fog color, as the same color as the back
     loop();
 }
     ());
+```
+
+In this demo I put in a simple loop to to have a camera move back and forth from a simple mesh as a way to show off the fog effect.
+
+## Check your materials
+
+You will want to make sure that you are using a material that can be effected my shadows. Some materials will not work with a fog, such as the [MeshNormalMaterial](https://threejs.org/docs/index.html#api/materials/MeshNormalMaterial). To help with this you can check the fog boolean which is a property of the base [Material class](https://threejs.org/docs/index.html#api/materials/Material).
+
+```js
+    var material = new THREE.MeshNormalMaterial();
+ 
+    console.log(material.fog); // false
+ 
+    var material = new THREE.MeshLambertMaterial({
+            color: 0xff0000,
+            emissive: 0x080808
+        });
+ 
+    console.log(material.fog); // true
 ```
