@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 175
-updated: 2018-04-15 21:35:00
-version: 1.5
+updated: 2018-04-15 21:42:14
+version: 1.6
 ---
 
 In [Vector space](https://en.wikipedia.org/wiki/Vector_space) you have one or more objects that can be called Vectors. In [three.js](https://threejs.org/) there are a few constructors that can be used to created these objects which can be used for many things. This post is about the [Vector3](https://threejs.org/docs/index.html#api/math/Vector3) constructor that is useful in 3d space. A 3d Vector3 Instance consists of an x,y, and z value which makes it useful for plotting a single point in 3d space. It also has a few more uses, such as finding [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) via the length method of the Vector3 instance, which is the distance from the vector to the origin (0,0,0).
@@ -133,3 +133,7 @@ Although I will not be getting into making custom geometry in detail, doing so w
     geometry.normalize();
     geometry.computeFlatVertexNormals();
 ```
+
+## Conclusion
+
+Vectors are a big part of working with three.js, all the objects contain them as a way of defining points in space. Many properties of Objects are instances of Vector three as well such as Object3d.position that can be used to set the position of a Mesh, Camera or any other find of Object in a Scene. So having a solid understanding of where there is to work with when it comes to Vector three is important, as it will come up often.
