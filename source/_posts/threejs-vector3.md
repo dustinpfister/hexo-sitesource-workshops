@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 175
-updated: 2018-04-15 21:26:52
-version: 1.4
+updated: 2018-04-15 21:35:00
+version: 1.5
 ---
 
 In [Vector space](https://en.wikipedia.org/wiki/Vector_space) you have one or more objects that can be called Vectors. In [three.js](https://threejs.org/) there are a few constructors that can be used to created these objects which can be used for many things. This post is about the [Vector3](https://threejs.org/docs/index.html#api/math/Vector3) constructor that is useful in 3d space. A 3d Vector3 Instance consists of an x,y, and z value which makes it useful for plotting a single point in 3d space. It also has a few more uses, such as finding [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) via the length method of the Vector3 instance, which is the distance from the vector to the origin (0,0,0).
@@ -95,3 +95,41 @@ If you want to make an independent copy of a vector you can use the clone method
 ```
 
 Remember that objects are copied by reference in in javaScript so you will want to use one of these methods or some other similar method to make copies of a vector.
+
+## Create Geometry Vertices with Vector3
+
+Although I will not be getting into making custom geometry in detail, doing so will often involve the use of Vector3 to create the array of vertices. The faces will then reference them by the index value of the vertex in the vertices array of the geometry.
+
+```js
+    var geometry = new THREE.Geometry();
+ 
+    // create vertices with Vector3
+    geometry.vertices.push(
+        new THREE.Vector3(1, 1, 1),
+        new THREE.Vector3(1, 1, -1),
+        new THREE.Vector3(1, -1, 1),
+        new THREE.Vector3(1, -1, -1),
+        new THREE.Vector3(-1, 1, -1),
+        new THREE.Vector3(-1, 1, 1),
+        new THREE.Vector3(-1, -1, -1),
+        new THREE.Vector3(-1, -1, 1));
+ 
+    // faces are made with the index
+    // values of from the vertices array
+    geometry.faces.push(
+        new THREE.Face3(0, 2, 1),
+        new THREE.Face3(2, 3, 1),
+        new THREE.Face3(4, 6, 5),
+        new THREE.Face3(6, 7, 5),
+        new THREE.Face3(4, 5, 1),
+        new THREE.Face3(5, 0, 1),
+        new THREE.Face3(7, 6, 2),
+        new THREE.Face3(6, 3, 2),
+        new THREE.Face3(5, 7, 0),
+        new THREE.Face3(7, 2, 0),
+        new THREE.Face3(1, 3, 4),
+        new THREE.Face3(3, 6, 4));
+ 
+    geometry.normalize();
+    geometry.computeFlatVertexNormals();
+```
