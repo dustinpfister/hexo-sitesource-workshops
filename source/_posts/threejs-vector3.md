@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 175
-updated: 2018-04-15 21:10:37
-version: 1.3
+updated: 2018-04-15 21:26:52
+version: 1.4
 ---
 
 In [Vector space](https://en.wikipedia.org/wiki/Vector_space) you have one or more objects that can be called Vectors. In [three.js](https://threejs.org/) there are a few constructors that can be used to created these objects which can be used for many things. This post is about the [Vector3](https://threejs.org/docs/index.html#api/math/Vector3) constructor that is useful in 3d space. A 3d Vector3 Instance consists of an x,y, and z value which makes it useful for plotting a single point in 3d space. It also has a few more uses, such as finding [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) via the length method of the Vector3 instance, which is the distance from the vector to the origin (0,0,0).
@@ -61,3 +61,37 @@ To quickly add a scalar values to all three values there is addScalar.
  
     console.log(vec.x, vec.y, vec.z); // 13 13 17
 ```
+
+## Finding the distance between two vectors.
+
+The length method of Vector3 returns the distance from the origin, but what if you want the distance from another instance of Vector3? For that there is the distance method.
+
+```js
+var a = new THREE.Vector3(10, 10, 10),
+b = new THREE.Vector3(10, 5, 10);
+console.log(a.distanceTo(b)); // 5
+```
+
+## Clone, and Copy
+
+If you want to make an independent copy of a vector you can use the clone method, and if you want to copy in the values of one vector into another there is the copy method.
+
+```js
+    // clone
+    var original = new THREE.Vector3(10, 10, 10),
+    copy = original.clone();
+    copy.x += 5;
+ 
+    console.log(copy.x); // 15
+    console.log(original.x); // 10
+ 
+    // copy
+    var a = new THREE.Vector3(1, 2, 1),
+    copy = new THREE.Vector3().copy(a);
+    copy.z += 2;
+ 
+    console.log(a.z); // 1
+    console.log(copy.z); // 3
+```
+
+Remember that objects are copied by reference in in javaScript so you will want to use one of these methods or some other similar method to make copies of a vector.
