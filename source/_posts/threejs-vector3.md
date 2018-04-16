@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 175
-updated: 2018-04-15 21:42:14
-version: 1.6
+updated: 2018-04-15 21:49:14
+version: 1.7
 ---
 
 In [Vector space](https://en.wikipedia.org/wiki/Vector_space) you have one or more objects that can be called Vectors. In [three.js](https://threejs.org/) there are a few constructors that can be used to created these objects which can be used for many things. This post is about the [Vector3](https://threejs.org/docs/index.html#api/math/Vector3) constructor that is useful in 3d space. A 3d Vector3 Instance consists of an x,y, and z value which makes it useful for plotting a single point in 3d space. It also has a few more uses, such as finding [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) via the length method of the Vector3 instance, which is the distance from the vector to the origin (0,0,0).
@@ -95,6 +95,21 @@ If you want to make an independent copy of a vector you can use the clone method
 ```
 
 Remember that objects are copied by reference in in javaScript so you will want to use one of these methods or some other similar method to make copies of a vector.
+
+## Normalize a Vector
+
+Normalizing a vector will keep it's direction from the origin the same, but change its distance from it to 1.
+
+```js
+    var vec = new THREE.Vector3(7, 7, 7);
+ 
+    console.log(vec.length()); // 12.12...
+ 
+    vec.normalize();
+ 
+    console.log(vec.x, vec.y, vec.z); // 0.57... 0.57... 0.57...
+    console.log(vec.length()); // 1
+```
 
 ## Create Geometry Vertices with Vector3
 
