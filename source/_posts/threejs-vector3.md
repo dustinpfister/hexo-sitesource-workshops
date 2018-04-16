@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 175
-updated: 2018-04-15 21:49:14
-version: 1.7
+updated: 2018-04-15 21:59:42
+version: 1.8
 ---
 
 In [Vector space](https://en.wikipedia.org/wiki/Vector_space) you have one or more objects that can be called Vectors. In [three.js](https://threejs.org/) there are a few constructors that can be used to created these objects which can be used for many things. This post is about the [Vector3](https://threejs.org/docs/index.html#api/math/Vector3) constructor that is useful in 3d space. A 3d Vector3 Instance consists of an x,y, and z value which makes it useful for plotting a single point in 3d space. It also has a few more uses, such as finding [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) via the length method of the Vector3 instance, which is the distance from the vector to the origin (0,0,0).
@@ -148,6 +148,91 @@ Although I will not be getting into making custom geometry in detail, doing so w
     geometry.normalize();
     geometry.computeFlatVertexNormals();
 ```
+
+## Changing a Vector3 value in a geometry
+
+This can be done by having a reference to the vertex that you want to change, and then just go ahead and change it's position with the set method, or any other method that will have an impact on it's values. When doing this the changes might not take effect with respect to the instance of geometry, so you will need to make sure that the verticesNeedUpdate property of the geometry is set to true.
+
+```js
+(function () {
+
+    // SCENE
+    var scene = new THREE.Scene();
+
+    // CAMERA
+    var camera = new THREE.PerspectiveCamera(50, 4 / 3, .5, 1000);
+    camera.position.set(0, 3, 3);
+    camera.lookAt(0, 0, 0);
+ 
+    // a SPHERE
+    var sphere = new THREE.Mesh(
+            new THREE.SphereGeometry(1, 10, 10),
+            new THREE.MeshBasicMaterial({
+                color: 0x0f0f0f,
+                wireframe: true
+            }));
+ 
+    scene.add(sphere);
+ 
+    // THE VECTOR
+    var v = new THREE.Vector3(1, 0, 0);
+ 
+    // geometry that is using the VECTOR
+    var geometry = new THREE.Geometry();
+    geometry.vertices.push(
+        new THREE.Vector3(0, 0, 0), v);
+ 
+    // using the geometry in a line
+    var line = new THREE.Line(geometry, new THREE.LineBasicMaterial({
+                color: 0x0000ff
+            }));
+ 
+    scene.add(line);
+ 
+    // RENDER
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(320, 240);
+    document.getElementById('demo').appendChild(renderer.domElement);
+ 
+    var frame = 0,
+    maxFrame = 100,
+    per = 0,
+    bias = 0;
+    var loop = function () {
+ 
+        requestAnimationFrame(loop);
+ 
+        var radian = Math.PI * 2 * per,
+        radius = .25 + .75 * bias,
+        x = Math.cos(radian) * radius,
+        y = Math.sin(radian) * radius,
+        z = radius,
+        s;
+ 
+        // change the vector
+        v.set(x, y, z);
+        s = v.length();
+ 
+        // geometry needs an update
+        geometry.verticesNeedUpdate = true;
+ 
+        sphere.geometry.normalize();
+        sphere.geometry.scale(s, s, s);
+ 
+        renderer.render(scene, camera);
+ 
+        frame += 1;
+        frame = frame % maxFrame;
+        per = frame / maxFrame;
+        bias = Math.abs(.5 - per) / .5;
+ 
+    };
+ 
+    loop();
+}
+    ());
+```
+
 
 ## Conclusion
 
