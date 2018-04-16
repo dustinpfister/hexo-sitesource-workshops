@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 175
-updated: 2018-04-15 21:59:42
-version: 1.8
+updated: 2018-04-15 22:05:23
+version: 1.9
 ---
 
 In [Vector space](https://en.wikipedia.org/wiki/Vector_space) you have one or more objects that can be called Vectors. In [three.js](https://threejs.org/) there are a few constructors that can be used to created these objects which can be used for many things. This post is about the [Vector3](https://threejs.org/docs/index.html#api/math/Vector3) constructor that is useful in 3d space. A 3d Vector3 Instance consists of an x,y, and z value which makes it useful for plotting a single point in 3d space. It also has a few more uses, such as finding [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) via the length method of the Vector3 instance, which is the distance from the vector to the origin (0,0,0).
@@ -40,6 +40,17 @@ To create a single instance of Vector3 I just need to call the constructor ans p
 ```
 
 There are for the most part only 3 properties of a Vector3 instance that are of interest in most situations which of course is the x , y, and z properties. To my knowledge there are only four properties in total, the fourth being the isVector property which should always be true. Every thing else of interest in a Vector3 instance is a method, such as the length method that will give the current Euclidean distance, or distance from the origin.
+
+## Setting the values of Vector3
+
+Setting the values of a Vector3 instance can be done by just setting the values directly, there is also the set method.
+
+```js
+var vec = new THREE.Vector3();
+v.set(7,12,3);
+v.x += 3;
+console.log(vec.x, vec.y, vec.z); // 10 12 3
+```
 
 ## Adding, diving, and multiplying Vectors
 
@@ -233,6 +244,7 @@ This can be done by having a reference to the vertex that you want to change, an
     ());
 ```
 
+It can go without saying that doing this can result in something that might eat up a lot of overhead, but is necessary from making things that mimic fabric, and the surface of water.
 
 ## Conclusion
 
