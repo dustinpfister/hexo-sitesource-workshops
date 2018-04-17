@@ -5,8 +5,8 @@ tags: [js,canvas,three.js,animation]
 layout: post
 categories: three.js
 id: 177
-updated: 2018-04-17 10:22:06
-version: 1.3
+updated: 2018-04-17 10:36:42
+version: 1.4
 ---
 
 So far I have not written any posts on textures with my [three.js](https://threejs.org/) collection of posts, so lets put and end to that today. In three.js you have a Scene, and in that scene you place things like cameras, and other Objects like a Mesh that is composed of a Geometry, and a Material. When we look at Materials in depth they are composed of many properties, some of which are part of the base Material class, and others are part of the specific Material such as the Basic Material, or Lambert Material. Properties such as map, and emissiveMap that expect a Texture, which is an image that can be used to define how the surface is going to look. 
@@ -73,3 +73,101 @@ var material = new THREE.MeshLambertMaterial({
 ```
 
 There are other properties that make use of a texture, I will not get into detail with them all here as it is off topic, but it is something that you should be aware of if not before hand.
+
+## Full Demo
+
+Once you have the canvas, texture, and material we can go on with everything else as normal. In this demo I will set up a scene, add a camera and set it away from a the origin where I will be placing a simple Mesh with the simple box geometry that is often used for these kinds of examples.
+
+In this example I will just be rendering the box once and be done with it just so show that you can use a canvas to make a static texture, more on animation later.
+
+```js
+(function () {
+ 
+    // Scene
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xffffff);
+ 
+    // Camera
+    var camera = new THREE.PerspectiveCamera(75, 320 / 240, .025, 20);
+    camera.position.set(1, 1, 1);
+    camera.lookAt(0, 0, 0);
+ 
+    // GEOMETRY
+    var geometry = new THREE.BoxGeometry(1, 1, 1);
+ 
+    // CANVAS
+    var canvas = document.createElement('canvas'),
+    ctx = canvas.getContext('2d');
+ 
+    canvas.width = 8;
+    canvas.height = 8;
+ 
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#ff00ff';
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+ 
+    var texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+ 
+    // MATERIAL
+    var material = new THREE.MeshBasicMaterial({
+            map: texture
+        });
+ 
+    // MESH
+    var mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+ 
+    // RENDER
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(320, 240);
+    document.getElementById('demo').appendChild(renderer.domElement);
+ 
+    renderer.render(scene, camera);
+}
+    ());
+```
+
+Notice that I set the needs update property of the texture to true. As I mentioned earlier this does not need to be set true if I where to use the CanvasTexture constructor, if I am just doing something like this in which I am not redrawing the canvas this only needs to be set true once.
+
+## Animation
+
+So because the source is a canvas you might be wondering if it is possible to redraw the canvas and update the texture, making an animated texture. The answer is yes, all you need to do is redraw the contents of the canvas, and set the needsUpdate property of the texture to true before calling the render method of your renderer.
+
+Something like this:
+
+```js
+    // Loop
+    var frame = 0,
+    maxFrame = 500,
+    loop = function () {
+ 
+        var per = frame / maxFrame,
+        bias = Math.abs(.5 - per) / .5,
+        x = canvas.width / 2 * bias;
+        y = canvas.height / 2 * bias;
+        w = canvas.width - canvas.width * bias;
+        h = canvas.height - canvas.height * bias;
+ 
+        requestAnimationFrame(loop);
+ 
+        ctx.lineWidth = 3;
+        ctx.fillStyle = '#000000';
+        ctx.strokeStyle = '#ff00ff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeRect(x, y, w, h);
+ 
+        controls.update();
+        texture.needsUpdate = true;
+        renderer.render(scene, camera);
+ 
+        frame += 1;
+        frame = frame % maxFrame;
+ 
+    };
+ 
+    loop();
+```
+
+It should go without saying that this will use more overhead compared to a static texture, so I would not go wild with it just yet, but it is pretty cool that I can do this.
