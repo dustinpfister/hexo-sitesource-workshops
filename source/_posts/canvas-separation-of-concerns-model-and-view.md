@@ -1,11 +1,11 @@
 ---
-title: Separation of concerns, Model and View with HTNML 5 Canvas
+title: Separation of concerns, Model and View with HTML 5 Canvas
 tags: [js, canvas]
 categories: canvas
 date: 2017-08-29 10:23:00
 id: 33
-updated: 2017-09-30 18:29:02
-version: 1.4
+updated: 2018-04-17 09:59:18
+version: 1.5
 ---
 
 In my first [getting started post](/2017/05/17/canvas-getting-started/) on html 5 canvas I made a simple example on how to quickly throw together a canvas project in a way in which I usually do so. If it is something stupid simple things like [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) does not strike me as something that is that important. However if I do start to put together something that is a little advanced, it does become important as a means of avoiding writing the dreaded spaghetti code.
