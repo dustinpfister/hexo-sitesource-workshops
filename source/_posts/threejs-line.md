@@ -1,12 +1,12 @@
 ---
 title: Working with lines in three.js
 date: 2018-04-19 15:21:00
-tags: [js,canvas,three.js,animation]
+tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 178
-updated: 2018-04-22 14:22:34
-version: 1.5
+updated: 2018-04-22 19:02:22
+version: 1.6
 ---
 
 This month I have been working towards developing a solid understanding of the basics of [three.js](https://threejs.org/) as it is a great project that helps with everything, and anything 3d in a javaScript environment. As such it was only a matter of time until I would get around to working out a few quick demos about how to work with lines in three.js. Doing so is not that hard at all, and can quickly become very fun allowing me to draw in 3d. 
