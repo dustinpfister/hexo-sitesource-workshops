@@ -5,8 +5,8 @@ tags: [js,canvas,three.js,animation]
 layout: post
 categories: three.js
 id: 178
-updated: 2018-04-22 13:11:12
-version: 1.2
+updated: 2018-04-22 13:23:40
+version: 1.3
 ---
 
 This month I have been working towards developing a solid understanding of the basics of [three.js](https://threejs.org/) as it is a great project that helps with everything, and anything 3d in a javaScript environment. As such it was only a matter of time until I would get around to working out a few quick demos about how to work with lines in three.js. Doing so is not that hard at all, and can quickly become very fun allowing me to draw in 3d. 
@@ -30,6 +30,24 @@ As I say in every three.js post of mine, three.js is a project where the version
 If you are just making lines, and nothing that will compose a solid object or face, the it does not make sense to use a material that is designed to be used with something that is just a string of points in space.
 
 So if you aim to just draw some lines, and not something that will compose a solid object there are two special materials in three.js that are intended to be used with just lines. [LineBasicMaterial](https://threejs.org/docs/index.html#api/materials/LineBasicMaterial), and [LineDashedMaterial](https://threejs.org/docs/index.html#api/materials/LineDashedMaterial)
+
+## Using the dashed line material
+
+If you are trying to use the dashed line material rather than the basic material, but are scratching your head wondering why it is that it is not dashed, then changes are you have not called a
+
+```js
+var line = new THREE.Line(geometry, new THREE.LineDashedMaterial({
+    color: 0x0000ff,
+    linewidth: 3,
+    scale: .1,
+    dashSize: .3,
+    gapSize: .1
+}));
+line.computeLineDistances();
+scene.add(line);
+```
+
+Certain properties such as the line Width might not work as expected on all platforms, as such it might be best to always expect a width of only 1, or at least be happy with how it looks when it is just 1.
 
 ## The Line, and LineSegments Constructors
 
