@@ -5,8 +5,8 @@ tags: [js,canvas,three.js,animation]
 layout: post
 categories: three.js
 id: 178
-updated: 2018-04-22 13:32:23
-version: 1.4
+updated: 2018-04-22 14:22:34
+version: 1.5
 ---
 
 This month I have been working towards developing a solid understanding of the basics of [three.js](https://threejs.org/) as it is a great project that helps with everything, and anything 3d in a javaScript environment. As such it was only a matter of time until I would get around to working out a few quick demos about how to work with lines in three.js. Doing so is not that hard at all, and can quickly become very fun allowing me to draw in 3d. 
@@ -106,3 +106,47 @@ As with any three.js example that is fully complete there must be a scene, camer
 ```
 
 I often place these examples just to have a complete copy and paste, functioning example, and also to cover some additional things that must be done with respect to the other components that make up a three.js project. Although in this case nothing special needs to be done compared to any other example this time around. Just the usual pitfalls to look out for such as making sure the camera is positioned away from, and looking at, what you are working with.
+
+```js
+    // GEOMETRY
+    var geometry = new THREE.BoxGeometry(1, 1, 1);
+ 
+    // CANVAS
+    var canvas = document.createElement('canvas'),
+    ctx = canvas.getContext('2d');
+ 
+    canvas.width = 8;
+    canvas.height = 8;
+ 
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#ff00ff';
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+ 
+    var texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+ 
+    // MATERIAL
+    var material = new THREE.MeshBasicMaterial({
+            map: texture
+        });
+ 
+    // MESH
+    var mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+```
+
+I will not be getting into the canvas 2d drawing api in detail here, but becuase it is another way of drawing lines in three.js it is sure worth mentioning to say the least.
+
+## Using 2d lines made in a canvas project with three.js
+
+Read my [full post on using canvas to make a texture](/2018/04/17/threejs-canvas-texture/) in three.js
+
+If you are familiar with the 2d canvas drawing api that can be used to draw 2d lines by making a texture using a canvas element. I have [written a post](/2018/04/17/threejs-canvas-texture/) on this that covers how to do this in detail.
+
+How it is done in a nut shell is to use the 2d canvas drawing context line methods to draw a line like normal, then pass the canvas to the Texture constructor, or better yet the CanvasTexture constructor that is put in place for this specific purpose. The texture can then be used with a material that is used in a Mesh. The Mesh can then use any geometry that will have one or more faces that will make use of the texture.
+
+
+
+## Conclusion
+
