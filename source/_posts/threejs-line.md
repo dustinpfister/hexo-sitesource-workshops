@@ -5,8 +5,8 @@ tags: [js,canvas,three.js,animation]
 layout: post
 categories: three.js
 id: 178
-updated: 2018-04-22 13:23:40
-version: 1.3
+updated: 2018-04-22 13:32:23
+version: 1.4
 ---
 
 This month I have been working towards developing a solid understanding of the basics of [three.js](https://threejs.org/) as it is a great project that helps with everything, and anything 3d in a javaScript environment. As such it was only a matter of time until I would get around to working out a few quick demos about how to work with lines in three.js. Doing so is not that hard at all, and can quickly become very fun allowing me to draw in 3d. 
@@ -66,3 +66,43 @@ scene.add(new THREE.Line(geometry, new THREE.LineBasicMaterial({
     color: 0x0000ff
 })));
 ```
+
+## Full line demo example
+
+As with any three.js example that is fully complete there must be a scene, camera, and renderer on top of the use of the Line constructor, geometry, and line materials.
+
+```js
+(function () {
+ 
+    // Scene
+    var scene = new THREE.Scene();
+ 
+    // Camera
+    var camera = new THREE.PerspectiveCamera(45, 4 / 3, .5, 100);
+    camera.position.set(0, 0, -30);
+    camera.lookAt(0, 0, 0);
+ 
+    // GEOMETRY
+    var geometry = new THREE.Geometry();
+    geometry.vertices.push(
+        new THREE.Vector3(0, -10, 0),
+        new THREE.Vector3(10, 0, 0),
+        new THREE.Vector3(0, 10, 0));
+ 
+    // The Line
+    var line = new THREE.Line(geometry, new THREE.LineBasicMaterial({
+                color: 0x0000ff
+            }));
+    scene.add(line);
+ 
+    // Render
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(320, 240);
+    document.getElementById('demo').appendChild(renderer.domElement);
+    renderer.render(scene, camera);
+ 
+}
+    ());
+```
+
+I often place these examples just to have a complete copy and paste, functioning example, and also to cover some additional things that must be done with respect to the other components that make up a three.js project. Although in this case nothing special needs to be done compared to any other example this time around. Just the usual pitfalls to look out for such as making sure the camera is positioned away from, and looking at, what you are working with.
