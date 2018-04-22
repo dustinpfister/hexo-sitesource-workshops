@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 175
-updated: 2018-04-22 13:45:03
-version: 1.10
+updated: 2018-04-22 13:59:51
+version: 1.11
 ---
 
 In [Vector space](https://en.wikipedia.org/wiki/Vector_space) you have one or more objects that can be called Vectors. In [three.js](https://threejs.org/) there are a few constructors that can be used to created these objects which can be used for many things. This post is about the [Vector3](https://threejs.org/docs/index.html#api/math/Vector3) constructor that is useful in 3d space. A 3d Vector3 Instance consists of an x,y, and z value which makes it useful for plotting a single point in 3d space. It also has a few more uses, such as finding [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) via the length method of the Vector3 instance, which is the distance from the vector to the origin (0,0,0).
@@ -51,6 +51,24 @@ v.set(7,12,3);
 v.x += 3;
 console.log(vec.x, vec.y, vec.z); // 10 12 3
 ```
+
+## Object3d and vector3
+
+A very important base class in three.js is [Object3D](https://threejs.org/docs/index.html#api/core/Object3D). Many constructors in three.js such as Camera, Mesh, ect inherit from Object3d. The reason why I bring this up is becuase there are a few properties in this base class the expect an instance of Vector3. Manly Object3D.position, and Object3D.scale.
+
+```js
+    var obj = new THREE.Object3D();
+ 
+    // {"x":0,"y":0,"z":0}
+    console.log(JSON.stringify(obj.position));
+ 
+    obj.position.set(1, 2, 3);
+ 
+    // {"x":1,"y":2,"z":3}
+    console.log(JSON.stringify(obj.position));
+```
+
+Because Vector3 is the constructor that is used to represent a point in 3d space in three.js, it's use is to be expected in any situation in which its use is appropriate. Therefor it pays to have a solid foundational understanding of this constructor.
 
 ## Adding, diving, and multiplying Vectors
 
