@@ -5,8 +5,8 @@ tags: [js,canvas,three.js,animation]
 layout: post
 categories: three.js
 id: 178
-updated: 2018-04-19 16:32:29
-version: 1.1
+updated: 2018-04-22 13:11:12
+version: 1.2
 ---
 
 This month I have been working towards developing a solid understanding of the basics of [three.js](https://threejs.org/) as it is a great project that helps with everything, and anything 3d in a javaScript environment. As such it was only a matter of time until I would get around to working out a few quick demos about how to work with lines in three.js. Doing so is not that hard at all, and can quickly become very fun allowing me to draw in 3d. 
@@ -35,3 +35,16 @@ So if you aim to just draw some lines, and not something that will compose a sol
 
 One of the best ways to go about getting started with lines in three.js is to just use the Line constructor. There is also the LineSegments constructor that works pretty much the same way only it uses a different rendering method.
 
+A basic example of one of these would be to just create a geometry, push vectors to its vertices array, and then use that geometry with a line material to create an instance of Line that can then be added to a scene.
+
+```js
+var geometry = new THREE.Geometry();
+geometry.vertices.push(
+    new THREE.Vector3(0, -10, 0),
+    new THREE.Vector3(10, 0, 0),
+    new THREE.Vector3(0, 10, 0));
+ 
+scene.add(new THREE.Line(geometry, new THREE.LineBasicMaterial({
+    color: 0x0000ff
+})));
+```
