@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 175
-updated: 2018-04-15 22:05:23
-version: 1.9
+updated: 2018-04-22 13:45:03
+version: 1.10
 ---
 
 In [Vector space](https://en.wikipedia.org/wiki/Vector_space) you have one or more objects that can be called Vectors. In [three.js](https://threejs.org/) there are a few constructors that can be used to created these objects which can be used for many things. This post is about the [Vector3](https://threejs.org/docs/index.html#api/math/Vector3) constructor that is useful in 3d space. A 3d Vector3 Instance consists of an x,y, and z value which makes it useful for plotting a single point in 3d space. It also has a few more uses, such as finding [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) via the length method of the Vector3 instance, which is the distance from the vector to the origin (0,0,0).
@@ -158,6 +158,26 @@ Although I will not be getting into making custom geometry in detail, doing so w
  
     geometry.normalize();
     geometry.computeFlatVertexNormals();
+```
+
+## Making Lines with Vector3
+
+Read my [full post on lines](/2018/04/19/threejs-line/).
+
+So now that you have at least the basic idea of Vector3 down, another typical use example of the use of Vector3 is to make lines. There are a number of ways to make 3d, and 2d lines in three.js. However maybe the most important way to do so is with the Line constructor.
+
+Doing so is not so different from making a custom geometry that will be used in a material that renders faces. The main difference is that you only really have to work about the array of vertacies, and not at all about the faces if there is not going to be any. There are two special materials that can be used with the Line constructor that are in place for this purpose that do not make use of faces, and are there purely for lines only.
+
+```js
+var geometry = new THREE.Geometry();
+geometry.vertices.push(
+    new THREE.Vector3(0, -10, 0),
+    new THREE.Vector3(10, 0, 0),
+    new THREE.Vector3(0, 10, 0));
+ 
+scene.add(new THREE.Line(geometry, new THREE.LineBasicMaterial({
+    color: 0x0000ff
+})));
 ```
 
 ## Changing a Vector3 value in a geometry
