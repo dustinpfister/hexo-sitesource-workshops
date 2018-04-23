@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 179
-updated: 2018-04-23 16:11:18
-version: 1.5
+updated: 2018-04-23 16:18:53
+version: 1.6
 ---
 
 In [three.js](https://threejs.org/) you might want to have a way to set up a background that will actually be a bunch of images that would line each side of the inside of a box, resulting in a background that is different for any given general direction in 3d space. You might also want to have that kind of texture placed over the surface of some kind of mesh as well. In three.js there is a constructor that will produce this kind of texture that can be used with an array of materials, called [CubeTexture](https://threejs.org/docs/index.html#api/textures/CubeTexture).
@@ -28,3 +28,54 @@ Getting into how to go about making these images could prove to be a whole other
 ## The Cube Texture Loader
 
 Although it is possible to work directly with the [CubeTexture constructor](https://threejs.org/docs/index.html#api/textures/CubeTexture), typical use will involve the [CubeTextureLoader](https://threejs.org/docs/index.html#api/loaders/CubeTextureLoader) that will give me an instance of CubeTexture.
+
+```js
+ 
+    // LOAD CUBE TEXTURE
+    new THREE.CubeTextureLoader()
+    .setPath('/img/cube/skybox/')
+    .load(
+ 
+        // urls of images used in the cube texture
+        [
+            'px.jpg',
+            'nx.jpg',
+            'py.jpg',
+            'ny.jpg',
+            'pz.jpg',
+            'nz.jpg'
+        ],
+ 
+        // what to do when loading is over
+        function (cubeTexture) {
+ 
+            // Geometry
+            var geometry = new THREE.SphereGeometry(1, 20, 20);
+ 
+            // Material
+            var material = new THREE.MeshBasicMaterial({
+ 
+                // CUBE TEXTURE can be used with
+                // the environment map property of
+                // a material.
+                envMap: cubeTexture
+ 
+            });
+ 
+            // Mesh
+            var mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+ 
+            // CUBE TEXTURE is also an option for a background
+            scene.background = cubeTexture;
+ 
+            renderer.render(scene, camera);
+ 
+        }
+ 
+    );
+```
+
+The setPath method of the CubeTextureLoader instance can be used to set the base url of where the images are stored. Then the load method can be used to start loading some images that should be at that location. When calling the load method, at a minimum the first argument should be the filenames of the images. Although some examples make use of what is returned by the CubeTextureLoader I prefer to use the onload callback, which will be the second argument giave to the load method.
+
+If desired a third argument can be used that will be the on progress method, and a final argument given can be an on error method.
