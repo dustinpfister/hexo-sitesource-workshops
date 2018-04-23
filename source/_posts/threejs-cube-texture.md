@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 179
-updated: 2018-04-23 16:32:32
-version: 1.7
+updated: 2018-04-23 16:37:23
+version: 1.8
 ---
 
 In [three.js](https://threejs.org/) you might want to have a way to set up a background that will actually be a bunch of images that would line each side of the inside of a box, resulting in a background that is different for any given general direction in 3d space. You might also want to have that kind of texture placed over the surface of some kind of mesh as well. In three.js there is a constructor that will produce this kind of texture that can be used with an array of materials, called [CubeTexture](https://threejs.org/docs/index.html#api/textures/CubeTexture).
@@ -67,7 +67,7 @@ If desired a third argument can be used that will be the on progress method, and
 
 For a basic example of cube texture use I used the Cube Texture loader to load a set of images that compose a [cube mapping](https://en.wikipedia.org/wiki/Cube_mapping) that I borrowed from the three.js repository as mentioned earlier to procure an instance of CubeTexture.
 
-I then used the CubeTexture as an [environment map](https://en.wikipedia.org/wiki/Reflection_mapping) for a material that I then used to skin a sphere. this can be achieved be setting the instance of CubeTexture to the envMap property of the Material.
+I then used the CubeTexture as an [environment map](https://en.wikipedia.org/wiki/Reflection_mapping) for a material that I then used to skin a sphere. this can be achieved be setting the instance of CubeTexture to the envMap property of the Material. In addition I also used the same cube texture to set the background of the scene.
 
 ```js
 (function () {
@@ -132,3 +132,5 @@ I then used the CubeTexture as an [environment map](https://en.wikipedia.org/wik
 }
     ());
 ```
+
+This results in a scene where I have the cube texture as the background, and I am also using it as a means of cheep reflection with respect to the sphere. In order to get the full effect of what is going on I should add some [orbit controls](/2018/04/13/threejs-orbit-controls/), or failing that do something to move the camera around.
