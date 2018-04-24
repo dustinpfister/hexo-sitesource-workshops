@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 180
-updated: 2018-04-24 18:40:52
-version: 1.4
+updated: 2018-04-24 18:57:43
+version: 1.5
 ---
 
 The [Object3D](https://threejs.org/docs/index.html#api/core/Object3D) base class in [three.js](https://threejs.org/) is one of the most important classes to be aware of when making some kind of project involving three.js. It is in use in many objects in three.js including things like cameras, lights, and the the Meshes that are placed in a Scene. This base class adds a whole bunch of common properties, and methods for any kind of object in the project. Once you know a thing or two about Object3D the same methods will work with any and all objects that inherent from Object3D, which is a lot.
@@ -31,6 +31,25 @@ Typically I do not work with the class directly, I work with something that inhe
 ```
 
 Here I made just a simple example where I am just playing with the position property, which is an instance of [Vector3](/2018/04/15/threejs-vector3/). This can be used to set the center point of the object in a Scene. In the case that the Object is a child of another object it would be the position relative to the parent Object.
+
+## Rotation of an Object
+
+Another property of the Object3D base class that I use often is the rotation property. This property expects an instance of the [Euler Class](https://threejs.org/docs/index.html#api/math/Euler), Which is the Class used in three.js that has anything to do with a set of [Euler Angles](https://en.wikipedia.org/wiki/Euler_angles).
+
+```js
+// creating an instance of Object3D
+var obj = new THREE.Object3D();
+
+//{"_x":0,"_y":0,"_z":0,"_order":"XYZ"}
+console.log(JSON.stringify(obj.rotation));
+
+obj.rotation.set(0, 0, Math.PI * 1.75);
+
+// {"_x":0,"_y":0,"_z":5.497787143782138,"_order":"XYZ"}
+console.log(JSON.stringify(obj.rotation));
+```
+
+I will not get into the Euler Class in detail here, but it is similar to [Vector3](/2018/04/15/threejs-vector3/) only when using the set method you want to give [radians](https://en.wikipedia.org/wiki/Radian) rather than, and x,y,z position.
 
 ## Examples of use in other constructors
 
