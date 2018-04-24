@@ -5,13 +5,17 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 180
-updated: 2018-04-24 18:57:43
-version: 1.5
+updated: 2018-04-24 19:04:02
+version: 1.6
 ---
 
 The [Object3D](https://threejs.org/docs/index.html#api/core/Object3D) base class in [three.js](https://threejs.org/) is one of the most important classes to be aware of when making some kind of project involving three.js. It is in use in many objects in three.js including things like cameras, lights, and the the Meshes that are placed in a Scene. This base class adds a whole bunch of common properties, and methods for any kind of object in the project. Once you know a thing or two about Object3D the same methods will work with any and all objects that inherent from Object3D, which is a lot.
 
 <!-- more -->
+
+## What to know before hand
+
+This is not a [getting started post on three.js](/2018/04/04/threejs-getting-started/), or javaScript in general. This post is on an advanced topic on [three.js](/categories/three-js/) and I expect that you have some basic working knowledge of where there is to know before hand. As with any post on three.js the version number matters a lot, in this post I am using [three.js r91](https://github.com/mrdoob/three.js/tree/r91).
 
 ## Basic example of Object3d using the position property
 
@@ -147,4 +151,8 @@ I try to make it a habit to have at least one copy and past working demo of what
     ());
 ```
 
-It may be true that Object3D by itself is not intended to be used from grouping as there is a separate constructor for that, called simply enough [Group](https://threejs.org/docs/index.html#api/objects/Group). Still Object3D by itself seems to work okay be itself good enought for this simple demo on Object3D.
+It may be true that Object3D by itself is not intended to be used from grouping as there is a separate constructor for that, called simply enough [Group](https://threejs.org/docs/index.html#api/objects/Group). Still Object3D by itself seems to work okay be itself good enough for this simple demo on Object3D.
+
+## Conclusion
+
+From here you might choose to make some more demos that have to do with exercising the use of working with objects in three.js. If you enjoyed this post you might also like to check out my [many other posts](/categories/three-js/) on the subject.
