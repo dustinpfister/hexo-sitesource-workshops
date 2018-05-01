@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 181
-updated: 2018-05-01 17:32:44
-version: 1.3
+updated: 2018-05-01 17:38:16
+version: 1.4
 ---
 
 In [three.js](https://threejs.org/) there are some eight materials to choose from to help skin a mesh. There are also additional materials for rendering lines, points, shadows, and sprites. This post will serve as a general overview of materials in general in three.js.
@@ -49,7 +49,7 @@ This comes in handy when I just want to quickly add some solid color to a mesh, 
 
 ### Mesh Depth Material
 
-This is another basic material that is not used for anything advanced involving a light source, and shadows. It can be used to show some depth to a mesh, rather than just having a solid color painted on each face.
+This is another basic material that is not used for anything advanced involving a light source, and shadows. The [depth material](https://threejs.org/docs/index.html#api/materials/MeshDepthMaterial) can be used to show some depth to a mesh, rather than just having a solid color painted on each face.
 
 ```js
 // CUBE
@@ -65,3 +65,13 @@ scene.add(new THREE.Mesh(
 ```
 
 Depth is based off the near, and far plane of the camera. White areas indicate that an area of the mesh is closer to the camera, while darker areas indicate that the area of the mesh is farther away.
+
+There does not appear to be much to write about in terms of other properties to know about with this one aside from the fact that the depth packing encoding can be changed from the default which is basic depth packing. The only other constant seems to be rgba packing.
+
+```js
+var material = new THREE.MeshDepthMaterial({
+ 
+    depthPacking: THREE.RGBADepthPacking
+ 
+});
+```
