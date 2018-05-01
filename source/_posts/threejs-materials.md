@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 181
-updated: 2018-05-01 17:38:16
-version: 1.4
+updated: 2018-05-01 17:48:04
+version: 1.5
 ---
 
 In [three.js](https://threejs.org/) there are some eight materials to choose from to help skin a mesh. There are also additional materials for rendering lines, points, shadows, and sprites. This post will serve as a general overview of materials in general in three.js.
@@ -75,3 +75,24 @@ var material = new THREE.MeshDepthMaterial({
  
 });
 ```
+
+## The Lambert material
+
+Read my [full post](/2018/04/08/threejs-lambert-material/) on the Lambert material
+
+This is the first material I started working with when getting into the use of lights and shadows. In some ways the [Lambert material](https://threejs.org/docs/index.html#api/materials/MeshLambertMaterial) is a good choice for a reflective material as the algorithm used for reflecting light is more efficient compared to the other options, although I might not say that it is th best looking compared to the alternatives.
+
+```js
+// Cube
+var cube = new THREE.Mesh(
+    new THREE.BoxGeometry(100, 100, 100),
+    new THREE.MeshLambertMaterial({
+        color: 0xff0000,
+        emissive: 0x3a3a3a
+    })
+);
+cube.position.set(0, 100, 0);
+scene.add(cube);
+```
+
+the main thing to understand here is when just setting a solid color, the color that is set with the color property is actually the color that will show up when a white light source shines on it. The emissive property is what is used to set a solid color that is to show up no matter what, which differs from you might be used to with the basic material that you might have started with like I did.
