@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 181
-updated: 2018-05-01 18:12:42
-version: 1.7
+updated: 2018-05-01 18:40:23
+version: 1.8
 ---
 
 In [three.js](https://threejs.org/) there are some eight materials to choose from to help skin a mesh. There are also additional materials for rendering lines, points, shadows, and sprites. This post will serve as a general overview of materials in general in three.js.
@@ -129,6 +129,34 @@ scene.add(helper);
 That should help give you an idea of what is going on, and how the shape is being colored.
 
 ### Mesh Phong Material
+
+The [phong material](https://threejs.org/docs/index.html#api/materials/MeshPhongMaterial) is another option for a material that will respond to a light source. Unlike the Lambert material this is a better option for specular highlights making it a good choice for any kind of surface that should be shiny like metal or varnished wood.
+
+```js
+// Sphere
+scene.add(new THREE.Mesh(
+ 
+    // Sphere GEOMETRY
+    new THREE.SphereGeometry(1, 20, 20),
+ 
+    // phong MATERIAL
+    new THREE.MeshPhongMaterial({
+        color: 0xff0000,
+        emissive: 0x2a0000,
+ 
+        shininess: 10,
+        specular: 0xffffff
+    })
+ 
+));
+ 
+// SPOTLIGHT
+var spotLight = new THREE.SpotLight(0xffffff);
+spotLight.position.set(1.25, 1.25, 1.25);
+scene.add(spotLight);
+```
+
+To get this material working great It might be best to use some kind of directional light source such as a spotlight. The specular property can be used to set the color of the shine, by default it is a very dark gray.
 
 ### Mesh Physical Material
 
