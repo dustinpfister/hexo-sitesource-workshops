@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 181
-updated: 2018-05-01 19:07:02
-version: 1.10
+updated: 2018-05-01 19:17:57
+version: 1.11
 ---
 
 In [three.js](https://threejs.org/) there are some eight materials to choose from to help skin a mesh. There are also additional materials for rendering lines, points, shadows, and sprites. This post will serve as a general overview of materials in general in three.js.
@@ -25,7 +25,20 @@ Three.js is a project in which the version number matters a whole lot. Older pos
 
 ## The Material base Class
 
-All materials inherit from the [Material base class](https://threejs.org/docs/index.html#api/materials/Material). This base class contains a lot of properties some of which are superseded by prosperities in a certain material. I will not be getting into the Base class in detail here, as I still need to write more demos with many of the properties. Also This post is going to be pretty lengthly to begin with anyway.
+All materials inherit from the [Material base class](https://threejs.org/docs/index.html#api/materials/Material). This base class contains a lot of properties some of which are superseded by prosperities in a certain material. I will not be getting into the Base class in detail here, as I still need to write more demos with many of the properties. Also This post is going to be pretty lengthly to begin with anyway. However I think I should at least cover some of the most important properties to be aware of in the base material class that I have dealt with thus far.
+
+### The Material.side property
+
+When dealing with a material that will be used on a mesh in which faces will be viewed from both sides, the side property of the material base class may be of interest.
+
+```js
+var planeMaterial = new THREE.MeshBasicMaterial({
+    color: 0x00ff00,
+    side: THREE.DoubleSide
+});
+```
+
+As you might guess this will make it so the material is used on both sides of the faces used in a mesh. By default it is the THREE.FrontSide constant, there is also a THREE.BackSide constant as well.
 
 ## Mesh Materials
 
@@ -113,9 +126,8 @@ var cube = new THREE.Mesh(
     geometry,
  
     // Material
-    new THREE.MeshNormalMaterial({
-        side: THREE.DoubleSide
-    }));
+    new THREE.MeshNormalMaterial()
+);
 scene.add(cube);
 ```
 
