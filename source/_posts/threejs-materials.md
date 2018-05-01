@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 181
-updated: 2018-05-01 18:00:19
-version: 1.6
+updated: 2018-05-01 18:12:42
+version: 1.7
 ---
 
 In [three.js](https://threejs.org/) there are some eight materials to choose from to help skin a mesh. There are also additional materials for rendering lines, points, shadows, and sprites. This post will serve as a general overview of materials in general in three.js.
@@ -102,3 +102,36 @@ scene.add(cube);
 ```
 
 the main thing to understand here is when just setting a solid color, the color that is set with the color property is actually the color that will show up when a white light source shines on it. The emissive property is what is used to set a solid color that is to show up no matter what, which differs from you might be used to with the basic material that you might have started with like I did.
+
+### Mesh Normal Material
+
+The [normal material](https://threejs.org/docs/index.html#api/materials/MeshNormalMaterial) has to do with [vector normals](https://en.wikipedia.org/wiki/Normal_(geometry)). Coloring of the shape is based on the direction of the shapes normals.
+
+```js
+var cube = new THREE.Mesh(
+ 
+    geometry,
+ 
+    // Material
+    new THREE.MeshNormalMaterial({
+        side: THREE.DoubleSide
+    }));
+scene.add(cube);
+```
+
+I will not be getting into normals in detail here as that is a matter for another post. However I will mention that there is a useful helper method o get a sense of what is going on with the vector normals of a geometry.
+
+```js
+var helper = new THREE.VertexNormalsHelper(cube, 2, 0x00ff00, 1);
+scene.add(helper);
+```
+
+That should help give you an idea of what is going on, and how the shape is being colored.
+
+### Mesh Phong Material
+
+### Mesh Physical Material
+
+### Mesh Standard Material
+
+### Mesh Toon Material
