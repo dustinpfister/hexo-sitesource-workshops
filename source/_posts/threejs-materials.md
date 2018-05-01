@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 181
-updated: 2018-05-01 19:17:57
-version: 1.11
+updated: 2018-05-01 19:28:22
+version: 1.12
 ---
 
 In [three.js](https://threejs.org/) there are some eight materials to choose from to help skin a mesh. There are also additional materials for rendering lines, points, shadows, and sprites. This post will serve as a general overview of materials in general in three.js.
@@ -33,12 +33,23 @@ When dealing with a material that will be used on a mesh in which faces will be 
 
 ```js
 var planeMaterial = new THREE.MeshBasicMaterial({
-    color: 0x00ff00,
+    color: 0x00ffff,
     side: THREE.DoubleSide
 });
 ```
-
 As you might guess this will make it so the material is used on both sides of the faces used in a mesh. By default it is the THREE.FrontSide constant, there is also a THREE.BackSide constant as well.
+
+### Material.transparent, and Material.opacity
+
+These two properties have to do with the opacity of the material. The transparent property expects a boolean value, which will turn transparency on or off depending on the value. If it is set true, and you do not see any opacity effect it could be because the default value for material.opacity is 1 which means fully opaque. Set the opacity property to a value between 0 and 1 to set the opacity of the material of transparency is enabled.
+
+```js
+var planeMaterial = new THREE.MeshBasicMaterial({
+    color: 0x00ffff,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: .4
+});
 
 ## Mesh Materials
 
