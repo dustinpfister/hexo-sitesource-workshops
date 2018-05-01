@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 181
-updated: 2018-05-01 18:58:07
-version: 1.9
+updated: 2018-05-01 19:07:02
+version: 1.10
 ---
 
 In [three.js](https://threejs.org/) there are some eight materials to choose from to help skin a mesh. There are also additional materials for rendering lines, points, shadows, and sprites. This post will serve as a general overview of materials in general in three.js.
@@ -158,8 +158,6 @@ scene.add(spotLight);
 
 To get this material working great It might be best to use some kind of directional light source such as a spotlight. The specular property can be used to set the color of the shine, by default it is a very dark gray.
 
-### Mesh Physical Material
-
 ### Mesh Standard Material
 
 The [standard material](https://threejs.org/docs/index.html#api/materials/MeshStandardMaterial) might be the best option for most surfaces if a more realistic rather than speedy rendering is desired. 
@@ -179,4 +177,12 @@ scene.add(new THREE.Mesh(
 })));
 ```
 
-### Mesh Toon Material
+### Mesh Physical and toon Materials
+
+Another two materials in three.js that can be used with a mesh are the [Physical](https://threejs.org/docs/index.html#api/materials/MeshPhysicalMaterial), and [Toon](https://threejs.org/docs/index.html#api/materials/MeshToonMaterial) materials. Both of these materials are like that of the standard material, and phong materials respectfully, but with additional features. The physical material is like the standard material but gives a greater deal of control over reflectivity, while the toon material is just like phong only with toon shading.
+
+## Conclusion
+
+So far I have just only scratched the surface when it comes to materials. There is a great deal more to write about when it comes to th finer points of each mesh material. In addition there is more to say about the base material class, and other matters with materials such as using an array of materials with a mesh.
+
+I might give three.js another month at least, and in that time I might come around to updating this post as well as many others as I write more demos.
