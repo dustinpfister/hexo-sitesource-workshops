@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 181
-updated: 2018-05-01 18:40:23
-version: 1.8
+updated: 2018-05-01 18:58:07
+version: 1.9
 ---
 
 In [three.js](https://threejs.org/) there are some eight materials to choose from to help skin a mesh. There are also additional materials for rendering lines, points, shadows, and sprites. This post will serve as a general overview of materials in general in three.js.
@@ -161,5 +161,22 @@ To get this material working great It might be best to use some kind of directio
 ### Mesh Physical Material
 
 ### Mesh Standard Material
+
+The [standard material](https://threejs.org/docs/index.html#api/materials/MeshStandardMaterial) might be the best option for most surfaces if a more realistic rather than speedy rendering is desired. 
+
+Unlike the phong material this material does not support specular highlights, but it would appear that is the only feature lost of interest compared to phong.
+
+```js
+// Sphere
+scene.add(new THREE.Mesh(
+    // box GEOMETRY
+    new THREE.SphereGeometry(1, 20, 20),
+ 
+    // phong MATERIAL
+    new THREE.MeshStandardMaterial({
+    color: 0xff0000,
+    emissive: 0x2a0000
+})));
+```
 
 ### Mesh Toon Material
