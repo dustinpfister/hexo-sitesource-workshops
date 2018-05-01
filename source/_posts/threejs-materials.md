@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 181
-updated: 2018-05-01 17:16:16
-version: 1.2
+updated: 2018-05-01 17:32:44
+version: 1.3
 ---
 
 In [three.js](https://threejs.org/) there are some eight materials to choose from to help skin a mesh. There are also additional materials for rendering lines, points, shadows, and sprites. This post will serve as a general overview of materials in general in three.js.
@@ -19,7 +19,7 @@ This is not my getting started post on three.js, if you are new to three.js you 
 
 ## Version number matters with three.js
 
-Three.js is a project in which the version number matters a whole lot. Older posts on three.js often contain examples that will break on newer revisions and vise versa. In most of these posts I have been sticking to three.js 0.91.0 (r91)
+Three.js is a project in which the version number matters a whole lot. Older posts on three.js often contain examples that will break on newer revisions and vise versa. In most of these posts I have been sticking to [three.js 0.91.0 (r91)](https://github.com/mrdoob/three.js/tree/r91)
 
 ## Mesh Materials
 
@@ -27,18 +27,41 @@ The most use materials should be the ones that are used with a Mesh to bring sty
 
 ### Mesh Basic Material
 
-The basic material is as the name suggests, it is the kind of material that I would use if I do not aim to do anything special with shading, shadows and so forth. The basic material will not respond to a light source, and the faces will be filled with a solid color, or a given texture.
+The [basic material](https://threejs.org/docs/index.html#api/materials/MeshBasicMaterial) is as the name suggests, it is the kind of material that I would use if I do not aim to do anything special with shading, shadows and so forth. The basic material will not respond to a light source, and the faces will be filled with a solid color, or a given texture.
 
 
 ```js
-    // CUBE
-    scene.add(new THREE.Mesh(
+// CUBE
+scene.add(new THREE.Mesh(
  
-        // box GEOMETRY
-        new THREE.BoxGeometry(1, 1, 1),
+    // box GEOMETRY
+    new THREE.BoxGeometry(1, 1, 1),
  
-        // basic MATERIAL
-        new THREE.MeshBasicMaterial({
+    // basic MATERIAL
+    new THREE.MeshBasicMaterial({
         color: 0xff0000
-    })));
+    })
+ 
+));
 ```
+
+This comes in handy when I just want to quickly add some solid color to a mesh, or do something involving just a color map.
+
+### Mesh Depth Material
+
+This is another basic material that is not used for anything advanced involving a light source, and shadows. It can be used to show some depth to a mesh, rather than just having a solid color painted on each face.
+
+```js
+// CUBE
+scene.add(new THREE.Mesh(
+ 
+    // box GEOMETRY
+    new THREE.BoxGeometry(1, 1, 1),
+ 
+    // Depth MATERIAL
+    new THREE.MeshDepthMaterial()
+ 
+));
+```
+
+Depth is based off the near, and far plane of the camera. White areas indicate that an area of the mesh is closer to the camera, while darker areas indicate that the area of the mesh is farther away.
