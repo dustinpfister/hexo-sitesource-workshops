@@ -5,11 +5,13 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 181
-updated: 2018-05-01 17:48:04
-version: 1.5
+updated: 2018-05-01 18:00:19
+version: 1.6
 ---
 
 In [three.js](https://threejs.org/) there are some eight materials to choose from to help skin a mesh. There are also additional materials for rendering lines, points, shadows, and sprites. This post will serve as a general overview of materials in general in three.js.
+
+I will of course not be getting into every key little detail with each of theme, Some of these will deserve a full post explaining them in further detail.
 
 <!-- more -->
 
@@ -21,9 +23,13 @@ This is not my getting started post on three.js, if you are new to three.js you 
 
 Three.js is a project in which the version number matters a whole lot. Older posts on three.js often contain examples that will break on newer revisions and vise versa. In most of these posts I have been sticking to [three.js 0.91.0 (r91)](https://github.com/mrdoob/three.js/tree/r91)
 
+## The Material base Class
+
+All materials inherit from the [Material base class](https://threejs.org/docs/index.html#api/materials/Material). This base class contains a lot of properties some of which are superseded by prosperities in a certain material. I will not be getting into the Base class in detail here, as I still need to write more demos with many of the properties. Also This post is going to be pretty lengthly to begin with anyway.
+
 ## Mesh Materials
 
-The most use materials should be the ones that are used with a Mesh to bring style to the faces of a shape. This will be a brief overview of all of these materials and what makes each of theme special.
+The most used materials should be the ones that are used with a Mesh to bring style to the faces of a shape. This will be a brief overview of all of these materials and what makes each of theme special.
 
 ### Mesh Basic Material
 
