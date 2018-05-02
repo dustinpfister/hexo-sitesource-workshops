@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 167
-updated: 2018-05-02 10:45:23
-version: 1.8
+updated: 2018-05-02 11:08:08
+version: 1.9
 ---
 
 I have been wanting to write a series of posts on [three.js](https://threejs.org/) for a while now, and I do not care to put it off any longer. I have fiddled with three.js in the past, but never really got into it. I have enough experience with it to know that it helps making projects that involve 3d objects very easy, yet it is still something that takes a significant investment of time to get fairly solid with.
@@ -34,6 +34,19 @@ So three.js is very much a front end resource, so installing will not likely inv
 ## You might also want to install blender
 
 Although it is not required for getting started at least, at some point you might want to install a 3d modeling program of some kind such as [blender](https://www.blender.org/). As you get into the depth of three.js there will come a time where you will want to create assets externally, and then import theme into three.js. There are official plug-ins for doing so, and the best supported and easiest to use one I have found is the one for blender.
+
+## A basic overview of how to make a three.js project
+
+Three.js will contain a whole lot of constructors that each have a certain importance. There is no way that I can even touch base on all of them, let alone do them justice without having this starting to resemble a dissertation rather than a blog post.
+
+However it is possible to touch base on all of the constructors that will be in use in just about any three.js project, including the most basic examples.
+
+As such a three.js project will typically always contain at least one of the following:
+
+* An instance of THREE.Scene
+* At least one camera typically THREE.PerspectiveCamera
+* There will need to be a renderer such as with THREE.WebGLRenderer
+* A Mesh that will contain a Geometry, and a Material. Such as with THREE.Mesh, THREE.BoxGeometry, and THREE.MeshBasicMaterial.
 
 ## HTML
 
