@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 167
-updated: 2018-05-02 10:37:43
-version: 1.7
+updated: 2018-05-02 10:45:23
+version: 1.8
 ---
 
 I have been wanting to write a series of posts on [three.js](https://threejs.org/) for a while now, and I do not care to put it off any longer. I have fiddled with three.js in the past, but never really got into it. I have enough experience with it to know that it helps making projects that involve 3d objects very easy, yet it is still something that takes a significant investment of time to get fairly solid with.
@@ -30,6 +30,10 @@ It is worth mentioning that it is a good idea to at least know a thing or two ab
 ## Setup
 
 So three.js is very much a front end resource, so installing will not likely involve npm, unless you want to do something involving [webpack](https://webpack.js.org/) in which I guess it would involve npm. For me I did not use any package manager, and I wanted to set up a situation in which I have multiple versions of three.js in a name space, so I just grab versions of three.js manually from the [github repo](https://github.com/mrdoob/three.js), and pasted them in all low tech like.
+
+## You might also want to install blender
+
+Although it is not required for getting started at least, at some point you might want to install a 3d modeling program of some kind such as [blender](https://www.blender.org/). As you get into the depth of three.js there will come a time where you will want to create assets externally, and then import theme into three.js. There are official plug-ins for doing so, and the best supported and easiest to use one I have found is the one for blender.
 
 ## HTML
 
