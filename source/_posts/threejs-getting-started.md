@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 167
-updated: 2018-04-22 14:07:51
-version: 1.6
+updated: 2018-05-02 10:37:43
+version: 1.7
 ---
 
 I have been wanting to write a series of posts on [three.js](https://threejs.org/) for a while now, and I do not care to put it off any longer. I have fiddled with three.js in the past, but never really got into it. I have enough experience with it to know that it helps making projects that involve 3d objects very easy, yet it is still something that takes a significant investment of time to get fairly solid with.
@@ -20,6 +20,12 @@ Also three.js is one of those javaScript projects that is just plain awesome. Wo
 Three.js is a project where the version number matters a lot, very significant changes are still being made all the time. In this demo I am using [version r91](https://github.com/mrdoob/three.js/tree/r91/build).
 
 It seems like new revisions come out as often as once a month, and when they do there are a whole lot of changes, so I decided to structure things in a way in which I can make demos for each revision.
+
+## What to know before getting started with three.js
+
+Of course it goes without saying that you need a decent understanding of front end javaScript, and related the related languages. However there are some additional things to be aware of as well, as this is a fairly complex library that can quickly lead in many additional directions.
+
+It is worth mentioning that it is a good idea to at least know a thing or two about other topics that do not pertain to javaScript, or even computer programing in general, but classical mathematics. Subjects come to mind like [geometry](https://en.wikipedia.org/wiki/Geometry), [trigonometry](https://en.wikipedia.org/wiki/Trigonometry), and many others. Getting into those subjects goes beyond the scope of this simple getting started post, and are not the kind of things that one can become solid with overnight. However don't let that overwhelm you, as three.js is very easy to work with, and getting into three.js can lead to a desire to become more knowledgeable about those topics, and many more.
 
 ## Setup
 
