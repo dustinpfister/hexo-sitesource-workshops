@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 167
-updated: 2018-05-02 11:08:08
-version: 1.9
+updated: 2018-05-03 09:51:02
+version: 1.10
 ---
 
 I have been wanting to write a series of posts on [three.js](https://threejs.org/) for a while now, and I do not care to put it off any longer. I have fiddled with three.js in the past, but never really got into it. I have enough experience with it to know that it helps making projects that involve 3d objects very easy, yet it is still something that takes a significant investment of time to get fairly solid with.
@@ -189,6 +189,10 @@ To make some kind of object to look at I need it's geometry, I will also want to
 
 In order to see anything I will need to render it using something like Canvas, or webGL. In this post I just used the webGL renderer, but there are additional renderer's available in three.js, such as the canvas renderer that uses the 2d drawing context. That will be a lot slower, but it will give greater support on platforms that do not support webGL that well.
 
+## Whats next?
+
+Three.js is the kind of library where you really need to devote at least a solid month or more in order to start to get a little solid with it. I am still learning myself, but I think there are some additional aspects of this library that are very important, while others are kind of optional depending on the kind of projects you aim to make. For example if you want to make games you might want to know about the [lambert material](/2018/04/08/threejs-lambert-material/), as it is more efficient then the standard material. However if you aim to make something that does not need to run in real time you might choose to go with the standard material, as it gives a more realistic look.
+
 ## Object3D
 
 Yet another Class to mention is the [Object3D](https://threejs.org/docs/index.html#api/core/Object3D) class, This is not something that you typically work with directly, but is a class that is used in many of the objects in three.js that helps to make working with three.js easy. It gives Objects like Camera, and Mesh methods like lookAT, and position.set.
@@ -196,6 +200,7 @@ Yet another Class to mention is the [Object3D](https://threejs.org/docs/index.ht
 ## Vector3
 
 Another class of interest that you should at least be aware of is [vector3](https://threejs.org/docs/index.html#api/math/Vector3), This is what you want to use when defining a point in 3d Space.
+
 
 ## Conclusion
 
