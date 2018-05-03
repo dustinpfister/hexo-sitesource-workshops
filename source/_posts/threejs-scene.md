@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 182
-updated: 2018-05-03 11:37:15
-version: 1.5
+updated: 2018-05-03 11:56:31
+version: 1.6
 ---
 
 A [Scene](https://threejs.org/docs/index.html#api/scenes/Scene) in [three.js](https://threejs.org/) is a constructor that can be used to create an instance of Scene that can be used to place everything that makes up an environment in a three.js project. It can contain cameras, lights, and of course objects composed of a geometry and material.
@@ -59,6 +59,22 @@ So a basic example of THREE.Scene might look something like this:
 ```
 
 By default a Mesh will use the Basic material with a random color used to paint the faces of the geometry. Of course I could create an instance of some other material, or give a color or texture to another instance of basic material that I would then give as the second argument to the Mesh constructor, but this is a post on THREE.Scene so I will not be getting into that in depth. However I will be getting into the properties of THREE.Scene including the material override property, more on that later.
+
+## Fog
+
+my full [post on fog](/2018/04/16/threejs-fog/)
+
+A property of interest in a scene instance is the fog Property which can be used to add a fog effect to a scene.
+
+```js
+var scene = new THREE.Scene(),
+fogColor = new THREE.Color(0xffffff);
+ 
+scene.background = fogColor;
+scene.fog = new THREE.FogExp2(fogColor, 0.1);
+```
+
+There are two kinds of fog that can be added to a scene in three.js which are [Fog](https://threejs.org/docs/index.html#api/scenes/Fog), and [FogExp2](https://threejs.org/docs/index.html#api/scenes/FogExp2). The regular Fog constructor will add a fog that works in a linear way, while the FogExp2 constructor works in an exponential way. Check out my full [post on fog](/2018/04/16/threejs-fog/) for more on this.
 
 ## Changing the background of the Scene with Scene.background
 
