@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 182
-updated: 2018-05-03 10:17:51
-version: 1.3
+updated: 2018-05-03 11:13:21
+version: 1.4
 ---
 
 A [Scene](https://threejs.org/docs/index.html#api/scenes/Scene) in [three.js](https://threejs.org/) is a constructor that can be used to create an instance of Scene that can be used to place everything that makes up an environment in a three.js project. It can contain cameras, lights, and of course objects composed of a geometry and material.
@@ -59,3 +59,80 @@ So a basic example of THREE.Scene might look something like this:
 ```
 
 By default a Mesh will use the Basic material with a random color used to paint the faces of the geometry. Of course I could create an instance of some other material, or give a color or texture to another instance of basic material that I would then give as the second argument to the Mesh constructor, but this is a post on THREE.Scene so I will not be getting into that in depth. However I will be getting into the properties of THREE.Scene including the material override property, more on that later.
+
+## Using Scene.overrideMaterial to add a material that overrides all materials
+
+There is the scene override property of a scene that will do exactly as you would expect, override all materials used in the scene with the material given to the material override property of the scene instance.
+
+```js
+(function () {
+ 
+    // create a Scene
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xafafaf);
+ 
+    // can set an override material for everything
+    scene.overrideMaterial = new THREE.MeshDepthMaterial();
+ 
+    // just adding a 1x1x1 cube with the default
+    // MeshBasicMaterial and random color for faces
+    // when added to the scene like this
+    scene.add(new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1)));
+ 
+    // adding another 1x1x1 cube but this time I am giving
+    // and instance of MeshBasicMaterial in which I am setting
+    // the face color of the faces to red
+    var cube2 = new THREE.Mesh(
+            new THREE.BoxGeometry(1, 1, 1),
+ 
+            new THREE.MeshBasicMaterial({
+ 
+                color: 0x00ff00
+ 
+            }));
+    cube2.position.set(-2, 0, 0);
+    scene.add(cube2);
+ 
+    // a sphere using the lamber material in wire frame mode
+    var sphere = new THREE.Mesh(
+            new THREE.SphereGeometry(1, 20, 20),
+ 
+            new THREE.MeshLambertMaterial({
+ 
+                emissive: 0x00004a
+ 
+            }));
+    sphere.position.set(0, 0, -2);
+    scene.add(sphere);
+ 
+    // add a CAMERA to it so we can see something
+    var camera = new THREE.PerspectiveCamera(45, 4 / 3, 1, 100);
+ 
+    // position The camera away from the origin
+    // and have it look at the origin
+    // by default that is where something goes.
+    camera.position.set(2.5, 2.5, 2.5);
+    camera.lookAt(0, 0, 0);
+ 
+    // we need a RENDERER to render the scene
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(320, 240);
+    document.getElementById('demo').appendChild(renderer.domElement);
+ 
+    // render the scene with the camera
+    renderer.render(scene, camera);
+ 
+}
+    ());
+```
+
+In the above demo I created a simple scene with a few instances of Mesh that each use a different material and or settings for the material. By setting an instance of THREE.MeshDepthMaterial as the value of Scene.overrideMaterial, all the other materials are ignored and the depth material is just used for everything.
+
+This can be useful if you want to have a feature that allows for doing something like setting everything in the scene to wire frame mode.
+
+```js
+scene.overrideMaterial = new THREE.MeshBasicMaterial({
+    color: 0xff0000,
+    wireframe:true
+});
+```
