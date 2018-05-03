@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 182
-updated: 2018-05-03 11:13:21
-version: 1.4
+updated: 2018-05-03 11:37:15
+version: 1.5
 ---
 
 A [Scene](https://threejs.org/docs/index.html#api/scenes/Scene) in [three.js](https://threejs.org/) is a constructor that can be used to create an instance of Scene that can be used to place everything that makes up an environment in a three.js project. It can contain cameras, lights, and of course objects composed of a geometry and material.
@@ -59,6 +59,16 @@ So a basic example of THREE.Scene might look something like this:
 ```
 
 By default a Mesh will use the Basic material with a random color used to paint the faces of the geometry. Of course I could create an instance of some other material, or give a color or texture to another instance of basic material that I would then give as the second argument to the Mesh constructor, but this is a post on THREE.Scene so I will not be getting into that in depth. However I will be getting into the properties of THREE.Scene including the material override property, more on that later.
+
+## Changing the background of the Scene with Scene.background
+
+It goes without saying that an important part of the scene instance is the background property. By default it is a solid black color, but it can be set to another solid color using THREE.Color.
+
+```js
+scene.background = THREE.Color(0xffffff);
+```
+
+If you want to use a texture, or a cube texture that can be used as well. I have written a [post on how to used a cube texture](/2018/04/22/threejs-cube-texture/) in which I get into how to go about doing just that in detail.
 
 ## Using Scene.overrideMaterial to add a material that overrides all materials
 
