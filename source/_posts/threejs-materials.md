@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 181
-updated: 2018-05-01 19:35:01
-version: 1.13
+updated: 2018-05-03 17:04:40
+version: 1.14
 ---
 
 In [three.js](https://threejs.org/) there are some eight materials to choose from to help skin a mesh. There are also additional materials for rendering lines, points, shadows, and sprites. This post will serve as a general overview of materials in general in three.js. I will give a very basic overview of the base Material class, and get into some of the differences between materials used with a Mesh.
@@ -203,6 +203,30 @@ scene.add(new THREE.Mesh(
 ### Mesh Physical and toon Materials
 
 Another two materials in three.js that can be used with a mesh are the [Physical](https://threejs.org/docs/index.html#api/materials/MeshPhysicalMaterial), and [Toon](https://threejs.org/docs/index.html#api/materials/MeshToonMaterial) materials. Both of these materials are like that of the standard material, and phong materials respectfully, but with additional features. The physical material is like the standard material but gives a greater deal of control over reflectivity, while the toon material is just like phong only with toon shading.
+
+## The Points Material
+
+There is one Material in three.js that can be used to set display just points in a geometry which can come in handy some times.
+
+```js
+    var pointsGeometry = new THREE.Geometry();
+    var i = 0;
+    while (i < 500) {
+ 
+        var star = new THREE.Vector3();
+        star.set(
+            THREE.Math.randFloatSpread(45),
+            THREE.Math.randFloatSpread(45),
+            THREE.Math.randFloatSpread(45));
+ 
+        pointsGeometry.vertices.push(star);
+ 
+        i += 1;
+ 
+    }
+ 
+    scene.add(new THREE.Points(pointsGeometry, new THREE.PointsMaterial({color: 0x00afaf})));
+```
 
 ## Conclusion
 
