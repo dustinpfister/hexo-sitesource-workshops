@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 167
-updated: 2018-05-03 09:54:25
-version: 1.11
+updated: 2018-05-03 16:36:50
+version: 1.12
 ---
 
 I have been wanting to write a series of posts on [three.js](https://threejs.org/) for a while now, and I do not care to put it off any longer. I have fiddled with three.js in the past, but never really got into it. I have enough experience with it to know that it helps making projects that involve 3d objects very easy, yet it is still something that takes a significant investment of time to get fairly solid with.
@@ -43,10 +43,10 @@ However it is possible to touch base on all of the constructors that will be in 
 
 As such a three.js project will typically always contain at least one of the following:
 
-* An instance of THREE.Scene
-* At least one camera typically THREE.PerspectiveCamera
+* An instance of [THREE.Scene](/2018/05/03/threejs-scene/)
+* At least one camera typically [THREE.PerspectiveCamera](/2018/04/07/threejs-camera-perspective/)
 * There will need to be a renderer such as with THREE.WebGLRenderer
-* A Mesh that will contain a Geometry, and a Material. Such as with THREE.Mesh, THREE.BoxGeometry, and THREE.MeshBasicMaterial.
+* A Mesh that will contain a [Geometry](/2018/04/14/threejs-geometry/), and a [Material](/2018/04/30/threejs-materials/). Such as with THREE.Mesh, THREE.BoxGeometry, and THREE.MeshBasicMaterial.
 
 ## HTML
 
@@ -141,6 +141,8 @@ A very typical example for getting started with three.js indeed, but still it wo
 This example will just draw a cube on the screen. So lets have a break down on everything that is going on here.
 
 ## The Scene
+
+Full post on [Scene](/2018/05/03/threejs-scene/)
 
 The [Scene](https://threejs.org/docs/index.html#api/scenes/Scene) is the space in which everything will go, your objects, cameras, and anything else that would be placed in a scene like a light source. Once you have a scene we will want to add things into it, like an object of some kind to look at with a camera. 
 
