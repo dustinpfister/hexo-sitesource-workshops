@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 183
-updated: 2018-05-04 12:53:47
-version: 1.2
+updated: 2018-05-04 12:57:49
+version: 1.3
 ---
 
 A Mesh is used in [three.js](https://threejs.org/) to create triangular polygon based mesh Objects with a [geometry](/2018/04/14/threejs-geometry/), and a [material](/2018/04/30/threejs-materials/). The Mesh Constructor is one of many constructors that you will find yourself using often as you get into making three.js projects. It is typically what is used for any kind of 3d Object that will be placed in a [Scene](/2018/05/03/threejs-scene/)
@@ -15,6 +15,7 @@ A Mesh is used in [three.js](https://threejs.org/) to create triangular polygon 
 
 ## Basic example of using a mesh
 
+A Basic example of using a mesh would involve creating an instance of Mesh with the THREE.Mesh constructor, passing it the geometry that you want to use. Be default the basic material will be used
 
 ```js
 (function () {
