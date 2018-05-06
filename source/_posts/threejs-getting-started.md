@@ -5,8 +5,8 @@ tags: [js,canvas,three.js]
 layout: post
 categories: three.js
 id: 167
-updated: 2018-05-03 16:36:50
-version: 1.12
+updated: 2018-05-06 06:06:57
+version: 1.13
 ---
 
 I have been wanting to write a series of posts on [three.js](https://threejs.org/) for a while now, and I do not care to put it off any longer. I have fiddled with three.js in the past, but never really got into it. I have enough experience with it to know that it helps making projects that involve 3d objects very easy, yet it is still something that takes a significant investment of time to get fairly solid with.
@@ -46,7 +46,7 @@ As such a three.js project will typically always contain at least one of the fol
 * An instance of [THREE.Scene](/2018/05/03/threejs-scene/)
 * At least one camera typically [THREE.PerspectiveCamera](/2018/04/07/threejs-camera-perspective/)
 * There will need to be a renderer such as with THREE.WebGLRenderer
-* A Mesh that will contain a [Geometry](/2018/04/14/threejs-geometry/), and a [Material](/2018/04/30/threejs-materials/). Such as with THREE.Mesh, THREE.BoxGeometry, and THREE.MeshBasicMaterial.
+* A [Mesh](/2018/05/04/threejs-mesh/) that will contain a [Geometry](/2018/04/14/threejs-geometry/), and a [Material](/2018/04/30/threejs-materials/). Such as with THREE.Mesh, THREE.BoxGeometry, and THREE.MeshBasicMaterial.
 
 ## HTML
 
@@ -185,7 +185,7 @@ There are then four camera types to choose from, in this post I am only briefly 
 
 ## Geometry, Material, and Mesh.
 
-To make some kind of object to look at I need it's geometry, I will also want to skin that geometry with some kind Of Material, and I will want to tie those two things together into a Mesh. In the example in this Post I used BoxGeometry to quickly create a Cube, and Just a basic Material with a Mesh.
+To make some kind of object to look at I need it's geometry, I will also want to skin that geometry with some kind Of Material, and I will want to tie those two things together into a Mesh. In the example in this Post I used BoxGeometry to quickly create a Cube, and Just a [basic Material](/2018/05/05/threejs-basic-material/) with a [Mesh](/2018/05/04/threejs-mesh/).
 
 ## Renderer
 
