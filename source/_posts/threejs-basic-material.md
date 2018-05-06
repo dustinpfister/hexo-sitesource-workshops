@@ -5,8 +5,8 @@ tags: [js,three.js]
 layout: post
 categories: three.js
 id: 184
-updated: 2018-05-06 07:14:14
-version: 1.2
+updated: 2018-05-06 07:26:05
+version: 1.3
 ---
 
 In [three.js](https://threejs.org/) The [basic material](https://threejs.org/docs/index.html#api/materials/MeshBasicMaterial) seems to come up a lot, for example it is the default material that is used when creating a Mesh if a material is not specified. Also it is still a decent material if you want to just skin a mesh with a texture and do not want to do anything special involving reflection of light. So today I thought I would continue expanding my [collection of posts on three.js](/categories/three-js/) by writing a post on the basic material, and what it has to offer when making a three.js project.
@@ -76,3 +76,7 @@ The Basic material is a good choice if you do not what to do much of anything in
         }));
     scene.add(cube);
 ```
+
+## Conclusion
+
+The basic material is just as the name suggests, there are other materials to use in three.js if you want to do something more advanced. There is of course the [Lambert material](/2018/04/08/threejs-lambert-material/) that is a good choice if you want to do something involving light in a real time environment.
