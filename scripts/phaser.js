@@ -21,7 +21,7 @@ hexo.extend.tag.register('phaser', function (projectSRC, version, projectPath) {
     projectPath = projectPath || '/js/phaser_demos/';
 
     // start with div container
-    var html = '<div id=\"gamearea\" style=\"width:100%;background:#afafaf;\"><\/div>';
+    var html = '<div id=\"gamearea\" style=\"width:100%;height:240px;background:#afafaf;\"><\/div>';
 
     // add phaser
     html += '<script src=\"/js/phaser/' + version + '/phaser.min.js\"><\/script>';
