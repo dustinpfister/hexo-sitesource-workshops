@@ -15,28 +15,29 @@
 {% phaser ['/js/phaser_demos/phaser-buttons/game.js'','/js/phaser_demos/phaser-buttons/boot.js'] %}
 
  */
-hexo.extend.tag.register('phaser', function (projectSRC, version) {
+hexo.extend.tag.register('phaser', function (projectSRC, version, projectPath) {
 
     version = version || '2.8.8';
+    projectPath = projectPath || '/js/phaser_demos/';
 
     // start with div container
     var html = '<div id=\"gamearea\" style=\"width:100%;background:#afafaf;\"><\/div>';
 
     // add phaser
-    html += '<script src=\"/js/phaser/'+version+'/phaser.min.js\"><\/script>';
+    html += '<script src=\"/js/phaser/' + version + '/phaser.min.js\"><\/script>';
 
     // add additional scripts
     if (projectSRC) {
 
         if (typeof projectSRC === 'string') {
 
-            html += '<script src=\"' + projectSRC + '\"><\/script>';
+            html += '<script src=\"' + projectPath + projectSRC + '\"><\/script>';
 
         } else {
 
             projectSRC.forEach(function (path) {
 
-                html += '<script src=\"' + path + '\"><\/script>';
+                html += '<script src=\"' + projectPath + path + '\"><\/script>';
 
             });
 
