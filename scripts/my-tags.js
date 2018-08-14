@@ -379,3 +379,12 @@ hexo.extend.tag.register('mytags_postwords', function (args) {
     return '\n<meta itemprop="keywords" content="' + str.substr(0, str.length - 1) + '">\n';
 
 });
+
+// js tag
+hexo.extend.tag.register('js', function (path) {
+    if (!path) {
+        return '';
+    }
+    return '<script src=\"' + path + '\"><\/script>';
+});
+
